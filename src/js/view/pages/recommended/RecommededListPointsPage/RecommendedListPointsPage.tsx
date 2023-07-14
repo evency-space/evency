@@ -90,7 +90,6 @@ export const RecommendedListPointsPage = () => {
 
   const footer = (
     <ActionPanel
-      sticky
       primaryButtonText={t("list_point.add_item")}
       onPrimaryButtonClick={() => goToListPointEditPage(getEmptyListPoint())}
       secondaryButtonText={`> ${t("buttons.next")}`}

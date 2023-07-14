@@ -5,7 +5,7 @@ import { IContentWrapperProps } from "./ActionPanelProps";
 
 export const ActionPanel = (props: IContentWrapperProps) => {
   const {
-    sticky,
+    sticky = true,
     primaryButtonText,
     primaryButtonIcon,
     primaryButtonType = "button",
