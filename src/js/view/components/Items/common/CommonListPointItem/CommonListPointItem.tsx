@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ICommonListPointItemProps } from "./CommonListPointItemProps";
 import { ListPointItem } from "../../ListPointItem/ListPointItem";
 import {
+  BindingProgressTags,
   BtnIcon,
   ButtonTransparent,
   TagMe,
@@ -84,15 +85,11 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
   );
 
   const listPointBindingProgress = (
-    <div className="flex items-center gap-x-1 w-max">
-      <TagSmall isButton={false} className="w-max">{`${bindingProgress} ${t(
-        `list_point.short_units.${listPoint.unit}`
-      )}`}</TagSmall>
-
-      <TextBodySmall>
-        / {listPoint.count} {t(`list_point.short_units.${listPoint.unit}`)}
-      </TextBodySmall>
-    </div>
+    <BindingProgressTags
+      progressCount={bindingProgress}
+      totalCount={listPoint.count}
+      unit={listPoint.unit}
+    />
   );
 
   const listPointCount = (

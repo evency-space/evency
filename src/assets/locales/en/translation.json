@@ -5,11 +5,12 @@
   "members": "Участники",
   "error": "Что пошло не так, попробуйте перезагрузить страницу",
   "welcome": "Добро пожаловать",
+  "i_take": "Я беру",
   "headerRoutes": {
     "goBack": "Назад",
     "eventEditListPointPage": {
-      "private" : "Личные вещи",
-      "common" : "Общие вещи"
+      "private": "Личные вещи",
+      "common": "Общие вещи"
     },
     "eventsPage": "Ваши мероприятия",
     "recommendedListPointsPage": "Рекомендуемые вещи",
@@ -131,19 +132,19 @@
     },
     "categories": {
       "food": "Еда",
-      "equipment":  "Инвентарь",
+      "equipment": "Инвентарь",
       "clothes": "Одежда",
-      "medicines":  "Лекарства",
+      "medicines": "Лекарства",
       "entertainment": "Развлечения",
       "other": "Другое"
     }
   },
   "event_card": {
     "list_point_types": {
-        "recommended": "Рекомендованный список",
-        "private": "Личные вещи",
-        "common": "Общие вещи",
-        "taken": "Взять с собой"
+      "recommended": "Рекомендованный список",
+      "private": "Личные вещи",
+      "common": "Общие вещи",
+      "taken": "Взять с собой"
     }
   },
   "modals": {

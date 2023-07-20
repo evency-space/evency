@@ -21,6 +21,7 @@ export default {
       unit: LIST_POINT_UNITS.piece,
       count: 3,
     },
+    countItemTaken: 0,
   },
 };
 
