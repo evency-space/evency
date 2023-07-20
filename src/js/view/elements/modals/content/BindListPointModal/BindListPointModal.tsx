@@ -10,7 +10,7 @@ export const BindListPointModal = (props: IBindListPointModal) => {
 
   const { t } = useTranslation();
 
-  const [countItem, setCountItem] = useState<string>(countItemTaken || "0");
+  const [countItem, setCountItem] = useState<number>(countItemTaken || 0);
 
   return (
     <>
@@ -20,7 +20,7 @@ export const BindListPointModal = (props: IBindListPointModal) => {
         )})`}
       />
 
-      <Counter positive value={countItem} onChange={setCountItem} />
+      <Counter value={countItem} onChange={setCountItem} />
 
       <ActionPanel
         primaryButtonText={t("buttons.done")}

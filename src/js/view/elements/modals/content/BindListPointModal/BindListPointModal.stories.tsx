@@ -19,7 +19,7 @@ export default {
         tags: [LIST_POINT_CATEGORIES.medicines],
       },
       unit: LIST_POINT_UNITS.piece,
-      count: "3",
+      count: 3,
     },
   },
 };
@@ -32,5 +32,5 @@ export const Primary = Template.bind({});
 
 export const TakenByUser = Template.bind({});
 TakenByUser.args = {
-  countItemTaken: "2",
+  countItemTaken: 2,
 };

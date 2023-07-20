@@ -1,4 +1,4 @@
-import { LIST_POINT_UNITS, LIST_POINT_CATEGORIES } from "./contants";
+import { LIST_POINT_CATEGORIES, LIST_POINT_UNITS } from "./contants";
 
 // Backend models
 export interface IItemFromBE {
@@ -38,21 +38,16 @@ export interface IItem
 }
 
 export interface IListPoint
-  extends Omit<
-    IListPointFromBE,
-    "is_private" | "item" | "count" | "point_uid"
-  > {
+  extends Omit<IListPointFromBE, "is_private" | "item" | "point_uid"> {
   item: IItem;
   pointUid?: string;
-  count: string;
 }
 
 export interface IListPointBinding
-  extends Omit<IListPointBindingFromBE, "member" | "count"> {
+  extends Omit<IListPointBindingFromBE, "member"> {
   member: {
     memberUid: string;
     name: string;
     isAuthor: boolean;
   };
-  count: string;
 }

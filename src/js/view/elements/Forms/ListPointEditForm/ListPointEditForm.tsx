@@ -1,6 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IListPointEditFormProps } from "./ListPointEditFormProps";
+import {
+  IListPointEditFormProps,
+  LIST_POINT_UNITS_STEP,
+} from "./ListPointEditFormProps";
 import {
   IListPoint,
   LIST_POINT_CATEGORIES,
@@ -18,7 +21,12 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
 
   const { t } = useTranslation();
 
-  const checkFormFullFilled = () => !!listPoint.item.name && !!listPoint.count;
+  const [countStep, setCountStep] = useState<number>(
+    LIST_POINT_UNITS_STEP[listPoint.unit]
+  );
+
+  const checkFormFullFilled = () =>
+    !!listPoint.item.name && listPoint.count > 0;
 
   const listPointCategories = Object.values(LIST_POINT_CATEGORIES);
 
@@ -32,6 +40,16 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
     onChange({
       ...listPoint,
       ...value,
+    });
+  };
+
+  const changeUnits = (u: string) => {
+    const unit = u as LIST_POINT_UNITS;
+
+    setCountStep(LIST_POINT_UNITS_STEP[unit]);
+    changeItem({
+      ...listPoint,
+      unit,
     });
   };
 
@@ -59,7 +77,6 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
           }
         />
       </div>
-
       <div>
         <Input
           label={t("list_point.edit_form.item")}
@@ -74,24 +91,17 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
           }
         />
       </div>
-
       <Select
         label={t("list_point.edit_form.unit")}
         localizationPath="list_point.units"
         value={listPoint.unit}
         options={listPointUnits}
-        onChange={(value) =>
-          changeItem({
-            ...listPoint,
-            unit: value as LIST_POINT_UNITS,
-          })
-        }
+        onChange={changeUnits}
       />
-
       <Counter
-        positive
         label={t("list_point.edit_form.count")}
         value={listPoint.count}
+        step={countStep}
         onChange={(value) =>
           changeItem({
             ...listPoint,

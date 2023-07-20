@@ -12,8 +12,8 @@ export interface IContentWrapperProps {
   primaryButtonIcon?: React.ReactNode;
   primaryButtonType?: keyof typeof ButtonType;
   primaryButtonDisabled?: boolean;
-  onPrimaryButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onPrimaryButtonClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   secondaryButtonText?: string;
   secondaryButtonIcon?: React.ReactNode;
-  onSecondaryButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onSecondaryButtonClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
