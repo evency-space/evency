@@ -6,6 +6,7 @@ import { ModalTitle } from "../../Modal/ModalTitle/ModalTitle";
 import { Counter } from "../../../Counter/Counter";
 import { BindingProgressTags } from "../../../BindingProgressTags/BindingProgressTags";
 import { TextBodyLarge } from "../../../typography";
+import { LIST_POINT_UNITS_STEP } from "../../../Forms/ListPointEditForm/ListPointEditFormProps";
 
 export const BindListPointModal = (props: IBindListPointModal) => {
   const { listPoint, countItemTaken, onClick } = props;
@@ -31,7 +32,11 @@ export const BindListPointModal = (props: IBindListPointModal) => {
         />
       </div>
 
-      <Counter value={countItem} onChange={setCountItem} />
+      <Counter
+        value={countItem}
+        onChange={setCountItem}
+        step={LIST_POINT_UNITS_STEP[listPoint.unit]}
+      />
 
       <ActionPanel
         primaryButtonText={t("buttons.done")}
