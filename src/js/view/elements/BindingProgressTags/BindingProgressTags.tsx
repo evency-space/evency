@@ -10,8 +10,8 @@ export const BindingProgressTags = (props: BindingProgressTagsProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex items-center gap-x-1 w-max">
-      <TagSmall isButton={false} className="w-max">{`${progressCount} ${t(
+    <div className="flex items-center gap-x-1 w-max whitespace-nowrap">
+      <TagSmall isButton={false} className="text-sw-max">{`${progressCount} ${t(
         `list_point.short_units.${unit}`
       )}`}</TagSmall>
 

@@ -19,8 +19,8 @@ export const BindListPointModal = (props: IBindListPointModal) => {
     <>
       <ModalTitle title={t("i_take")} />
 
-      <div className="flex justify-between">
-        <TextBodyLarge className="text-light-4">
+      <div className="flex justify-between gap-x-2">
+        <TextBodyLarge className="text-left text-light-4">
           {`${listPoint.item.name} (${t(
             `list_point.short_units.${listPoint.unit}`
           )})`}
