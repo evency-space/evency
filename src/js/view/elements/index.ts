@@ -15,4 +15,5 @@ export * from "./modals";
 export * from "./TagMe";
 export * from "./MembersListItem/MembersListItem";
 export * from "./EventTitle/EventTitle";
-export * from "./Accordion/Accordion"
+export * from "./Accordion/Accordion";
+export * from "./BindingProgressTags/BindingProgressTags";

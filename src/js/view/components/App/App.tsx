@@ -31,11 +31,11 @@ export function App() {
   }, [location]);
 
   return (
-    <div className="relative bg-light-4 dark:bg-black-0 px-base min-h-[-webkit-fill-available]">
-      <div className="min-w-[320px] max-w-[1024px] m-auto">
+    <div className="relative h-full bg-light-4 dark:bg-black-0 px-base overflow-y-auto">
+      <div className="h-full max-w-[1024px] m-auto">
         <Header />
 
-        <main className="flex min-h-[calc(100vh-theme(height.header))]">
+        <main className="flex h-[calc(100%-theme(height.header))]">
           <Outlet />
 
           {modalContext.content && (

@@ -11,6 +11,7 @@ export const ButtonPrimary = (props: BtnProps) => {
     disabled,
     className = "",
     textClassName = "",
+    onClick,
     ...rest
   } = props;
 
@@ -32,6 +33,7 @@ export const ButtonPrimary = (props: BtnProps) => {
       normal-case ${className}`}
       type={type}
       disabled={disabled}
+      onClick={onClick}
     >
       {icon}
       {children && (

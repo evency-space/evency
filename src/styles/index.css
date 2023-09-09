@@ -9,3 +9,8 @@
         @apply even:bg-black-1 odd:bg-black-0;
     }
 }
+
+html, body, #root {
+    overflow-x: hidden;
+    height: 100%;
+}

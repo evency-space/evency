@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  TGroupedListPoints,
-  IListPointsWrapperProps,
   IGroupedListPointObject,
+  IListPointsWrapperProps,
+  TGroupedListPoints,
 } from "./ListPointsWrapperProps";
 import { PageWrapper } from "../../PageWrapper/PageWrapper";
 import {
   ActionPanel,
+  ButtonTransparent,
   TextBodyStandard,
   TitleH1,
-  ButtonTransparent,
 } from "../../../elements";
 import ShutterStock from "../../../../../assets/images/shutterstock.png";
 import { useLoading } from "../../../../hooks";
@@ -160,7 +160,6 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
 
   const pageFooter = (
     <ActionPanel
-      sticky
       primaryButtonText={t("list_point.add_item")}
       onPrimaryButtonClick={() => onCreateListPoint?.()}
     />

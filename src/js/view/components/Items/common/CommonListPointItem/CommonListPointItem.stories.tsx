@@ -27,7 +27,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   listPoint: {
     ...commonListPoint,
-    count: "10",
+    count: 10,
   },
 };
 
@@ -39,7 +39,7 @@ WithLongName.args = {
       ...commonListPoint.item,
       name: "Очень чистая родниковая вода",
     },
-    count: "5",
+    count: 5,
     unit: "liter",
   },
 };
@@ -73,7 +73,7 @@ LoadingWithLongNameItem.args = {
       ...commonListPoint.item,
       name: "Очень чистая родниковая вода",
     },
-    count: "5",
+    count: 5,
     unit: "liter",
   },
 };

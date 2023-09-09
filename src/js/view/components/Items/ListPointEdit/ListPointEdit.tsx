@@ -5,7 +5,7 @@ import { IListPoint } from "../../../../interfaces";
 import { PageWrapper } from "../../PageWrapper/PageWrapper";
 import { getEmptyListPoint } from "../../../../utils";
 
-import { ActionPanel, TitleH1, ListPointEditForm } from "../../../elements";
+import { ActionPanel, ListPointEditForm, TitleH1 } from "../../../elements";
 
 export const ListPointEdit = (props: IListPointEditProps) => {
   const { listPoint, isCreationMode, onClick } = props;

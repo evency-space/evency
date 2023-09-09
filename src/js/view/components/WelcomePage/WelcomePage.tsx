@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Input, TextBodyLarge, TitleH1, ActionPanel } from "../../elements";
+import { ActionPanel, Input, TextBodyLarge, TitleH1 } from "../../elements";
 import tentImg from "../../../../assets/images/tent.png";
 import { saveUserNameInLocalStorage } from "../../../utils/localStorage";
 import { PageWrapper } from "..";
@@ -27,7 +27,7 @@ export const WelcomePage = () => {
     <form className="text-center w-full">
       <div className="flex flex-col grow justify-center">
         <div className="mb-8 xs:mb-14 mx-auto">
-          <img src={tentImg} alt="Tent" className="mx-auto" />
+          <img src={tentImg} alt="Tent" className="max-h-[230px]" />
         </div>
 
         <div className="mb-6">

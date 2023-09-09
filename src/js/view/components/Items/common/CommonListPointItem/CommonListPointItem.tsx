@@ -3,13 +3,14 @@ import { useTranslation } from "react-i18next";
 import { ICommonListPointItemProps } from "./CommonListPointItemProps";
 import { ListPointItem } from "../../ListPointItem/ListPointItem";
 import {
-  TagSmall,
+  BindingProgressTags,
   BtnIcon,
-  TextBodySmall,
   ButtonTransparent,
   TagMe,
-  TextBodyStandard,
+  TagSmall,
   TextBodyLarge,
+  TextBodySmall,
+  TextBodyStandard,
 } from "../../../../elements";
 import { ArrowIcon, KebabIcon, LoaderIcon, PlusIcon } from "../../../../icons";
 import { classesOf } from "../../../../../utils";
@@ -44,7 +45,7 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
     let progress = 0;
 
     listPoint.bindings.forEach((binding) => {
-      progress += Number(binding.count);
+      progress += binding.count;
     });
 
     return progress;
@@ -84,15 +85,11 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
   );
 
   const listPointBindingProgress = (
-    <div className="flex items-center gap-x-1 w-max">
-      <TagSmall isButton={false} className="w-max">{`${bindingProgress} ${t(
-        `list_point.short_units.${listPoint.unit}`
-      )}`}</TagSmall>
-
-      <TextBodySmall>
-        / {listPoint.count} {t(`list_point.short_units.${listPoint.unit}`)}
-      </TextBodySmall>
-    </div>
+    <BindingProgressTags
+      progressCount={bindingProgress}
+      totalCount={listPoint.count}
+      unit={listPoint.unit}
+    />
   );
 
   const listPointCount = (
@@ -180,7 +177,7 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
   return (
     <ListPointItem
       listPointName={listPoint.item.name}
-      grayTitle={bindingProgress >= Number(listPoint.count)}
+      grayTitle={bindingProgress >= listPoint.count}
       isButton
       content={content}
       outerContent={outerContent}

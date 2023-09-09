@@ -11,6 +11,7 @@ export const ButtonSecondary = (props: BtnProps) => {
     disabled,
     className = "",
     textClassName = "",
+    onClick,
   } = props;
 
   const textClasses = classesOf(
@@ -21,13 +22,14 @@ export const ButtonSecondary = (props: BtnProps) => {
 
   return (
     <button
-      className={`btn btn-secondary w-full
+      className={`btn btn-secondary
       dark:focus:bg-black-4 dark:focus-visible:bg-black-4 
       hover:bg-black-3 dark:hover:bg-black-3
       focus:bg-dark-1 focus-visible:bg-dark-4 
       normal-case ${className}`}
       type={type}
       disabled={disabled}
+      onClick={onClick}
     >
       {icon}
       {children && (

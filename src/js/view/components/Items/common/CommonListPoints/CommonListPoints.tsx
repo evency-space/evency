@@ -4,15 +4,15 @@ import { CommonListPointItem } from "../CommonListPointItem/CommonListPointItem"
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
 import {
   convertICommonListPointFromBEToIListPoint,
-  getEmptyListPoint,
   convertIListPointBindingFromBEtoIListPointBinding,
+  getEmptyListPoint,
 } from "../../../../../utils";
 import {
-  getCommonListPoints,
-  lockCommonListPoint,
-  getMemberBindings,
   changeCommonListPointBindStatus,
   deleteCommonListPoint,
+  getCommonListPoints,
+  getMemberBindings,
+  lockCommonListPoint,
   unlockCommonListPoint,
 } from "../../../../../api_clients";
 import { useLoading, useModal } from "../../../../../hooks";
@@ -24,8 +24,8 @@ import {
   LIST_POINT_CATEGORIES,
 } from "../../../../../interfaces";
 import {
-  BlockedListPointModal,
   BindListPointModal,
+  BlockedListPointModal,
   ListPointActionModal,
 } from "../../../../elements";
 import { ICommonListPointsProps } from "./CommonListPointsProps";
@@ -209,7 +209,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
     count,
   }: {
     pointUid: string;
-    count: string;
+    count: number;
   }) => {
     try {
       setLoading(true);
@@ -218,9 +218,9 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
       const payload = {
         ...accessIds,
         pointUid,
-        count: "",
+        count: 0,
       };
-      if (count !== "0") {
+      if (count !== 0) {
         payload.count = count;
       }
 
@@ -243,7 +243,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
       content: (
         <BindListPointModal
           listPoint={listPoint}
-          countItemTaken={countItemTaken.toString()}
+          countItemTaken={countItemTaken}
           onClick={(count) => {
             void bindListPoint({ pointUid: listPoint.pointUid, count });
           }}
