@@ -10,12 +10,8 @@ export interface ITakenListPointFromBE {
 
 // Frontend models
 export interface ITakenListPoint
-  extends Omit<
-    ITakenListPointFromBE,
-    "is_taken" | "point_uid" | "count" | "point"
-  > {
+  extends Omit<ITakenListPointFromBE, "is_taken" | "point_uid" | "point"> {
   point: IListPoint;
-  count: string;
   isTaken: boolean;
   pointUid: string;
 }

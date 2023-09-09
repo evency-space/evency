@@ -138,7 +138,7 @@ export const changeCommonListPointBindStatus = ({
   eventUid: string;
   memberUid: string;
   pointUid: IListPoint["pointUid"];
-  count?: string;
+  count?: number;
 }) =>
   fetch(commonListPointApi({ eventUid })[count ? "bindItem" : "unbindItem"], {
     method: count ? "POST" : "DELETE",
