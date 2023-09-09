@@ -32,11 +32,10 @@ const i18nextStoryDecorator = (Story, context) => {
   return (
     <LoadingProvider>
       <I18nextProvider i18n={i18n}>
-        <div
-          className="flex flex-col relative bg-light-4 dark:bg-black-0 px-base"
-          style={{ height: "100vh" }}
-        >
-          <Story />
+        <div className="relative h-full bg-light-4 dark:bg-black-0 px-base overflow-y-auto">
+          <div className="h-full max-w-[1024px] m-auto">
+            <Story />
+          </div>
         </div>
       </I18nextProvider>
     </LoadingProvider>

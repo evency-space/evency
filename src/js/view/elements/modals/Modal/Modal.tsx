@@ -20,7 +20,7 @@ export const Modal = (props: IModalProps) => {
 
   return (
     <div
-      className="flex justify-center items-end absolute top-0 bottom-0 left-0 right-0 bg-black-3/40 z-10 cursor-default"
+      className="flex justify-center items-end fixed top-0 bottom-0 left-0 right-0 bg-black-3/40 z-10 cursor-default"
       role="button"
       tabIndex={0}
       onClick={(e) => closeModal(e)}

@@ -2,8 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { IPrivateListPointItemProps } from "./PrivateListPointItemProps";
 import { ListPointItem } from "../../ListPointItem/ListPointItem";
-import { TagSmall, BtnIcon } from "../../../../elements";
-import { EditIcon, DeleteIcon } from "../../../../icons";
+import { BtnIcon, TagSmall } from "../../../../elements";
+import { DeleteIcon, EditIcon } from "../../../../icons";
 
 export const PrivateListPointItem = (props: IPrivateListPointItemProps) => {
   const { listPoint, onEdit, onRemove } = props;
