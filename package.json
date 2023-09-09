@@ -1,5 +1,5 @@
 {
-  "name": "todorism",
+  "name": "evency",
   "version": "0.2.0",
   "private": true,
   "description": "Evency is a web project designed to help hiking teams keep track of their spending and organize their gear.",
@@ -114,10 +114,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/slimcandy/todorism.git"
+    "url": "git+https://github.com/evency-space/evency.git"
   },
   "bugs": {
-    "url": "https://github.com/slimcandy/todorism/issues"
+    "url": "https://github.com/evency-space/evency/issues"
   },
-  "homepage": "http://todorism.netlify.app/"
+  "homepage": "https://evency.space"
 }
