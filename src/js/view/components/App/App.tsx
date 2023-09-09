@@ -1,20 +1,15 @@
 import React, { useCallback, useEffect } from "react";
-import { Provider } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import store from "../../../stores/store";
-import { Panel } from "../Panel/Panel";
 import { Header } from "../Header/Header";
-import { UIKitPage } from "../UIKitPage/UIKitPage";
-import { DevNavPage } from "../DevNavPage/DevNavPage";
-import SPAremoveit from "../SPAremoveit/SPAremoveit";
-import { NoEventsPage } from "../NoEventsPage/NoEventsPage";
-import { WelcomePage } from "../WelcomePage/WelcomePage";
-
 import "../../../../styles/index.css";
+import { useDarkMode, useModal } from "../../../hooks";
+import { Modal } from "../../elements";
 
 export function App() {
   const { i18n } = useTranslation();
+  const modalContext = useModal();
+  const location = useLocation();
   const cLanguage = useCallback(
     async (language: string) => {
       await i18n.changeLanguage(language).then();
@@ -22,29 +17,35 @@ export function App() {
     [i18n]
   );
 
+  useDarkMode();
+
   useEffect(() => {
     void cLanguage("ru");
   }, [cLanguage]);
 
+  useEffect(() => {
+    if (modalContext.content) {
+      // drop context for modals
+      modalContext.setContent(undefined);
+    }
+  }, [location]);
+
   return (
-    <Provider store={store}>
-      <div className="relative bg-light-4 dark:bg-dark-0 ">
+    <div className="relative bg-light-4 dark:bg-black-0 px-base min-h-[-webkit-fill-available]">
+      <div className="min-w-[320px] max-w-[1024px] m-auto">
+        <Header />
 
-        <Header isWithLogo />
+        <main className="flex min-h-[calc(100vh-theme(height.header))]">
+          <Outlet />
 
-        <main>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<DevNavPage />} />
-              <Route path="/alex" element={<Panel />} />
-              <Route path="/ui-kit" element={<UIKitPage />} />
-              <Route path="/welcome" element={<WelcomePage />} />
-              <Route path="/no-events" element={<NoEventsPage />} />
-              <Route path="/SPAremoveit" element={<SPAremoveit />} />
-            </Routes>
-          </BrowserRouter>
+          {modalContext.content && (
+            <Modal
+              onClose={() => modalContext.onClose?.()}
+              content={modalContext.content}
+            />
+          )}
         </main>
       </div>
-    </Provider>
+    </div>
   );
 }

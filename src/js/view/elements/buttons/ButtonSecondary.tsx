@@ -15,8 +15,8 @@ export const ButtonSecondary = (props: BtnProps) => {
 
   const textClasses = classesOf(
     textClassName,
-    "text-light-4" && !disabled,
-    "text-dark-2" && disabled
+    !disabled && "text-light-4",
+    disabled && "text-dark-2"
   );
 
   return (
@@ -30,7 +30,9 @@ export const ButtonSecondary = (props: BtnProps) => {
       disabled={disabled}
     >
       {icon}
-      <TextBodyMedium className={textClasses}>{children}</TextBodyMedium>
+      {children && (
+        <TextBodyMedium className={textClasses}>{children}</TextBodyMedium>
+      )}
     </button>
   );
 };

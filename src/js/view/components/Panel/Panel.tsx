@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { initialList } from "../../../stores/storeConstants";
 import { clearList, listSelector, setList } from "../../../stores/store";
-import { pushLocalStorage } from "../../../utils/localStorage";
+import { pushLocalStorage } from "../../../utils/localStorage_old";
 import { setStorageList } from "../../../utils/storage";
 import {
-  FindForm,
   CreateForm,
+  CurrentUser,
+  FindForm,
   List,
   PeopleForm,
   PeopleList,
-  CurrentUser,
 } from "../index";
 
 export function Panel() {

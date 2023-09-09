@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 // Icons
 import {
@@ -17,12 +16,6 @@ import {
 
 // Texts and buttons
 import {
-  ButtonCircle,
-  ButtonPrimary,
-  ButtonSecondary,
-  ButtonSquare,
-  ButtonTransparent,
-  Indicator,
   TextBodyLarge,
   TextBodyMedium,
   TextBodySmall,
@@ -30,22 +23,25 @@ import {
   TitleH1,
   TitleH2,
   TitleH3,
-  Input,
+  ButtonCircle,
+  ButtonPrimary,
+  ButtonSecondary,
+  ButtonSquare,
+  ButtonTransparent,
+  TagLarge,
+  TagMedium,
+  TagSmall,
 } from "../../elements";
+import { TagMe } from "../../elements/TagMe";
 import SearchBar from "../SearchBar/SearchBar";
-
 import { ThemeToggler } from "../ThemeToggler/ThemeToggler";
 
 export function UIKitPage() {
-  const { t } = useTranslation();
   return (
     <div className="ui-kit-page p-4  dark:text-light-4 text-black-0">
       <h1>UI-kit page</h1>
       <span className="mr-2">
-        <Indicator />
-      </span>
-      <span className="mr-2">
-        <Indicator isActive />
+        <TagMe />
       </span>
       <ThemeToggler />
       <TitleH1>UI-kit page</TitleH1>
@@ -57,18 +53,22 @@ export function UIKitPage() {
           <TitleH3>TitleH3: Заголовок третьего уровня</TitleH3>
         </div>
         <div>
-          <TextBodyLarge>TextBodyLarge: Крупный наборный текст</TextBodyLarge>
+          <TextBodyLarge>
+            TextBodyLarge / Body 16 Regular: Крупный наборный текст
+          </TextBodyLarge>
           <br />
           <TextBodyMedium>
-            TextBodyMedium: Текст для кнопок и кликабельного текста
+            TextBodyMedium / Body 14 Medium: Текст для кнопок и кликабельного
+            текста
           </TextBodyMedium>
           <br />
           <TextBodyStandard>
-            TextBodyStandard: Стандартный наборный текст
+            TextBodyStandard / Body 14 Regular: Стандартный наборный текст
           </TextBodyStandard>
           <br />
           <TextBodySmall>
-            TextBodySmall: Мелкий наборный текст, текст для пояснений
+            TextBodySmall / Body 12 Regular: Мелкий наборный текст, текст для
+            пояснений
           </TextBodySmall>
         </div>
         <div className="buttons">
@@ -216,37 +216,36 @@ export function UIKitPage() {
             <h4 className="text-myPerfectDark">SearchBar</h4>
             <SearchBar placeholder="Поиск" />
           </div>
-          <div>
-            <TitleH3 className="mb-4">Inputs</TitleH3>
-            <TextBodyLarge>Simple input</TextBodyLarge>
-            <div className="w-80">
-              <Input placeholder={t("inputs.whats_your_name")} />
-            </div>
-
-            <TextBodySmall>With Icon</TextBodySmall>
-            <div className="w-80">
-              <Input placeholder={t("inputs.whats_your_name")} 
-              icon={<CalendarIcon size={20}/>}/>
-            </div>
-
-            <div className="w-80 mt-4">
-              <Input placeholder={t("inputs.whats_your_name")} 
-              icon={<CalendarIcon size={20} className="cursor-pointer"/>}
-              isIconLeft/>
-            </div>
-
-            <TextBodySmall>Disabled</TextBodySmall>
-            <div className="w-80">
-              <Input placeholder={t("inputs.whats_your_name")} 
-              disabled />
-            </div>
-
-            <TextBodySmall>Disabled with icon</TextBodySmall>
-            <div className="w-80">
-              <Input placeholder={t("inputs.whats_your_name")} 
-              icon={<CalendarIcon size={20}/>}
-              disabled />
-            </div>
+        </div>
+      </div>
+      <div className="ml-4">
+        <TextBodyLarge>Tags</TextBodyLarge>
+        <br />
+        <TextBodyMedium>TagSmall</TextBodyMedium>
+        <div className="flex">
+          <div className="mr-4 mt-1">
+            <TagSmall>21.06.2020</TagSmall>
+          </div>
+          <div className="mr-4 mt-1">
+            <TagSmall isActive>21.06.2020</TagSmall>
+          </div>
+        </div>
+        <TextBodyMedium>TagMedium</TextBodyMedium>
+        <div className="flex">
+          <div className="mr-4 mt-1">
+            <TagMedium>1 шт</TagMedium>
+          </div>
+          <div className="mr-4 mt-1">
+            <TagMedium isActive>1 шт</TagMedium>
+          </div>
+        </div>
+        <TextBodyMedium>TagLarge</TextBodyMedium>
+        <div className="flex">
+          <div className="mr-4 mt-1">
+            <TagLarge>Text</TagLarge>
+          </div>
+          <div className="mr-4 mt-1">
+            <TagLarge isActive>Text</TagLarge>
           </div>
         </div>
       </div>

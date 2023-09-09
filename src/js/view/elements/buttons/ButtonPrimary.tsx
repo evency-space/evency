@@ -11,17 +11,19 @@ export const ButtonPrimary = (props: BtnProps) => {
     disabled,
     className = "",
     textClassName = "",
+    ...rest
   } = props;
 
   const textClasses = classesOf(
     "text-black-0",
     textClassName,
-    "text-black-0" && !disabled,
-    "text-light-0 dark:text-dark-2" && disabled
+    !disabled && "text-black-0",
+    disabled && "text-light-0 dark:text-dark-2"
   );
 
   return (
     <button
+      {...rest}
       className={`btn btn-primary w-full 
       dark:bg-green-4 bg-green-3
       dark:focus:bg-green-2 dark:focus-visible:bg-green-2
@@ -32,7 +34,9 @@ export const ButtonPrimary = (props: BtnProps) => {
       disabled={disabled}
     >
       {icon}
-      <TextBodyMedium className={textClasses}>{children}</TextBodyMedium>
+      {children && (
+        <TextBodyMedium className={textClasses}>{children}</TextBodyMedium>
+      )}
     </button>
   );
 };
