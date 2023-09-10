@@ -39,7 +39,7 @@ export const Counter = (props: ICounterProps) => {
 
   useEffect(() => {
     onChange(Number(localValue));
-  }, [localValue, onChange]);
+  }, [localValue]);
 
   return (
     <>
