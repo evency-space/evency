@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import {
+  ActionPanel,
+  Loader,
   MemoInput as Input,
   TextBodyStandard,
   TitleH1,
-  ActionPanel,
-  Loader,
 } from "../../elements";
 import { CopyIcon } from "../../icons/CopyIcon";
 import { PageWrapper } from "../../components";
@@ -20,8 +20,8 @@ import BackPackLogo from "./images/backpack.png";
 import BackPackLogo_2x from "./images/backpack_2x.png";
 import { useLoading } from "../../../hooks";
 import {
-  convertIListPointToIListPointFromBE,
   classesOf,
+  convertIListPointToIListPointFromBE,
   copyUrl,
 } from "../../../utils";
 import { TProvidedEvent } from "../../../../router/types";
@@ -104,7 +104,7 @@ export const ShareLinkPage = () => {
 
       <div className="mb-6">
         {isNewEvent ? (
-          <TitleH1>Ура! Мероприятие успешно создано!</TitleH1>
+          <TitleH1>{t("pages.new_event.success")}</TitleH1>
         ) : (
           <TitleH1>{event?.title}</TitleH1>
         )}
