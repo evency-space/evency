@@ -1,11 +1,11 @@
 {
-  "language": "English",
   "me": "Me",
   "hide": "Скрыть",
   "members": "Участники",
   "error": "Что пошло не так, попробуйте перезагрузить страницу",
   "welcome": "Добро пожаловать",
   "i_take": "Я беру",
+  "language": "Language",
   "headerRoutes": {
     "goBack": "Назад",
     "eventEditListPointPage": {
@@ -99,6 +99,9 @@
     "recommended": {
       "title": "Рекомендуемые личные вещи",
       "description": "Создайте список, который вы рекомендуете взять с собой участникам мероприятия."
+    },
+    "settings": {
+      "title": "Settings"
     }
   },
   "list_point": {

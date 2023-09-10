@@ -8,19 +8,10 @@ export const localStorageTripIdKey = "trip_ids";
 export const SERVER_URL =
   process.env.REACT_APP_SERVER || "https://tracking-organizer.herokuapp.com";
 
-// Elements
-export const langLocales = [
-  {
-    id: 1,
-    title: "Русский",
-    lang: "ru",
-  },
-  {
-    id: 2,
-    title: "English",
-    lang: "en",
-  },
-];
+export enum LOCALES {
+  "ru" = "ru",
+  "en" = "en",
+}
 
 export enum LIST_POINT_TYPES {
   "recommended" = "recommended",

@@ -1,27 +1,15 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { Header } from "../Header/Header";
 import "../../../../styles/index.css";
 import { useDarkMode, useModal } from "../../../hooks";
 import { Modal } from "../../elements";
 
 export function App() {
-  const { i18n } = useTranslation();
   const modalContext = useModal();
   const location = useLocation();
-  const cLanguage = useCallback(
-    async (language: string) => {
-      await i18n.changeLanguage(language).then();
-    },
-    [i18n]
-  );
 
   useDarkMode();
-
-  useEffect(() => {
-    void cLanguage("ru");
-  }, [cLanguage]);
 
   useEffect(() => {
     if (modalContext.content) {

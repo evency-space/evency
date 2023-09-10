@@ -1,11 +1,11 @@
 {
-  "language": "Русский",
   "me": "Я",
   "hide": "Скрыть",
   "members": "Участники",
   "error": "Что пошло не так, попробуйте перезагрузить страницу",
   "welcome": "Добро пожаловать",
   "i_take": "Я беру",
+  "language": "Язык",
   "headerRoutes": {
     "goBack": "Назад",
     "eventEditListPointPage": {
@@ -125,6 +125,9 @@
           }
         }
       }
+    },
+    "settings": {
+      "title": "Настройки"
     }
   },
   "list_point": {
