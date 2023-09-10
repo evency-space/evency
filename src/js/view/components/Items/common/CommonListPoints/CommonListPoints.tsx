@@ -5,7 +5,6 @@ import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
 import {
   convertICommonListPointFromBEToIListPoint,
   convertIListPointBindingFromBEtoIListPointBinding,
-  getEmptyListPoint,
 } from "../../../../../utils";
 import {
   changeCommonListPointBindStatus,
@@ -21,7 +20,6 @@ import {
   ICommonListPointFromBE,
   IListPoint,
   IListPointBindingFromBE,
-  LIST_POINT_CATEGORIES,
 } from "../../../../../interfaces";
 import {
   BindListPointModal,
@@ -34,6 +32,7 @@ import {
   eventCreateListPointPageUrl,
   eventEditListPointPageUrl,
 } from "../../../../../../router/constants";
+import { getEmptyListPointWithCurrentCategory } from "../../utils";
 
 export const CommonListPoints = (props: ICommonListPointsProps) => {
   const { accessIds } = props;
@@ -76,20 +75,6 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
     if (listPoint) {
       setSelectedListPoint(listPoint);
     }
-  };
-
-  const getEmptyListPointWithCurrentCategory = (
-    category: LIST_POINT_CATEGORIES
-  ): IListPoint => {
-    const emptyListPoint = getEmptyListPoint();
-
-    return {
-      ...emptyListPoint,
-      item: {
-        ...emptyListPoint.item,
-        tags: [category],
-      },
-    };
   };
 
   const goToListPointEditPage = (listPoint: IListPoint) => {
@@ -314,11 +299,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
       listPoints={listPoints}
       listPointItem={listPointItem}
       onCreateListPoint={(category) => {
-        goToListPointEditPage(
-          category
-            ? getEmptyListPointWithCurrentCategory(category)
-            : getEmptyListPoint()
-        );
+        goToListPointEditPage(getEmptyListPointWithCurrentCategory(category));
       }}
     />
   );
