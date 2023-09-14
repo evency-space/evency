@@ -32,8 +32,7 @@
     },
     "members": {
       "add_members": "Добавьте участников",
-      "edit_members": "Редактировать участников",
-      "another_member": "Еще участник"
+      "edit_members": "Редактировать участников"
     }
   },
   "categories": {
