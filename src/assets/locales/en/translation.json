@@ -68,6 +68,9 @@
   "inputs": {
     "whats_your_name": "What is your name?"
   },
+  "favoriteToggle": {
+    "description": "Нажмите чтобы добавить в список избранных вещей"
+  },
   "pages": {
     "welcome": {
       "title": "Welcome!",

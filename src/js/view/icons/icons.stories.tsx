@@ -3,29 +3,32 @@ import { ComponentStory } from "@storybook/react";
 
 import {
   ArrowIcon,
-  CalendarIcon,
-  CloseIcon,
-  EditIcon,
-  DeleteIcon,
-  GearIcon,
-  ZoomIcon,
-  PlusIcon,
-  LoaderIcon,
-  MinusIcon,
-  ShareIcon,
-  KebabIcon,
-  MembersIcon,
-  LogoutIcon,
   BurgerIcon,
-  FolderIcon,
+  CalendarIcon,
   ChatIcon,
   ChatQuestionIcon,
+  CloseIcon,
+  DeleteIcon,
+  EditIcon,
+  FolderIcon,
+  GearIcon,
+  KebabIcon,
+  LoaderIcon,
+  LogoutIcon,
+  MembersIcon,
+  MinusIcon,
+  PlusIcon,
+  ShareIcon,
+  StarIcon,
+  ZoomIcon,
 } from "./index";
 
 export default {
   title: "elements/icons",
   args: {
     size: 64,
+    iconStyle: "outline",
+    fill: "currentColor",
   },
 };
 
@@ -55,3 +58,4 @@ export const Burger = getComponent(BurgerIcon).bind({});
 export const Folder = getComponent(FolderIcon).bind({});
 export const Chat = getComponent(ChatIcon).bind({});
 export const ChatQuestion = getComponent(ChatQuestionIcon).bind({});
+export const Star = getComponent(StarIcon).bind({});
