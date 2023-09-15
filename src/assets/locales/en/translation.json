@@ -1,44 +1,44 @@
 {
-  "language": "English",
   "me": "Me",
-  "hide": "Скрыть",
-  "members": "Участники",
-  "error": "Что пошло не так, попробуйте перезагрузить страницу",
-  "welcome": "Добро пожаловать",
-  "i_take": "Я беру",
+  "hide": "Hide",
+  "members": "Members",
+  "error": "Something went wrong. Try reloading the page",
+  "welcome": "Welcome",
+  "i_take": "I’m taking",
+  "language": "Language",
+  "search": "Search",
   "headerRoutes": {
-    "goBack": "Назад",
+    "goBack": "Back",
     "eventEditListPointPage": {
-      "private": "Личные вещи",
-      "common": "Общие вещи"
+      "private": "Personal items",
+      "common": "Public items"
     },
-    "eventsPage": "Ваши мероприятия",
-    "recommendedListPointsPage": "Рекомендуемые вещи",
-    "eventMembersPage": "Добавьте участников",
-    "editEventPage": "Редактировать мероприятие"
+    "eventsPage": "Your events",
+    "recommendedListPointsPage": "Recommended items",
+    "eventMembersPage": "Add members",
+    "editEventPage": "Edit event"
   },
   "events": {
     "list": {
       "your_events": "Your events",
-      "no_events": "You have no events"
+      "no_events": "You have no events yet"
     },
     "create_new_event": {
       "create_btn": "+ Create a new event",
       "new_event": "New event",
-      "enter_event_name": "Enter event name",
+      "enter_event_name": "Enter event title",
       "choose_dates": "Choose dates",
       "description": "Description"
     },
     "members": {
-      "add_members": "Add members",
-      "another_member": "Another member"
+      "add_members": "Add members"
     }
   },
   "categories": {
     "choose_category": "Choose category",
     "take": {
       "what": "Item to bring along",
-      "how_much": "Quantity of items"
+      "how_much": "Quantity"
     }
   },
   "buttons": {
@@ -51,121 +51,125 @@
     "edit": "Edit",
     "share": "Share",
     "continue": "Continue",
-    "cancel": "Отмена",
+    "cancel": "Cancel",
     "remember_me": "Remember me",
     "done": "Done",
     "next": "Next",
-    "settings": "Настройки",
-    "favorite_items": "Сохраненные списки вещей",
-    "feedback_form": "Форма обратной связи",
+    "settings": "Settings",
+    "favorite_items": "Favorite items",
+    "feedback_form": "Feedback",
     "faq": "FAQ"
   },
   "tabs": {
-    "common_things": "Common things",
-    "private_things": "Private things",
-    "bring_along": "Bring along"
+    "common_things": "Public items",
+    "private_things": "Private items",
+    "bring_along": "I’m taking"
   },
   "inputs": {
-    "whats_your_name": "What is your name?"
+    "whats_your_name": "What’s your name?"
   },
   "pages": {
     "welcome": {
-      "title": "Welcome!",
-      "description": "We are an app Evency, the best app to organize your event!",
-      "whats_your_name": "What is your name?"
+      "title": "Welcome to Evency!",
+      "description": "The best app to organize your event.",
+      "whats_your_name": "What’s your name?"
     },
     "new_event": {
       "title": "New event",
-      "event_name": "Name your event*",
+      "event_name": "Title",
       "event_name_example": "Hiking in the mountains",
       "dates": "Choose dates",
       "date_start": "Start date",
       "date_end": "End date",
       "description": "Description",
-      "description_example": "We go to the Great Waterfall through the pine forest, and have dinner on an alpine meadow with a view of the mountain peaks",
-      "example": "Example"
+      "description_example": "We’re going to the waterfall through the pine forest to have dinner on the alpine meadow enjoying the view of mountain peaks",
+      "example": "E.g.",
+      "success": "Your event is successfully created!"
     },
     "share": {
-      "paragraph": "Share a link with friends",
+      "paragraph": "Share the link with friends",
       "logo": "Backpack Logo",
       "title": "Copy url address"
     },
     "members": {
-      "who_are_you": "Кто вы?",
+      "who_are_you": "Pick your name",
       "add_members": "Add members",
       "edit_members": "Edit members",
-      "input_placeholder": "Новый участник"
+      "input_placeholder": "New member"
     },
     "recommended": {
-      "title": "Рекомендуемые личные вещи",
-      "description": "Создайте список, который вы рекомендуете взять с собой участникам мероприятия."
+      "title": "Recommended private items",
+      "description": "Add private items that you recommend to take for all participants"
+    },
+    "settings": {
+      "title": "Settings"
     }
   },
   "list_point": {
-    "add_item": "Добавить вещь",
-    "edit_item": "Редактировать вещь",
+    "add_item": "Add item",
+    "edit_item": "Edit item",
     "empty_list": {
-      "title": "Тут пока ничего нет",
-      "action": "Добавьте первую вещь"
+      "title": "Nothing here yet",
+      "action": "Add an item"
     },
     "edit_form": {
-      "category": "Выберите категорию",
-      "item": "Что взять",
-      "unit": "В чем считать",
-      "count": "Сколько взять"
+      "category": "Category",
+      "item": "Item name",
+      "unit": "Unit",
+      "count": "Quantity"
     },
     "units": {
-      "gram": "Граммы",
-      "kilogram": "Килограммы",
-      "piece": "Штуки",
-      "package": "Упаковки",
-      "liter": "Литры",
-      "milliliter": "Миллилитры"
+      "gram": "Gram",
+      "kilogram": "Kilogram",
+      "piece": "Piece",
+      "package": "Package",
+      "liter": "Liter",
+      "milliliter": "Milliliter"
     },
     "short_units": {
-      "gram": "г",
-      "kilogram": "кг",
-      "piece": "шт",
-      "package": "уп",
-      "liter": "л",
-      "milliliter": "мл"
+      "gram": "g",
+      "kilogram": "kg",
+      "piece": "pcs",
+      "package": "pkg",
+      "liter": "l",
+      "milliliter": "ml"
     },
     "categories": {
-      "food": "Еда",
-      "equipment": "Инвентарь",
-      "clothes": "Одежда",
-      "medicines": "Лекарства",
-      "entertainment": "Развлечения",
-      "other": "Другое"
+      "food": "Food",
+      "equipment": "Equipment",
+      "clothes": "Clothes",
+      "medicines": "Drugs",
+      "entertainment": "Entertainment",
+      "other": "Other"
     }
   },
   "event_card": {
     "list_point_types": {
-      "recommended": "Рекомендованный список",
-      "private": "Личные вещи",
-      "common": "Общие вещи",
-      "taken": "Взять с собой"
+      "recommended": "Recommended items",
+      "private": "Private items",
+      "common": "Public items",
+      "taken": "I’m taking"
     }
   },
   "modals": {
-    "warning": "Это может затронуть других участников мероприятия",
+    "warning": "Your action will influence other members",
     "blocked_list_point": {
-      "title": "Вещь сейчас заблокирована!",
-      "description": "Кто-то из участников мероприятия редактирует эту вещь",
-      "primary_button_text": "Ок"
+      "title": "The item is locked now!",
+      "description": "Another member is editing this item",
+      "primary_button_text": "Ok"
     },
     "remove_list_point": {
-      "title": "Точно удалить позицию \"{{listPointName}}\"?"
+      "title": "Confirm deleting the item \"{{listPointName}}\"?"
     },
     "event_action": {
-      "leave": "Покинуть мероприятие",
-      "edit_event": "Редактировать мероприятие",
-      "members": "Участники мероприятия",
-      "logout": "Сменить участника"
+      "leave": "Leave event",
+      "edit_event": "Edit event",
+      "members": "Event members",
+      "logout": "Choose another member"
     },
     "events_list_action": {
-      "deleteEvent": "Удалить мероприятие",
-      "title": "Точно удалить мероприятие \"{{eventTitle}}\"?"
+      "deleteEvent": "Delete event",
+      "title": "Confirm deleting the event \"{{eventTitle}}\"?"
     }
   }
 }

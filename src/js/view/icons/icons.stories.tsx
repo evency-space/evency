@@ -3,23 +3,24 @@ import { ComponentStory } from "@storybook/react";
 
 import {
   ArrowIcon,
-  CalendarIcon,
-  CloseIcon,
-  EditIcon,
-  DeleteIcon,
-  GearIcon,
-  ZoomIcon,
-  PlusIcon,
-  LoaderIcon,
-  MinusIcon,
-  ShareIcon,
-  KebabIcon,
-  MembersIcon,
-  LogoutIcon,
   BurgerIcon,
-  FolderIcon,
+  CalendarIcon,
   ChatIcon,
   ChatQuestionIcon,
+  CloseIcon,
+  DeleteIcon,
+  EditIcon,
+  FolderIcon,
+  GearIcon,
+  KebabIcon,
+  LanguageIcon,
+  LoaderIcon,
+  LogoutIcon,
+  MembersIcon,
+  MinusIcon,
+  PlusIcon,
+  ShareIcon,
+  ZoomIcon,
 } from "./index";
 
 export default {
@@ -55,3 +56,4 @@ export const Burger = getComponent(BurgerIcon).bind({});
 export const Folder = getComponent(FolderIcon).bind({});
 export const Chat = getComponent(ChatIcon).bind({});
 export const ChatQuestion = getComponent(ChatQuestionIcon).bind({});
+export const Language = getComponent(LanguageIcon).bind({});

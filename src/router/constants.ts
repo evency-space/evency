@@ -55,3 +55,4 @@ export const eventEditRecommendedListPointPageUrl = ({
 
 export const faqPageUrl = () => "/help";
 
+export const settingsPageUrl = () => "/settings";

@@ -116,7 +116,7 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
 
   const listContent = (
     <div className="flex flex-col">
-      <SearchBar onChange={applyFilter} placeholder="Поиск" />
+      <SearchBar onChange={applyFilter} placeholder={t("search")} />
       <div>
         {groupedListPointsAfterFilter &&
           (
@@ -133,7 +133,7 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
                     className="btn-xs"
                     onClick={() => onCreateListPoint?.(groupName)}
                   >
-                    + Добавить
+                    {`+ ${t("buttons.add")}`}
                   </ButtonTransparent>
                 )}
               </div>
