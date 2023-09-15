@@ -3,10 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PrivateListPointItem } from "../PrivateListPointItem/PrivateListPointItem";
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
-import {
-  convertIPrivateListPointFromBEToIListPoint,
-  getEmptyListPoint,
-} from "../../../../../utils";
+import { convertIPrivateListPointFromBEToIListPoint } from "../../../../../utils";
 import {
   getPrivateListPoints,
   removePrivateListPoint,
@@ -20,6 +17,7 @@ import {
   eventCreateListPointPageUrl,
   eventEditListPointPageUrl,
 } from "../../../../../../router/constants";
+import { getEmptyListPointWithCurrentCategory } from "../../utils";
 
 export const PrivateListPoints = (props: IPrivateListPointsProps) => {
   const { accessIds } = props;
@@ -129,7 +127,9 @@ export const PrivateListPoints = (props: IPrivateListPointsProps) => {
     <ListPointsWrapper
       listPoints={listPoints}
       listPointItem={listPointItem}
-      onCreateListPoint={() => goToListPointEditPage(getEmptyListPoint())}
+      onCreateListPoint={(category) =>
+        goToListPointEditPage(getEmptyListPointWithCurrentCategory(category))
+      }
     />
   );
 };

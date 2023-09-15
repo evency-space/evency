@@ -22,6 +22,7 @@ import {
   shareEventPageUrl,
 } from "../../../../../router/constants";
 import { useModal } from "../../../../hooks";
+import { getEmptyListPointWithCurrentCategory } from "../../../components/Items/utils";
 
 export const RecommendedListPointsPage = () => {
   const { t } = useTranslation();
@@ -125,6 +126,9 @@ export const RecommendedListPointsPage = () => {
       listPointItem={listPointItem}
       title={title}
       customActionPanel={footer}
+      onCreateListPoint={(category) =>
+        goToListPointEditPage(getEmptyListPointWithCurrentCategory(category))
+      }
     />
   );
 };
