@@ -1,6 +1,8 @@
 import {
   ICommonListPoint,
   ICommonListPointFromBE,
+  IItem,
+  IItemFromBE,
   IListPoint,
   IListPointBinding,
   IListPointBindingFromBE,
@@ -38,14 +40,16 @@ export const convertIListPointToIListPointFromBE = (
   count: listPoint.count,
 });
 
+export const convertIItemFromBEToIItem = (item: IItemFromBE): IItem => ({
+  ...item,
+  itemUid: item.item_uid,
+});
+
 export const convertIPrivateListPointFromBEToIListPoint = (
   listPoint: IPrivateListPointFromBE
 ): IListPoint => ({
   pointUid: listPoint.point_uid,
-  item: {
-    ...listPoint.point.item,
-    itemUid: listPoint.point.item.item_uid,
-  },
+  item: convertIItemFromBEToIItem(listPoint.point.item),
   unit: listPoint.point.unit,
   count: listPoint.point.count,
 });
@@ -66,10 +70,7 @@ export const convertICommonListPointFromBEToIListPoint = (
 ): ICommonListPoint => ({
   ...listPoint,
   pointUid: listPoint.point_uid,
-  item: {
-    ...listPoint.item,
-    itemUid: listPoint.item.item_uid,
-  },
+  item: convertIItemFromBEToIItem(listPoint.item),
   bindings: listPoint.bindings.map((b) =>
     convertIListPointBindingFromBEtoIListPointBinding(b)
   ),
