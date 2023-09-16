@@ -1,16 +1,21 @@
 import { SERVER_URL } from "../../common/constants";
 
-import { IListPoint } from "../../interfaces";
-import { convertIListPointToIListPointFromBE } from "../../utils";
+import { ICommonListPointFromBE, IListPoint } from "../../interfaces";
+import {
+  convertICommonListPointFromBEToIListPoint,
+  convertIListPointToIListPointFromBE,
+} from "../../utils";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/CommonList/${eventUid}`;
 
 export const commonListPointApi = ({
   eventUid,
   pointUid,
+  pointName,
 }: {
   eventUid: string;
   pointUid?: string;
+  pointName?: string;
 }) => ({
   addItem: `${endPoint(eventUid)}/AddItem`,
   editItem: `${endPoint(eventUid)}/EditItem/${pointUid || ""}`,
@@ -22,6 +27,9 @@ export const commonListPointApi = ({
   unbindItem: `${endPoint(eventUid)}/Unbind`,
   getMemberBindings: `${endPoint(eventUid)}/GetMemberBindings/${
     pointUid || ""
+  }`,
+  getDuplicateListPoints: `${endPoint(eventUid)}/Duplicates?item_name=${
+    pointName || ""
   }`,
 });
 
@@ -165,3 +173,35 @@ export const getMemberBindings = ({
       "Content-Type": "application/json",
     },
   });
+
+export const getDuplicateListPoints = async ({
+  eventUid,
+  pointName,
+}: {
+  eventUid: string;
+  pointName: IListPoint["item"]["name"];
+}) => {
+  let data: IListPoint[] = [];
+
+  try {
+    const response = await fetch(
+      commonListPointApi({ eventUid, pointName }).getDuplicateListPoints,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      data = ((await response.json()) as ICommonListPointFromBE[]).map((e) =>
+        convertICommonListPointFromBEToIListPoint(e)
+      );
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return data;
+};

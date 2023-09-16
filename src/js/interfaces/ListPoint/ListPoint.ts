@@ -17,6 +17,8 @@ export interface IListPointFromBE {
   unit: keyof typeof LIST_POINT_UNITS;
   count: number;
   is_private: boolean;
+  // temp
+  item_uid?: string;
 }
 
 export interface IListPointBindingFromBE {
