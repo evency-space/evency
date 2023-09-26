@@ -116,7 +116,7 @@ export const DuplicateListPointModal = (
           "modals.duplicated_list_point.secondary_button_text"
         )}
         onPrimaryButtonClick={onPrimaryButtonClick}
-        onSecondaryButtonClick={() => onSecondaryButtonClick(listPoint)}
+        onSecondaryButtonClick={onSecondaryButtonClick}
       />
     </>
   );

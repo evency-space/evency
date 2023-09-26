@@ -4,5 +4,5 @@ export interface IDuplicateListPointModalProps {
   accessIds: IAccessIds;
   listPoint: IListPoint;
   onPrimaryButtonClick: () => void;
-  onSecondaryButtonClick: (listPoint: IListPoint) => void;
+  onSecondaryButtonClick: () => void;
 }

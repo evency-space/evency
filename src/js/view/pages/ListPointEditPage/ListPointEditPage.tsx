@@ -6,18 +6,17 @@ import {
   getListPointTypeFromLocalStorage,
 } from "../../../utils/localStorage";
 import { ListPointEdit } from "../../components/Items/ListPointEdit/ListPointEdit";
-
-import {
-  editCommonListPoint,
-  editPrivateListPoint,
-  getDuplicateListPoints,
-} from "../../../api_clients";
 import { useLoading, useModal } from "../../../hooks";
 
 import { IAccessIds, ICommonListPoint, IListPoint } from "../../../interfaces";
 import { TProvidedEvent } from "../../../../router/types";
 import { DuplicateListPointModal, Loader } from "../../elements";
 import { eventPageUrl } from "../../../../router/constants";
+import {
+  editCommonListPoint,
+  editPrivateListPoint,
+  getDuplicateListPoints,
+} from "../../../api_clients";
 
 export const ListPointEditPage = () => {
   const routeData = useLoaderData() as TProvidedEvent;
@@ -54,18 +53,21 @@ export const ListPointEditPage = () => {
     };
   };
 
-  const addDuplicateCommonListPoint = async (lp: IListPoint) => {
+  const addDuplicateCommonListPoint = async (baseListPoint: IListPoint) => {
     try {
       setLoading(true);
 
-      await editCommonListPoint(getListPointData(lp));
+      await editCommonListPoint(getListPointData(baseListPoint));
       goBackToListPointsPage();
     } finally {
       setLoading(false);
     }
   };
 
-  const showDuplicateListPointModal = (duplicateListPoint: IListPoint) => {
+  const showDuplicateListPointModal = (
+    baseListPoint: IListPoint,
+    duplicateListPoint: IListPoint
+  ) => {
     if (accessIds) {
       modalContext.setContent({
         content: (
@@ -73,8 +75,8 @@ export const ListPointEditPage = () => {
             accessIds={accessIds}
             listPoint={duplicateListPoint}
             onPrimaryButtonClick={goBackToListPointsPage}
-            onSecondaryButtonClick={(lp) => {
-              void addDuplicateCommonListPoint(lp);
+            onSecondaryButtonClick={() => {
+              void addDuplicateCommonListPoint(baseListPoint);
             }}
           />
         ),
@@ -98,7 +100,10 @@ export const ListPointEditPage = () => {
             });
 
             if (duplicateListPoints?.length > 0) {
-              showDuplicateListPointModal(duplicateListPoints[0]);
+              showDuplicateListPointModal(
+                editedListPoint,
+                duplicateListPoints[0]
+              );
               return;
             }
           }
