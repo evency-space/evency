@@ -199,7 +199,7 @@
     },
     "duplicated_list_point": {
       "title": "Такая вещь уже есть в списке!",
-      "description": "Если вы хотите добавить больше штук, перейдите в",
+      "description": "Если вы хотите изменить количество, перейдите в",
       "description_button": "режим редактирования вещи",
       "primary_button_text": "Назад к списку вещей",
       "secondary_button_text": "Все равно добавить"
