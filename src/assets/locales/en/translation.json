@@ -131,7 +131,7 @@
       "kilogram": "kg",
       "piece": "pcs",
       "package": "pkg",
-      "liter": "l",
+      "liter": "L",
       "milliliter": "ml"
     },
     "categories": {
@@ -170,6 +170,13 @@
     "events_list_action": {
       "deleteEvent": "Delete event",
       "title": "Confirm deleting the event \"{{eventTitle}}\"?"
+    },
+    "duplicated_list_point": {
+      "title": "This item is already on the list!",
+      "description": "If you want to change quantity, go to",
+      "description_button": "item edit mode",
+      "primary_button_text": "Back to public items",
+      "secondary_button_text": "Add anyway"
     }
   }
 }

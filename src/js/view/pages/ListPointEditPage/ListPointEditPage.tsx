@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import {
-  getCurrentListPointFromLocalStorage,
   deleteCurrentListPointFromLocalStorage,
+  getCurrentListPointFromLocalStorage,
   getListPointTypeFromLocalStorage,
 } from "../../../utils/localStorage";
 import { ListPointEdit } from "../../components/Items/ListPointEdit/ListPointEdit";
-
-import {
-  editPrivateListPoint,
-  editCommonListPoint,
-} from "../../../api_clients";
-import { useLoading } from "../../../hooks";
+import { useLoading, useModal } from "../../../hooks";
 
 import { IAccessIds, ICommonListPoint, IListPoint } from "../../../interfaces";
 import { TProvidedEvent } from "../../../../router/types";
-import { Loader } from "../../elements";
+import { DuplicateListPointModal, Loader } from "../../elements";
+import { eventPageUrl } from "../../../../router/constants";
+import {
+  editCommonListPoint,
+  editPrivateListPoint,
+  getDuplicateListPoints,
+} from "../../../api_clients";
 
 export const ListPointEditPage = () => {
   const routeData = useLoaderData() as TProvidedEvent;
@@ -24,37 +25,95 @@ export const ListPointEditPage = () => {
 
   const navigate = useNavigate();
 
+  const modalContext = useModal();
+
   const [accessIds, setAccessIds] = useState<IAccessIds>();
+
+  const [listPoint, setListPoint] = useState(
+    getCurrentListPointFromLocalStorage<ICommonListPoint | IListPoint>()
+  );
 
   const listPointType = getListPointTypeFromLocalStorage();
 
-  const listPoint = getCurrentListPointFromLocalStorage<
-    ICommonListPoint | IListPoint
-  >();
-
   const isCreationMode = !listPoint?.pointUid;
+
+  const goBackToListPointsPage = () => {
+    navigate(eventPageUrl({ eventUid: accessIds?.eventUid || "" }));
+    deleteCurrentListPointFromLocalStorage();
+  };
+
+  const getListPointData = (lp: IListPoint) => {
+    const mode: "add" | "edit" = isCreationMode ? "add" : "edit";
+
+    return {
+      mode,
+      eventUid: accessIds?.eventUid || "",
+      memberUid: accessIds?.memberUid || "",
+      listPoint: lp,
+    };
+  };
+
+  const addDuplicateCommonListPoint = async (baseListPoint: IListPoint) => {
+    try {
+      setLoading(true);
+
+      await editCommonListPoint(getListPointData(baseListPoint));
+      goBackToListPointsPage();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const showDuplicateListPointModal = (
+    baseListPoint: IListPoint,
+    duplicateListPoint: IListPoint
+  ) => {
+    if (accessIds) {
+      modalContext.setContent({
+        content: (
+          <DuplicateListPointModal
+            accessIds={accessIds}
+            listPoint={duplicateListPoint}
+            onPrimaryButtonClick={goBackToListPointsPage}
+            onSecondaryButtonClick={() => {
+              void addDuplicateCommonListPoint(baseListPoint);
+            }}
+          />
+        ),
+        onClose: () => modalContext.setContent(undefined),
+      });
+    }
+  };
 
   const changeListPoint = async (editedListPoint: IListPoint) => {
     try {
       setLoading(true);
 
       if (accessIds) {
-        const mode: "add" | "edit" = isCreationMode ? "add" : "edit";
-        const listPointData = {
-          ...accessIds,
-          mode,
-          listPoint: editedListPoint,
-        };
+        const listPointData = getListPointData(editedListPoint);
 
         if (listPointType === "common") {
+          if (isCreationMode) {
+            const duplicateListPoints = await getDuplicateListPoints({
+              eventUid: accessIds.eventUid,
+              pointName: editedListPoint.item.name,
+            });
+
+            if (duplicateListPoints?.length > 0) {
+              showDuplicateListPointModal(
+                editedListPoint,
+                duplicateListPoints[0]
+              );
+              return;
+            }
+          }
+
           await editCommonListPoint(listPointData);
         } else if (listPointType === "private") {
           await editPrivateListPoint(listPointData);
         }
 
-        // back to listPoints page
-        navigate(-1);
-        deleteCurrentListPointFromLocalStorage();
+        goBackToListPointsPage();
       }
     } finally {
       setLoading(false);
@@ -66,6 +125,7 @@ export const ListPointEditPage = () => {
       void routeData.data.then((d) => {
         setAccessIds(d.accessIds);
       });
+      setListPoint(getCurrentListPointFromLocalStorage());
     }
   }, [routeData]);
 
