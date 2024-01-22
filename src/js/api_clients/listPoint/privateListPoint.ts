@@ -58,6 +58,8 @@ export const editPrivateListPoint = ({
       body: JSON.stringify({
         point: convertIListPointToIListPointFromBE(listPoint),
         member_uid: memberUid,
+        // TEMPORARY
+        memberUid,
       }),
     }
   );
@@ -80,5 +82,8 @@ export const removePrivateListPoint = ({
     body: JSON.stringify({
       point_uid: pointUid,
       member_uid: memberUid,
+      // TEMPORARY
+      memberUid,
+      pointUid
     }),
   });

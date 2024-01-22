@@ -47,6 +47,8 @@ export const getCommonListPoints = ({
     },
     body: JSON.stringify({
       member_uid: memberUid,
+      // TEMPORARY
+      memberUid,
     }),
   });
 
@@ -73,6 +75,8 @@ export const editCommonListPoint = ({
       body: JSON.stringify({
         point: convertIListPointToIListPointFromBE(listPoint),
         member_uid: memberUid,
+        // TEMPORARY
+        memberUid,
       }),
     }
   );
@@ -94,6 +98,9 @@ export const deleteCommonListPoint = ({
     body: JSON.stringify({
       point_uid: pointUid,
       member_uid: memberUid,
+      // TEMPORARY
+      pointUid,
+      memberUid,
     }),
   });
 
@@ -114,6 +121,9 @@ export const lockCommonListPoint = ({
     body: JSON.stringify({
       point_uid: pointUid,
       member_uid: memberUid,
+      // TEMPORARY
+      pointUid,
+      memberUid,
     }),
   });
 
@@ -134,6 +144,9 @@ export const unlockCommonListPoint = ({
     body: JSON.stringify({
       point_uid: pointUid,
       member_uid: memberUid,
+      // TEMPORARY
+      pointUid,
+      memberUid,
     }),
   });
 
@@ -157,6 +170,9 @@ export const changeCommonListPointBindStatus = ({
       point_uid: pointUid,
       member_uid: memberUid,
       count,
+      // TEMPORARY
+      pointUid,
+      memberUid,
     }),
   });
 

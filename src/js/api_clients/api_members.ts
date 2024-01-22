@@ -36,6 +36,8 @@ export const renameMember = async (
       body: JSON.stringify({
         member_uid: memberUid,
         name: memberName,
+        // TEMPORARY
+        memberUid,
       }),
     }
   );
@@ -56,6 +58,8 @@ export const addMember = async (
       body: JSON.stringify({
         member_uid: null,
         name: memberName,
+        // TEMPORARY
+        memberUid: null,
       }),
     }
   );

@@ -10,6 +10,10 @@ export interface IItemFromBE {
   photo: string;
   is_presaved: boolean;
   item_uid?: string;
+  // TEMPORARY
+  itemUid?: string;
+  isPresaved?: boolean;
+  estimatedPrice?: number;
 }
 
 export interface IListPointFromBE {
@@ -17,8 +21,10 @@ export interface IListPointFromBE {
   unit: keyof typeof LIST_POINT_UNITS;
   count: number;
   is_private: boolean;
-  // temp
+  // TEMPORARY
   item_uid?: string;
+  itemUid?: string;
+  isPrivate?: boolean;
 }
 
 export interface IListPointBindingFromBE {
@@ -26,6 +32,9 @@ export interface IListPointBindingFromBE {
     member_uid: string;
     name: string;
     is_author: boolean;
+    // TEMPORARY
+    memberUid?: string;
+    isAuthor?: boolean;
   };
   count: number;
 }

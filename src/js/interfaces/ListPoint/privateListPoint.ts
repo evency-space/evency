@@ -7,4 +7,8 @@ export interface IPrivateListPointFromBE {
   count: number;
   is_taken: boolean;
   point: IListPointFromBE;
+  // TEMPORARY
+  pointUid?: string;
+  memberUid?: string;
+  isTaken?: boolean;
 }

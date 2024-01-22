@@ -6,6 +6,9 @@ export interface ITakenListPointFromBE {
   count: number;
   point: IListPointFromBE;
   point_uid: string;
+  // TEMPORARY
+  isTaken?: boolean;
+  pointUid?: string;
 }
 
 // Frontend models
