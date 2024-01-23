@@ -27,11 +27,15 @@ export const convertIListPointToIListPointFromBE = (
   listPoint: IListPoint
 ): IListPointFromBE => ({
   is_private: true,
+  isPrivate: true,
   item: {
     ...listPoint.item,
     item_uid: listPoint.item.itemUid,
+    itemUid: listPoint.item.itemUid,
     is_presaved: true,
+    isPresaved: true,
     estimated_price: 0,
+    estimatedPrice: 0,
     weight: 0,
     volume: 0,
     photo: "",
@@ -42,13 +46,13 @@ export const convertIListPointToIListPointFromBE = (
 
 export const convertIItemFromBEToIItem = (item: IItemFromBE): IItem => ({
   ...item,
-  itemUid: item.item_uid,
+  itemUid: item.item_uid || item.itemUid,
 });
 
 export const convertIPrivateListPointFromBEToIListPoint = (
   listPoint: IPrivateListPointFromBE
 ): IListPoint => ({
-  pointUid: listPoint.point_uid,
+  pointUid: listPoint.point_uid || listPoint.pointUid,
   item: convertIItemFromBEToIItem(listPoint.point.item),
   unit: listPoint.point.unit,
   count: listPoint.point.count,
@@ -60,8 +64,8 @@ export const convertIListPointBindingFromBEtoIListPointBinding = (
   ...binding,
   member: {
     ...binding.member,
-    memberUid: binding.member.member_uid,
-    isAuthor: binding.member.is_author,
+    memberUid: binding.member.member_uid || binding.member.memberUid || "",
+    isAuthor: binding.member.is_author || binding.member.isAuthor || false,
   },
 });
 
@@ -69,7 +73,7 @@ export const convertICommonListPointFromBEToIListPoint = (
   listPoint: ICommonListPointFromBE
 ): ICommonListPoint => ({
   ...listPoint,
-  pointUid: listPoint.point_uid,
+  pointUid: listPoint.point_uid || listPoint.pointUid || "",
   item: convertIItemFromBEToIItem(listPoint.item),
   bindings: listPoint.bindings?.map((b) =>
     convertIListPointBindingFromBEtoIListPointBinding(b)
@@ -80,6 +84,6 @@ export const convertITakenListPointFromBEToITakenListPoint = (
   listPoint: ITakenListPointFromBE
 ): ITakenListPoint => ({
   ...listPoint,
-  isTaken: listPoint.is_taken,
-  pointUid: listPoint.point_uid,
+  isTaken: listPoint.is_taken || listPoint.isTaken || false,
+  pointUid: listPoint.point_uid || listPoint.pointUid || "",
 });

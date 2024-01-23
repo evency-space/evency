@@ -9,6 +9,8 @@ import {
 export interface ICommonListPointFromBE extends IListPointFromBE {
   point_uid: string;
   bindings: IListPointBindingFromBE[];
+  // TEMPORARY
+  pointUid?: string;
 }
 
 // Frontend models
