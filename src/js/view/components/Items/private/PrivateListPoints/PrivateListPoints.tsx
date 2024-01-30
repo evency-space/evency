@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { PrivateListPointItem } from "../PrivateListPointItem/PrivateListPointItem";
+import { BaseListPointItem } from "../../BaseListPointItem/BaseListPointItem";
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
-import { convertIPrivateListPointFromBEToIListPoint } from "../../../../../utils";
 import {
   getPrivateListPoints,
   removePrivateListPoint,
 } from "../../../../../api_clients";
 import { useLoading, useModal } from "../../../../../hooks";
-import { IListPoint, IPrivateListPointFromBE } from "../../../../../interfaces";
+import { IListPoint, IPrivateListPoint } from "../../../../../interfaces";
 import { RemoveListItemModal } from "../../../../elements";
 import { IPrivateListPointsProps } from "./PrivateListPointsProps";
 import { saveCurrentListPointInLocalStorage } from "../../../../../utils/localStorage";
@@ -26,13 +25,13 @@ export const PrivateListPoints = (props: IPrivateListPointsProps) => {
 
   const navigate = useNavigate();
 
-  const [listPoints, setListPoints] = useState<IListPoint[]>([]);
+  const [listPoints, setListPoints] = useState<IPrivateListPoint[]>([]);
 
   const { setLoading } = useLoading();
 
   const modalContext = useModal();
 
-  const goToListPointEditPage = (listPoint: IListPoint) => {
+  const goToListPointEditPage = (listPoint: IListPoint | IPrivateListPoint) => {
     saveCurrentListPointInLocalStorage(listPoint);
     navigate(
       listPoint.pointUid
@@ -52,19 +51,13 @@ export const PrivateListPoints = (props: IPrivateListPointsProps) => {
       setLoading(true);
 
       const response = await getPrivateListPoints(accessIds);
-      const privateListPoints = (
-        (await response.json()) as IPrivateListPointFromBE[]
-      ).map((listPoint) =>
-        convertIPrivateListPointFromBEToIListPoint(listPoint)
-      );
-
-      setListPoints(privateListPoints);
+      setListPoints((await response.json()) as IPrivateListPoint[]);
     } finally {
       setLoading(false);
     }
   }, [accessIds, setLoading]);
 
-  const removeListPoint = async (listPoint: IListPoint) => {
+  const removeListPoint = async (listPoint: IPrivateListPoint) => {
     try {
       setLoading(true);
 
@@ -85,12 +78,12 @@ export const PrivateListPoints = (props: IPrivateListPointsProps) => {
     modalContext.setContent(undefined);
   };
 
-  const showRemoveListPointModal = (listPoint: IListPoint) =>
+  const showRemoveListPointModal = (listPoint: IPrivateListPoint) =>
     modalContext.setContent({
       content: (
         <RemoveListItemModal
           title={t("modals.remove_list_point.title", {
-            listPointName: listPoint.item.name,
+            listPointName: listPoint.point.item.name,
           })}
           onRemoveClick={() => {
             closeModal();
@@ -102,19 +95,24 @@ export const PrivateListPoints = (props: IPrivateListPointsProps) => {
       onClose: closeModal,
     });
 
-  const listPointItem = (index: number) => {
+  const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
-
-    return (
-      listPoint && (
-        <PrivateListPointItem
-          listPoint={listPoint}
-          key={listPoint.pointUid}
-          onEdit={() => goToListPointEditPage(listPoint)}
-          onRemove={() => showRemoveListPointModal(listPoint)}
-        />
-      )
+    const itemTemplate = listPoint && (
+      <BaseListPointItem
+        name={listPoint.point.item.name}
+        unit={listPoint.point.unit}
+        count={listPoint.count}
+        key={listPoint.pointUid}
+        onEdit={() => goToListPointEditPage(listPoint)}
+        onRemove={() => showRemoveListPointModal(listPoint)}
+      />
     );
+
+    return {
+      itemTemplate,
+      tag: listPoint.point.item.tags[0],
+      name: listPoint.point.item.name,
+    };
   };
 
   useEffect(() => {
@@ -126,7 +124,7 @@ export const PrivateListPoints = (props: IPrivateListPointsProps) => {
   return (
     <ListPointsWrapper
       listPoints={listPoints}
-      listPointItem={listPointItem}
+      getListPointData={getListPointData}
       onCreateListPoint={(category) =>
         goToListPointEditPage(getEmptyListPointWithCurrentCategory(category))
       }

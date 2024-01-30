@@ -8,7 +8,7 @@ import {
 import { ListPointEdit } from "../../components/Items/ListPointEdit/ListPointEdit";
 import { useLoading, useModal } from "../../../hooks";
 
-import { IAccessIds, ICommonListPoint, IListPoint } from "../../../interfaces";
+import { IAccessIds, IListPoint } from "../../../interfaces";
 import { TProvidedEvent } from "../../../../router/types";
 import { DuplicateListPointModal, Loader } from "../../elements";
 import { eventPageUrl } from "../../../../router/constants";
@@ -17,6 +17,7 @@ import {
   editPrivateListPoint,
   getDuplicateListPoints,
 } from "../../../api_clients";
+import { convertListPointToBaseListPoint } from "../../../utils";
 
 export const ListPointEditPage = () => {
   const routeData = useLoaderData() as TProvidedEvent;
@@ -29,9 +30,7 @@ export const ListPointEditPage = () => {
 
   const [accessIds, setAccessIds] = useState<IAccessIds>();
 
-  const [listPoint, setListPoint] = useState(
-    getCurrentListPointFromLocalStorage<ICommonListPoint | IListPoint>()
-  );
+  const [listPoint, setListPoint] = useState<IListPoint>();
 
   const listPointType = getListPointTypeFromLocalStorage();
 
@@ -125,9 +124,17 @@ export const ListPointEditPage = () => {
       void routeData.data.then((d) => {
         setAccessIds(d.accessIds);
       });
-      setListPoint(getCurrentListPointFromLocalStorage());
+      const currentListPoint = getCurrentListPointFromLocalStorage();
+
+      if (currentListPoint && listPointType) {
+        const convertedListPoint = convertListPointToBaseListPoint({
+          listPointType,
+          listPoint: currentListPoint,
+        });
+        setListPoint(convertedListPoint);
+      }
     }
-  }, [routeData]);
+  }, [routeData, listPointType]);
 
   return (
     <React.Suspense fallback={<Loader />}>

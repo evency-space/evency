@@ -28,7 +28,7 @@ export const MembersPage = () => {
 
   const [accessIds, setAccessIds] = useState<IAccessIds>();
 
-  const editingMemberBlank: IMember = { name: "", member_uid: "" };
+  const editingMemberBlank: IMember = { name: "", memberUid: "" };
 
   const isNewEvent = event?.isNewEvent;
 
@@ -45,13 +45,11 @@ export const MembersPage = () => {
 
   const onRemoveMemberFromList = (member: IMember) => {
     try {
-      if (!member.member_uid) return;
+      if (!member.memberUid) return;
 
-      deleteMember(eventUid, member.member_uid)
+      deleteMember(eventUid, member.memberUid)
         .then(() => {
-          const newList = list.filter(
-            (m) => m.member_uid !== member.member_uid
-          );
+          const newList = list.filter((m) => m.memberUid !== member.memberUid);
           setList(newList);
         })
         .catch(() => {});
@@ -84,18 +82,18 @@ export const MembersPage = () => {
       if (
         list.find(
           (member) =>
-            member.member_uid === editingMember.member_uid &&
+            member.memberUid === editingMember.memberUid &&
             member.name === editingMember.name
         )
       ) {
         return;
       }
-      await renameMember(eventUid, editingMember.member_uid, editingMember.name)
+      await renameMember(eventUid, editingMember.memberUid, editingMember.name)
         .then((response) => response.json())
         .then((data: IMember) => {
           if (data) {
             const newList = list.map((m) =>
-              m.member_uid === editingMember.member_uid
+              m.memberUid === editingMember.memberUid
                 ? { ...m, name: editingMember.name }
                 : m
             );
@@ -122,7 +120,7 @@ export const MembersPage = () => {
             isFocused={isFocusedInput}
           />
         </div>
-        {editingMember.member_uid && !isDeleting ? (
+        {editingMember.memberUid && !isDeleting ? (
           <ButtonCircle
             icon={<DoneIcon size={24} />}
             onClick={() => {

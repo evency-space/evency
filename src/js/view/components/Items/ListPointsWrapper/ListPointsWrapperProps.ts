@@ -1,17 +1,20 @@
-import { IListPoint, LIST_POINT_CATEGORIES } from "../../../../interfaces";
+import { LIST_POINT_CATEGORIES } from "../../../../interfaces";
 
 export type TGroupedListPoints = {
-  [key in LIST_POINT_CATEGORIES]?: IGroupedListPointObject[];
+  [key in LIST_POINT_CATEGORIES]?: IListPointData[];
 };
 
-export interface IGroupedListPointObject {
-  positionIndex: number;
-  listPoint: IListPoint;
+export interface IListPointData {
+  itemTemplate: JSX.Element;
+  tag: keyof typeof LIST_POINT_CATEGORIES;
+  name: string;
 }
 
+export type TUnknownListPoint = unknown;
+
 export interface IListPointsWrapperProps {
-  listPointItem: (index: number) => JSX.Element;
-  listPoints: IListPoint[];
+  listPoints: TUnknownListPoint[];
+  getListPointData: (index: number) => IListPointData;
   onCreateListPoint?: (category?: LIST_POINT_CATEGORIES) => void;
   customActionPanel?: JSX.Element;
   title?: JSX.Element;

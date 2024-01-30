@@ -1,89 +1,47 @@
 import {
-  ICommonListPoint,
-  ICommonListPointFromBE,
-  IItem,
-  IItemFromBE,
   IListPoint,
-  IListPointBinding,
-  IListPointBindingFromBE,
-  IListPointFromBE,
-  IPrivateListPointFromBE,
-  ITakenListPoint,
-  ITakenListPointFromBE,
   LIST_POINT_CATEGORIES,
   LIST_POINT_UNITS,
 } from "../../interfaces";
+
+import {
+  TLocalStorageListPointTypes,
+  TLocalStorageListPoint,
+} from "../localStorage";
 
 export const getEmptyListPoint = (): IListPoint => ({
   item: {
     name: "",
     tags: [LIST_POINT_CATEGORIES.food],
+    itemUid: "",
   },
   count: 1,
   unit: LIST_POINT_UNITS.piece,
+  pointUid: "",
 });
 
-export const convertIListPointToIListPointFromBE = (
-  listPoint: IListPoint
-): IListPointFromBE => ({
-  is_private: true,
-  isPrivate: true,
-  item: {
-    ...listPoint.item,
-    item_uid: listPoint.item.itemUid,
-    itemUid: listPoint.item.itemUid,
-    is_presaved: true,
-    isPresaved: true,
-    estimated_price: 0,
-    estimatedPrice: 0,
-    weight: 0,
-    volume: 0,
-    photo: "",
-  },
-  unit: listPoint.unit,
-  count: listPoint.count,
-});
+export const convertListPointToBaseListPoint = ({
+  listPointType,
+  listPoint,
+}: {
+  listPointType: TLocalStorageListPointTypes;
+  listPoint: TLocalStorageListPoint;
+}): IListPoint | undefined => {
+  if (listPointType === "common" && "item" in listPoint) {
+    return {
+      ...listPoint,
+    };
+  }
 
-export const convertIItemFromBEToIItem = (item: IItemFromBE): IItem => ({
-  ...item,
-  itemUid: item.item_uid || item.itemUid,
-});
+  if (listPointType === "private" && "point" in listPoint) {
+    const { point, count, pointUid } = listPoint;
+    return {
+      item: point.item,
+      unit: point.unit,
+      count,
+      pointUid,
+    };
+  }
 
-export const convertIPrivateListPointFromBEToIListPoint = (
-  listPoint: IPrivateListPointFromBE
-): IListPoint => ({
-  pointUid: listPoint.point_uid || listPoint.pointUid,
-  item: convertIItemFromBEToIItem(listPoint.point.item),
-  unit: listPoint.point.unit,
-  count: listPoint.point.count,
-});
-
-export const convertIListPointBindingFromBEtoIListPointBinding = (
-  binding: IListPointBindingFromBE
-): IListPointBinding => ({
-  ...binding,
-  member: {
-    ...binding.member,
-    memberUid: binding.member.member_uid || binding.member.memberUid || "",
-    isAuthor: binding.member.is_author || binding.member.isAuthor || false,
-  },
-});
-
-export const convertICommonListPointFromBEToIListPoint = (
-  listPoint: ICommonListPointFromBE
-): ICommonListPoint => ({
-  ...listPoint,
-  pointUid: listPoint.point_uid || listPoint.pointUid || "",
-  item: convertIItemFromBEToIItem(listPoint.item),
-  bindings: listPoint.bindings?.map((b) =>
-    convertIListPointBindingFromBEtoIListPointBinding(b)
-  ),
-});
-
-export const convertITakenListPointFromBEToITakenListPoint = (
-  listPoint: ITakenListPointFromBE
-): ITakenListPoint => ({
-  ...listPoint,
-  isTaken: listPoint.is_taken || listPoint.isTaken || false,
-  pointUid: listPoint.point_uid || listPoint.pointUid || "",
-});
+  return listPoint as IListPoint;
+};

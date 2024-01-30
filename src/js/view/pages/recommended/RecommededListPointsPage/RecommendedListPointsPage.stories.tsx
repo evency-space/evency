@@ -2,19 +2,15 @@ import React from "react";
 import { ComponentStory } from "@storybook/react";
 import { withRouter } from "storybook-addon-react-router-v6";
 import { RecommendedListPointsPage } from "./RecommendedListPointsPage";
-import { IListPoint, IPrivateListPointFromBE } from "../../../../interfaces";
-import {
-  privateListPointsFromBE,
-  convertIPrivateListPointFromBEToIListPoint,
-} from "../../../../utils";
+import { IListPoint, IPrivateListPoint } from "../../../../interfaces";
+import { privateListPointsFromBE } from "../../../../utils";
 import {
   saveRecommendedListPointsInLocalStorage,
   localStorageRecommendedListPoints,
 } from "../storages";
 
-const privateListPoints = privateListPointsFromBE.map((lp) =>
-  convertIPrivateListPointFromBEToIListPoint(lp as IPrivateListPointFromBE)
-);
+const privateListPoints =
+  privateListPointsFromBE as unknown as IPrivateListPoint[];
 
 const initialLocalStorageState = ({
   listPoints,
@@ -38,7 +34,10 @@ const Template: ComponentStory<typeof RecommendedListPointsPage> = () => (
 
 export const Primary = Template.bind({});
 Primary.loaders = [
-  () => initialLocalStorageState({ listPoints: privateListPoints }),
+  () =>
+    initialLocalStorageState({
+      listPoints: privateListPoints.map((lp) => lp.point),
+    }),
 ];
 
 export const Empty = Template.bind({});

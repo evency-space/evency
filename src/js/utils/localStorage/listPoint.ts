@@ -10,24 +10,23 @@ import {
 } from "./constants";
 
 export const saveCurrentListPointInLocalStorage = (
-  listPoint: TLocalStorageListPoint
+  listPoint: TLocalStorageListPoint,
 ) => {
   setLocalStorage<TLocalStorageListPoint>(
     localStorageCurrentListPointObject,
-    listPoint
+    listPoint,
   );
 };
 
-export const getCurrentListPointFromLocalStorage = <
-  TLocalStorageListPoint
->(): TLocalStorageListPoint | null =>
-  getLocalStorage<TLocalStorageListPoint>(localStorageCurrentListPointObject);
+export const getCurrentListPointFromLocalStorage =
+  (): TLocalStorageListPoint | null =>
+    getLocalStorage<TLocalStorageListPoint>(localStorageCurrentListPointObject);
 
 export const deleteCurrentListPointFromLocalStorage = () =>
   deleteLocalStorage(localStorageCurrentListPointObject);
 
 export const saveListPointTypeInLocalStorage = (
-  type: TLocalStorageListPointTypes
+  type: TLocalStorageListPointTypes,
 ) => {
   setLocalStorage<TLocalStorageListPointTypes>(localStorageListPointType, type);
 };

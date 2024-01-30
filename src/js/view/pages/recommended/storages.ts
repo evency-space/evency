@@ -5,25 +5,24 @@ export type TLocalStorageListPoints = Array<IListPoint>;
 
 export const localStorageRecommendedListPoints = "recommendedListPoints";
 
-export const getRecommendedListPointsFromLocalStorage =
-  (): TLocalStorageListPoints => {
-    const listPoints = getLocalStorage<TLocalStorageListPoints>(
-      localStorageRecommendedListPoints
-    );
-    return listPoints && Array.isArray(listPoints) ? listPoints : [];
-  };
+export const getRecommendedListPointsFromLocalStorage = (): IListPoint[] => {
+  const listPoints = getLocalStorage<TLocalStorageListPoints>(
+    localStorageRecommendedListPoints,
+  );
+  return listPoints && Array.isArray(listPoints) ? listPoints : [];
+};
 
 export const saveRecommendedListPointsInLocalStorage = (
-  listPoints: TLocalStorageListPoints
+  listPoints: TLocalStorageListPoints,
 ) => {
   setLocalStorage<TLocalStorageListPoints>(
     localStorageRecommendedListPoints,
-    listPoints
+    listPoints,
   );
 };
 
 export const pushListPointToLocalStorageRecommendedListPoints = (
-  listPoint: IListPoint
+  listPoint: IListPoint,
 ) => {
   const listPoints = getRecommendedListPointsFromLocalStorage();
 
@@ -33,7 +32,7 @@ export const pushListPointToLocalStorageRecommendedListPoints = (
 
 export const replaceListPointToLocalStorageRecommendedListPoints = (
   index: number,
-  listPoint: IListPoint
+  listPoint: IListPoint,
 ) => {
   const listPoints = getRecommendedListPointsFromLocalStorage();
 
@@ -42,7 +41,7 @@ export const replaceListPointToLocalStorageRecommendedListPoints = (
 };
 
 export const deleteListPointFromLocalStorageRecommendedListPoints = (
-  index: number
+  index: number,
 ) => {
   const listPoints = getRecommendedListPointsFromLocalStorage();
 
