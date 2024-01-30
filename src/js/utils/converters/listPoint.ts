@@ -1,5 +1,4 @@
 import {
-  ICommonListPoint,
   IListPoint,
   LIST_POINT_CATEGORIES,
   LIST_POINT_UNITS,
