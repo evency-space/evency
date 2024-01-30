@@ -1,14 +1,13 @@
-import { IListPointFromBE } from "./ListPoint";
+import { IListPoint } from "./ListPoint";
 
-// Backend models
-export interface IPrivateListPointFromBE {
-  point_uid: string;
-  member_uid: string;
+interface IPrivatePoint extends IListPoint {
+  isPrivate: boolean;
+}
+
+export interface IPrivateListPoint {
   count: number;
-  is_taken: boolean;
-  point: IListPointFromBE;
-  // TEMPORARY
-  pointUid?: string;
-  memberUid?: string;
-  isTaken?: boolean;
+  point: IPrivatePoint;
+  pointUid: string;
+  memberUid: string;
+  isTaken: boolean;
 }

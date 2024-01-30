@@ -19,11 +19,7 @@ import {
 import BackPackLogo from "./images/backpack.png";
 import BackPackLogo_2x from "./images/backpack_2x.png";
 import { useLoading } from "../../../hooks";
-import {
-  classesOf,
-  convertIListPointToIListPointFromBE,
-  copyUrl,
-} from "../../../utils";
+import { classesOf, copyUrl } from "../../../utils";
 import { TProvidedEvent } from "../../../../router/types";
 import { IEvent } from "../../../interfaces";
 
@@ -76,9 +72,7 @@ export const ShareLinkPage = () => {
       if (isNewEvent && event) {
         await createRecommendedPrivateList(
           event.eventUid,
-          getRecommendedListPointsFromLocalStorage().map((l) =>
-            convertIListPointToIListPointFromBE(l)
-          )
+          getRecommendedListPointsFromLocalStorage()
         );
         saveRecommendedListPointsInLocalStorage([]);
 

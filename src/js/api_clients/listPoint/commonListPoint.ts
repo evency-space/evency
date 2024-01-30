@@ -1,10 +1,6 @@
 import { SERVER_URL } from "../../common/constants";
 
-import { ICommonListPointFromBE, IListPoint } from "../../interfaces";
-import {
-  convertICommonListPointFromBEToIListPoint,
-  convertIListPointToIListPointFromBE,
-} from "../../utils";
+import { IListPoint } from "../../interfaces";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/CommonList/${eventUid}`;
 
@@ -46,8 +42,6 @@ export const getCommonListPoints = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      member_uid: memberUid,
-      // TEMPORARY
       memberUid,
     }),
   });
@@ -73,12 +67,10 @@ export const editCommonListPoint = ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        point: convertIListPointToIListPointFromBE(listPoint),
-        member_uid: memberUid,
-        // TEMPORARY
+        point: { ...listPoint, isPrivate: true },
         memberUid,
       }),
-    }
+    },
   );
 
 export const deleteCommonListPoint = ({
@@ -96,9 +88,6 @@ export const deleteCommonListPoint = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
-      // TEMPORARY
       pointUid,
       memberUid,
     }),
@@ -119,9 +108,6 @@ export const lockCommonListPoint = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
-      // TEMPORARY
       pointUid,
       memberUid,
     }),
@@ -142,9 +128,6 @@ export const unlockCommonListPoint = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
-      // TEMPORARY
       pointUid,
       memberUid,
     }),
@@ -167,10 +150,7 @@ export const changeCommonListPointBindStatus = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
       count,
-      // TEMPORARY
       pointUid,
       memberUid,
     }),
@@ -207,13 +187,11 @@ export const getDuplicateListPoints = async ({
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (response.ok) {
-      data = ((await response.json()) as ICommonListPointFromBE[]).map((e) =>
-        convertICommonListPointFromBEToIListPoint(e)
-      );
+      data = (await response.json()) as IListPoint[];
     }
   } catch (e) {
     console.error(e);

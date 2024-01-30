@@ -15,7 +15,7 @@ import {
 } from "../storages";
 import { ListPointsWrapper } from "../../../components/Items/ListPointsWrapper/ListPointsWrapper";
 import { getEmptyListPoint } from "../../../../utils";
-import { PrivateListPointItem } from "../../../components/Items/private/PrivateListPointItem/PrivateListPointItem";
+import { BaseListPointItem } from "../../../components/Items/BaseListPointItem/BaseListPointItem";
 import {
   eventCreateRecommendedListPointPageUrl,
   eventEditRecommendedListPointPageUrl,
@@ -98,32 +98,35 @@ export const RecommendedListPointsPage = () => {
     />
   );
 
-  const listPointItem = (index: number) => {
+  const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
-
-    return (
-      listPoint && (
-        <PrivateListPointItem
-          key={listPoint.item.name}
-          listPoint={listPoint}
-          onEdit={() => goToListPointEditPage(listPoint)}
-          onRemove={() =>
-            addRemoveListPointModalContent(
-              listPoints.findIndex(
-                (lp) => lp.item.name === listPoint.item.name
-              ),
-              listPoint.item.name
-            )
-          }
-        />
-      )
+    const itemTemplate = listPoint && (
+      <BaseListPointItem
+        key={listPoint.item.name}
+        name={listPoint.item.name}
+        unit={listPoint.unit}
+        count={listPoint.count}
+        onEdit={() => goToListPointEditPage(listPoint)}
+        onRemove={() =>
+          addRemoveListPointModalContent(
+            listPoints.findIndex((lp) => lp.item.name === listPoint.item.name),
+            listPoint.item.name
+          )
+        }
+      />
     );
+
+    return {
+      itemTemplate,
+      tag: listPoint.item.tags[0],
+      name: listPoint.item.name,
+    };
   };
 
   return (
     <ListPointsWrapper
       listPoints={listPoints}
-      listPointItem={listPointItem}
+      getListPointData={getListPointData}
       title={title}
       customActionPanel={footer}
       onCreateListPoint={(category) =>

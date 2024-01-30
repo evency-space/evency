@@ -1,17 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { TakenListPointItem } from "../TakenListPointItem/TakenListPointItem";
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
-import { convertITakenListPointFromBEToITakenListPoint } from "../../../../../utils";
 import {
   getTakenListPoints,
   changeIsTakenStatus,
 } from "../../../../../api_clients";
 import { useLoading } from "../../../../../hooks";
-import {
-  IListPoint,
-  ITakenListPoint,
-  ITakenListPointFromBE,
-} from "../../../../../interfaces";
+import { IListPoint, ITakenListPoint } from "../../../../../interfaces";
 import { ITakenListPointsProps } from "./TakenListPointsProps";
 
 export const TakenListPoints = (props: ITakenListPointsProps) => {
@@ -28,21 +23,10 @@ export const TakenListPoints = (props: ITakenListPointsProps) => {
       setLoading(true);
 
       const response = await getTakenListPoints(accessIds);
-      const takenListPointsFromBE: ITakenListPoint[] = [];
-      const listPointsFromBE: IListPoint[] = [];
+      const listPointsResponse = (await response.json()) as ITakenListPoint[];
 
-      ((await response.json()) as ITakenListPointFromBE[]).forEach(
-        (listPoint) => {
-          const convertedListPoint =
-            convertITakenListPointFromBEToITakenListPoint(listPoint);
-
-          takenListPointsFromBE.push(convertedListPoint);
-          listPointsFromBE.push(convertedListPoint.point);
-        }
-      );
-
-      setListPoints(takenListPointsFromBE);
-      setItems(listPointsFromBE);
+      setListPoints(listPointsResponse);
+      setItems(listPointsResponse.map((listPoint) => listPoint.point));
     } finally {
       setLoading(false);
     }
@@ -65,10 +49,9 @@ export const TakenListPoints = (props: ITakenListPointsProps) => {
     }
   };
 
-  const listPointItem = (index: number) => {
+  const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
-
-    return (
+    const itemTemplate = listPoint && (
       <TakenListPointItem
         listPoint={listPoint}
         key={listPoint.pointUid}
@@ -77,6 +60,12 @@ export const TakenListPoints = (props: ITakenListPointsProps) => {
         }}
       />
     );
+
+    return {
+      itemTemplate,
+      tag: listPoint.point.item.tags[0],
+      name: listPoint.point.item.name,
+    };
   };
 
   useEffect(() => {
@@ -88,7 +77,7 @@ export const TakenListPoints = (props: ITakenListPointsProps) => {
   return (
     <ListPointsWrapper
       listPoints={items}
-      listPointItem={listPointItem}
+      getListPointData={getListPointData}
       customActionPanel={<div />}
       disableCategoryAddButton
     />

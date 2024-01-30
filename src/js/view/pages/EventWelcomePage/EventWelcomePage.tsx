@@ -42,7 +42,7 @@ export const EventWelcomePage = () => {
   const onChangeMember = (member: IMember) => {
     pushAccessIdsInLocalStorage({
       eventUid,
-      memberUid: member.member_uid,
+      memberUid: member.memberUid,
     });
 
     saveUserNameInLocalStorage(member.name);
@@ -51,7 +51,7 @@ export const EventWelcomePage = () => {
   const radioButton = (member: IMember) => (
     <Radio
       name={member.name}
-      value={selectedMember?.member_uid === member.member_uid}
+      value={selectedMember?.memberUid === member.memberUid}
       onChange={() => setSelectedMember(member)}
     />
   );
@@ -75,7 +75,7 @@ export const EventWelcomePage = () => {
       <div>
         {members.length > 0
           ? members.map((member) => (
-              <MembersListItem key={member.member_uid} name={member.name}>
+              <MembersListItem key={member.memberUid} name={member.name}>
                 {membersListItemContent(member)}
               </MembersListItem>
             ))
@@ -112,7 +112,7 @@ export const EventWelcomePage = () => {
         setMembers(d.members);
 
         const member = d.members.find(
-          (m) => m.member_uid === d.accessIds?.memberUid
+          (m) => m.memberUid === d.accessIds?.memberUid
         );
         setSelectedMember(member);
       });

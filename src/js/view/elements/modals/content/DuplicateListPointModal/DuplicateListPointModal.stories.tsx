@@ -4,17 +4,10 @@ import { ComponentStory } from "@storybook/react";
 import { withRouter } from "storybook-addon-react-router-v6";
 import { DuplicateListPointModal } from "./DuplicateListPointModal";
 import { Modal } from "../../Modal/Modal";
-import {
-  accessIds,
-  commonListPointsFromBE,
-  convertICommonListPointFromBEToIListPoint,
-} from "../../../../../utils";
-import { IAccessIds, ICommonListPointFromBE } from "../../../../../interfaces";
+import { accessIds, commonListPointsFromBE } from "../../../../../utils";
+import { IAccessIds, ICommonListPoint } from "../../../../../interfaces";
 
-const commonListPoint = convertICommonListPointFromBEToIListPoint(
-  (commonListPointsFromBE as ICommonListPointFromBE[])[0]
-);
-
+const commonListPoint = (commonListPointsFromBE as ICommonListPoint[])[0];
 export default {
   title: "elements/Modal/content/DuplicateListPointModal",
   component: DuplicateListPointModal,

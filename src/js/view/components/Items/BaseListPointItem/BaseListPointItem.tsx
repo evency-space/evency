@@ -1,19 +1,19 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IPrivateListPointItemProps } from "./PrivateListPointItemProps";
-import { ListPointItem } from "../../ListPointItem/ListPointItem";
-import { BtnIcon, TagSmall } from "../../../../elements";
-import { DeleteIcon, EditIcon } from "../../../../icons";
+import { IBaseListPointItemProps } from "./BaseListPointItemProps";
+import { ListPointItem } from "../ListPointItem/ListPointItem";
+import { BtnIcon, TagSmall } from "../../../elements";
+import { DeleteIcon, EditIcon } from "../../../icons";
 
-export const PrivateListPointItem = (props: IPrivateListPointItemProps) => {
-  const { listPoint, onEdit, onRemove } = props;
+export const BaseListPointItem = (props: IBaseListPointItemProps) => {
+  const { name, unit, count, onEdit, onRemove } = props;
 
   const { t } = useTranslation();
 
   const listPointCount = () => (
-    <TagSmall isButton={false} className="w-max">{`${listPoint.count} ${t(
-      `list_point.short_units.${listPoint.unit}`
-    )}`}</TagSmall>
+    <TagSmall isButton={false} className="w-max">
+      {`${count || ""} ${t(`list_point.short_units.${unit}`)}`}
+    </TagSmall>
   );
 
   const actionButtons = () => (
@@ -38,7 +38,5 @@ export const PrivateListPointItem = (props: IPrivateListPointItemProps) => {
     </div>
   );
 
-  return (
-    <ListPointItem listPointName={listPoint.item.name} content={content()} />
-  );
+  return <ListPointItem listPointName={name} content={content()} />;
 };

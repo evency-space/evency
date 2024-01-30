@@ -4,16 +4,15 @@ import { TakenListPointItem } from "./TakenListPointItem";
 import {
   takenListPointFromBE,
   untakenListPointFromBE,
-  convertITakenListPointFromBEToITakenListPoint,
 } from "../../../../../utils";
-import { ITakenListPointFromBE } from "../../../../../interfaces";
+import { ITakenListPoint } from "../../../../../interfaces";
 
-const untakenListPoint = convertITakenListPointFromBEToITakenListPoint(
-  (untakenListPointFromBE as ITakenListPointFromBE[])[0]
-);
-const takenListPoint = convertITakenListPointFromBEToITakenListPoint(
-  (takenListPointFromBE as ITakenListPointFromBE[])[0]
-);
+const untakenListPoint = (
+  untakenListPointFromBE as unknown as ITakenListPoint[]
+)[0];
+const takenListPoint = (
+  takenListPointFromBE as unknown as ITakenListPoint[]
+)[0];
 
 export default {
   title: "components/listPoint/taken/TakenListPointItem",

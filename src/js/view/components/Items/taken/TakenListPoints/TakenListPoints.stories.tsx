@@ -3,7 +3,7 @@ import { ComponentStory } from "@storybook/react";
 import { TakenListPoints } from "./TakenListPoints";
 import { mockedTakenListPointsApi } from "../../../../../api_clients";
 import { takenListPointFromBE, accessIds } from "../../../../../utils";
-import { IAccessIds, ITakenListPointFromBE } from "../../../../../interfaces";
+import { IAccessIds } from "../../../../../interfaces";
 
 export default {
   title: "components/listPoint/taken/TakenListPoints",
@@ -36,7 +36,7 @@ TakenAll.parameters = {
     ...mockedTakenListPointsApi,
     getItems: {
       ...mockedTakenListPointsApi.getItems,
-      response: takenListPointFromBE as ITakenListPointFromBE[],
+      response: takenListPointFromBE,
     },
   }),
 };

@@ -1,16 +1,10 @@
 import React from "react";
 import { ComponentStory } from "@storybook/react";
 import { CommonListPointItem } from "./CommonListPointItem";
-import { ICommonListPointFromBE } from "../../../../../interfaces";
-import {
-  commonListPointsFromBE,
-  convertICommonListPointFromBEToIListPoint,
-} from "../../../../../utils";
+import { ICommonListPoint } from "../../../../../interfaces";
+import { commonListPointsFromBE } from "../../../../../utils";
 
-const commonListPoint = convertICommonListPointFromBEToIListPoint(
-  (commonListPointsFromBE as ICommonListPointFromBE[])[0]
-);
-
+const commonListPoint = (commonListPointsFromBE as ICommonListPoint[])[0];
 export default {
   title: "components/listPoint/common/CommonListPointItem",
   component: CommonListPointItem,
@@ -69,10 +63,7 @@ LoadingWithLongNameItem.args = {
   loading: true,
   listPoint: {
     ...commonListPoint,
-    item: {
-      ...commonListPoint.item,
-      name: "Очень чистая родниковая вода",
-    },
+    item: { ...commonListPoint.item, name: "Очень чистая родниковая вода" },
     count: 5,
     unit: "liter",
   },

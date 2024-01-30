@@ -26,8 +26,10 @@ Primary.args = {
     item: {
       name: "Греча",
       tags: [LIST_POINT_CATEGORIES.food],
+      itemUid: "",
     },
     unit: LIST_POINT_UNITS.gram,
     count: 3,
+    pointUid: "",
   },
 };

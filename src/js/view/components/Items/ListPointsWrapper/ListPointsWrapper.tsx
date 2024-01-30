@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  IGroupedListPointObject,
+  IListPointData,
   IListPointsWrapperProps,
   TGroupedListPoints,
+  TUnknownListPoint,
 } from "./ListPointsWrapperProps";
 import { PageWrapper } from "../../PageWrapper/PageWrapper";
 import {
@@ -15,12 +16,12 @@ import {
 import ShutterStock from "../../../../../assets/images/shutterstock.png";
 import { useLoading } from "../../../../hooks";
 import SearchBar from "../../SearchBar/SearchBar";
-import { IListPoint, LIST_POINT_CATEGORIES } from "../../../../interfaces";
+import { LIST_POINT_CATEGORIES } from "../../../../interfaces";
 
 export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
   const {
-    listPointItem,
     listPoints,
+    getListPointData,
     customActionPanel,
     onCreateListPoint,
     title,
@@ -39,18 +40,18 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
 
   const updateGroupedListPoints = ({
     grouped,
-    data,
+    listPointData,
   }: {
     grouped: TGroupedListPoints;
-    data: IGroupedListPointObject;
+    listPointData: IListPointData;
   }) => {
-    const tag = data.listPoint.item.tags[0];
+    const { tag } = listPointData;
     const list = grouped[tag];
 
     if (Array.isArray(list)) {
-      return { ...grouped, [tag]: [...list, data] };
+      return { ...grouped, [tag]: [...list, listPointData] };
     }
-    return { ...grouped, [tag]: [data] };
+    return { ...grouped, [tag]: [listPointData] };
   };
 
   const applyFilter = (value?: string) => {
@@ -59,20 +60,18 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
 
       listPoints.reduce(
         (
-          filteredListPoints: IListPoint[],
-          listPoint: IListPoint,
+          filteredListPoints: TUnknownListPoint[],
+          listPoint: TUnknownListPoint,
           index: number
         ) => {
-          const itemName = listPoint.item.name.toLowerCase();
+          const listPointData = getListPointData(index);
+          const itemName = listPointData.name.toLowerCase();
 
           if (itemName.indexOf(value.toLowerCase()) !== -1) {
             filteredListPoints.push(listPoint);
             grouped = updateGroupedListPoints({
               grouped,
-              data: {
-                listPoint,
-                positionIndex: index,
-              },
+              listPointData,
             });
           }
 
@@ -86,20 +85,21 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
     }
   };
 
-  const initializeGroupedListPoints = useCallback((list: IListPoint[]) => {
-    let grouped: TGroupedListPoints = {};
-    list.forEach((listPoint, index: number) => {
-      grouped = updateGroupedListPoints({
-        grouped,
-        data: {
-          listPoint,
-          positionIndex: index,
-        },
+  const initializeGroupedListPoints = useCallback(
+    (list: TUnknownListPoint[]) => {
+      let grouped: TGroupedListPoints = {};
+
+      list.forEach((_, index: number) => {
+        grouped = updateGroupedListPoints({
+          grouped,
+          listPointData: getListPointData(index),
+        });
       });
-    });
-    setGroupedListPoints(grouped);
-    setGroupedListPointsAfterFilter(grouped);
-  }, []);
+      setGroupedListPoints(grouped);
+      setGroupedListPointsAfterFilter(grouped);
+    },
+    [getListPointData]
+  );
 
   const noContent = (
     <div className="flex flex-col h-full items-center justify-center gap-y-6">
@@ -139,8 +139,8 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
               </div>
 
               <div>
-                {groupedListPointsAfterFilter[groupName]?.map((data) =>
-                  listPointItem(data.positionIndex)
+                {groupedListPointsAfterFilter[groupName]?.map(
+                  ({ itemTemplate }) => itemTemplate
                 )}
               </div>
             </div>
