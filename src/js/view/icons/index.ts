@@ -18,3 +18,4 @@ export * from "./ChatIcon";
 export * from "./ChatQuestionIcon";
 export * from "./FolderIcon";
 export * from "./StarIcon";
+export * from "./LanguageIcon";

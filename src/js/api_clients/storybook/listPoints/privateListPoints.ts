@@ -1,5 +1,4 @@
 import { accessIds, privateListPointsFromBE } from "../../../utils";
-import { IPrivateListPointFromBE } from "../../../interfaces";
 import { privateListPointApi } from "../../listPoint";
 
 const status = 200;
@@ -29,7 +28,7 @@ export const mockedPrivateListPointsApi = {
     url: privateEndPoints.getItems,
     method: "GET",
     status,
-    response: privateListPointsFromBE as IPrivateListPointFromBE[],
+    response: privateListPointsFromBE,
     delay,
   },
   removeItem: {

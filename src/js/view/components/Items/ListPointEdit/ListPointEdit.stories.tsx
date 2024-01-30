@@ -1,16 +1,12 @@
 import React from "react";
 import { ComponentStory } from "@storybook/react";
 import { ListPointEdit } from "./ListPointEdit";
-import { IPrivateListPointFromBE } from "../../../../interfaces";
-import {
-  privateListPointsFromBE,
-  convertIPrivateListPointFromBEToIListPoint,
-} from "../../../../utils";
+import { IPrivateListPoint } from "../../../../interfaces";
+import { privateListPointsFromBE } from "../../../../utils";
 
-const privateListPoint = convertIPrivateListPointFromBEToIListPoint(
-  (privateListPointsFromBE as IPrivateListPointFromBE[])[0]
-);
-
+const privateListPoint = (
+  privateListPointsFromBE as unknown as IPrivateListPoint[]
+)[0].point;
 export default {
   title: "components/ListPoint/ListPointEdit",
   component: ListPointEdit,

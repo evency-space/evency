@@ -1,8 +1,8 @@
 import { IAccessIdsFromBE, IAccessIds } from "../../interfaces";
 
 export const convertIAccessIdsFromBEToIAccessIds = (
-  accessIds: IAccessIdsFromBE
+  accessIds: IAccessIdsFromBE,
 ): IAccessIds => ({
-  eventUid: accessIds.trip_uid,
-  memberUid: accessIds.member_uid,
+  eventUid: accessIds.tripUid,
+  memberUid: accessIds.memberUid,
 });

@@ -1,7 +1,6 @@
 import { SERVER_URL } from "../../common/constants";
 
 import { IListPoint } from "../../interfaces";
-import { convertIListPointToIListPointFromBE } from "../../utils";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/PrivateList/${eventUid}`;
 
@@ -56,10 +55,10 @@ export const editPrivateListPoint = ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        point: convertIListPointToIListPointFromBE(listPoint),
-        member_uid: memberUid,
+        point: { ...listPoint, isPrivate: true },
+        memberUid,
       }),
-    }
+    },
   );
 };
 
@@ -78,7 +77,7 @@ export const removePrivateListPoint = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
+      memberUid,
+      pointUid,
     }),
   });

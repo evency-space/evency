@@ -3,10 +3,7 @@ import {
   commonListPointsFromBE,
   accessIds,
 } from "../../../utils";
-import {
-  ICommonListPointFromBE,
-  IListPointBindingFromBE,
-} from "../../../interfaces";
+import { IListPointBinding } from "../../../interfaces";
 import { commonListPointApi } from "../../listPoint";
 
 const status = 200;
@@ -36,7 +33,7 @@ export const mockedCommonListPointsApi = {
     url: commonEndPoints.getItems,
     method: "POST",
     status,
-    response: commonListPointsFromBE as ICommonListPointFromBE[],
+    response: commonListPointsFromBE,
     delay,
   },
   lockItem: {
@@ -78,7 +75,7 @@ export const mockedCommonListPointsApi = {
     url: commonEndPoints.getMemberBindings,
     method: "GET",
     status,
-    response: commonListPointBindingsFromBE as IListPointBindingFromBE[],
+    response: commonListPointBindingsFromBE as IListPointBinding[],
     delay,
   },
 };

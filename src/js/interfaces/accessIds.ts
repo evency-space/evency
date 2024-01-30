@@ -1,9 +1,8 @@
 export interface IAccessIdsFromBE {
-  trip_uid: string;
-  member_uid: string;
+  tripUid: string;
+  memberUid: string;
 }
 
-export interface IAccessIds {
+export interface IAccessIds extends Omit<IAccessIdsFromBE, "tripUid"> {
   eventUid: string;
-  memberUid: string;
 }

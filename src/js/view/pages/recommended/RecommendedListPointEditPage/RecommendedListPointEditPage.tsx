@@ -17,7 +17,7 @@ export const RecommendedListPointEditPage = () => {
 
   const { index } = useParams();
 
-  const listPoint = getCurrentListPointFromLocalStorage<IListPoint>();
+  const listPoint = getCurrentListPointFromLocalStorage() as IListPoint;
 
   const indexIsUndefined = index === undefined;
 

@@ -1,11 +1,12 @@
 {
-  "language": "Русский",
   "me": "Я",
   "hide": "Скрыть",
   "members": "Участники",
   "error": "Что пошло не так, попробуйте перезагрузить страницу",
   "welcome": "Добро пожаловать",
   "i_take": "Я беру",
+  "language": "Язык",
+  "search": "Поиск",
   "headerRoutes": {
     "goBack": "Назад",
     "eventEditListPointPage": {
@@ -31,8 +32,7 @@
     },
     "members": {
       "add_members": "Добавьте участников",
-      "edit_members": "Редактировать участников",
-      "another_member": "Еще участник"
+      "edit_members": "Редактировать участников"
     }
   },
   "categories": {
@@ -88,7 +88,8 @@
       "date_end": "Дата окончания",
       "description": "Описание",
       "description_example": "Идем к водопаду Великий через сосновый лес, а ужинаем на альпийском лугу с видом на горные вершины",
-      "example": "Например"
+      "example": "Например",
+      "success": "Ура! Мероприятие успешно создано!"
     },
     "share": {
       "paragraph": "Поделитесь ссылкой с друзьями",
@@ -128,6 +129,9 @@
           }
         }
       }
+    },
+    "settings": {
+      "title": "Настройки"
     }
   },
   "list_point": {
@@ -195,6 +199,13 @@
     "events_list_action": {
       "deleteEvent": "Удалить мероприятие",
       "title": "Точно удалить мероприятие \"{{eventTitle}}\"?"
+    },
+    "duplicated_list_point": {
+      "title": "Такая вещь уже есть в списке!",
+      "description": "Если вы хотите изменить количество, перейдите в",
+      "description_button": "режим редактирования вещи",
+      "primary_button_text": "Назад к списку вещей",
+      "secondary_button_text": "Все равно добавить"
     }
   }
 }

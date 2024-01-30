@@ -6,3 +6,4 @@ export * from "./content/ListPointActionModal/ListPointActionModal";
 export * from "./content/events/EventActionModal/EventActionModal";
 export * from "./content/events/EventsListActionModal/EventsListActionModal";
 export * from "./content/MenuModal/MenuModal";
+export * from "./content/DuplicateListPointModal/DuplicateListPointModal";

@@ -10,10 +10,10 @@ export const MembersEditList = memo((props: MembersListProps) => {
     <>
       {list.map((member) => (
         <MembersEditListItem
-          key={member.member_uid}
+          key={member.memberUid}
           memberName={member.name}
-          memberUid={member.member_uid}
-          isMe={member.member_uid === accessIds.memberUid}
+          memberUid={member.memberUid}
+          isMe={member.memberUid === accessIds.memberUid}
           onEdit={onEdit}
           onFinishEdit={onFinishEdit}
           onFocusInput={onFocusInput}

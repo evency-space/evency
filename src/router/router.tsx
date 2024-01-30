@@ -8,7 +8,12 @@ import {
   saveListPointTypeInLocalStorage,
 } from "../js/utils/localStorage";
 import { WelcomePage } from "../js/view/components/WelcomePage/WelcomePage";
-import { EventEditPage, EventWelcomePage, FaqPage } from "../js/view/pages";
+import {
+  EventEditPage,
+  EventWelcomePage,
+  FaqPage,
+  SettingsPage,
+} from "../js/view/pages";
 import { EventPage } from "../js/view/pages/EventPage/EventPage";
 import { ListPointEditPage } from "../js/view/pages/ListPointEditPage/ListPointEditPage";
 import { MembersPage } from "../js/view/pages/MembersPage";
@@ -155,6 +160,10 @@ export const router = createBrowserRouter([
       {
         path: "help",
         element: <FaqPage />,
+      },
+      {
+        path: "settings",
+        element: <SettingsPage />,
       },
       {
         path: "*",

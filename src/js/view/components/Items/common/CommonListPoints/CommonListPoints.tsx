@@ -2,11 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CommonListPointItem } from "../CommonListPointItem/CommonListPointItem";
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
-import {
-  convertICommonListPointFromBEToIListPoint,
-  convertIListPointBindingFromBEtoIListPointBinding,
-  getEmptyListPoint,
-} from "../../../../../utils";
+import {} from "../../../../../utils";
 import {
   changeCommonListPointBindStatus,
   deleteCommonListPoint,
@@ -18,10 +14,8 @@ import {
 import { useLoading, useModal } from "../../../../../hooks";
 import {
   ICommonListPoint,
-  ICommonListPointFromBE,
   IListPoint,
-  IListPointBindingFromBE,
-  LIST_POINT_CATEGORIES,
+  IListPointBinding,
 } from "../../../../../interfaces";
 import {
   BindListPointModal,
@@ -34,6 +28,7 @@ import {
   eventCreateListPointPageUrl,
   eventEditListPointPageUrl,
 } from "../../../../../../router/constants";
+import { getEmptyListPointWithCurrentCategory } from "../../utils";
 
 export const CommonListPoints = (props: ICommonListPointsProps) => {
   const { accessIds } = props;
@@ -78,21 +73,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
     }
   };
 
-  const getEmptyListPointWithCurrentCategory = (
-    category: LIST_POINT_CATEGORIES
-  ): IListPoint => {
-    const emptyListPoint = getEmptyListPoint();
-
-    return {
-      ...emptyListPoint,
-      item: {
-        ...emptyListPoint.item,
-        tags: [category],
-      },
-    };
-  };
-
-  const goToListPointEditPage = (listPoint: IListPoint) => {
+  const goToListPointEditPage = (listPoint: IListPoint | ICommonListPoint) => {
     saveCurrentListPointInLocalStorage(listPoint);
     navigate(
       listPoint.pointUid
@@ -110,13 +91,10 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
       setLoading(true);
 
       const response = await getCommonListPoints(accessIds);
-      const commonListPoints = (
-        (await response.json()) as ICommonListPointFromBE[]
-      ).map((listPoint) =>
-        convertICommonListPointFromBEToIListPoint(listPoint)
-      );
+      const commonListPointsResponse =
+        (await response.json()) as ICommonListPoint[];
 
-      setListPoints(commonListPoints);
+      setListPoints(commonListPointsResponse);
     } finally {
       setLoading(false);
     }
@@ -155,9 +133,8 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
         (lp) => lp.pointUid === listPoint.pointUid
       );
 
-      listPoints[index].bindings = (
-        (await response.json()) as IListPointBindingFromBE[]
-      ).map((b) => convertIListPointBindingFromBEtoIListPointBinding(b));
+      listPoints[index].bindings =
+        (await response.json()) as IListPointBinding[];
     } finally {
       setLoadingPointUid("");
     }
@@ -276,31 +253,35 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
     });
   };
 
-  const listPointItem = (index: number) => {
+  const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
 
-    return (
-      listPoint && (
-        <CommonListPointItem
-          listPoint={listPoint}
-          key={listPoint.pointUid}
-          memberUid={accessIds.memberUid}
-          loading={loadingPointUid === listPoint.pointUid}
-          onBindListPoint={() => {
-            void checkListPointAvailability({
-              listPoint,
-              cb: showBindModal,
-            });
-          }}
-          onShowListPointSettings={() => {
-            void showActionListPointModal(listPoint);
-          }}
-          onClickTitle={() => {
-            void updateListPointMemberBindings({ listPoint });
-          }}
-        />
-      )
+    const itemTemplate = (
+      <CommonListPointItem
+        listPoint={listPoint}
+        key={listPoint.pointUid}
+        memberUid={accessIds.memberUid}
+        loading={loadingPointUid === listPoint.pointUid}
+        onBindListPoint={() => {
+          void checkListPointAvailability({
+            listPoint,
+            cb: showBindModal,
+          });
+        }}
+        onShowListPointSettings={() => {
+          void showActionListPointModal(listPoint);
+        }}
+        onClickTitle={() => {
+          void updateListPointMemberBindings({ listPoint });
+        }}
+      />
     );
+
+    return {
+      itemTemplate,
+      tag: listPoint.item.tags[0],
+      name: listPoint.item.name,
+    };
   };
 
   useEffect(() => {
@@ -312,13 +293,9 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
   return (
     <ListPointsWrapper
       listPoints={listPoints}
-      listPointItem={listPointItem}
+      getListPointData={getListPointData}
       onCreateListPoint={(category) => {
-        goToListPointEditPage(
-          category
-            ? getEmptyListPointWithCurrentCategory(category)
-            : getEmptyListPoint()
-        );
+        goToListPointEditPage(getEmptyListPointWithCurrentCategory(category));
       }}
     />
   );

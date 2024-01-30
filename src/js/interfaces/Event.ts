@@ -1,12 +1,12 @@
 export interface IEventFromBE {
-  trip_uid: string;
+  tripUid: string;
   title: string;
   description: string;
   start: string | null;
   end: string | null;
 }
 
-export interface IEvent extends Omit<IEventFromBE, "trip_uid"> {
+export interface IEvent extends Omit<IEventFromBE, "tripUid"> {
   eventUid: string;
   isNewEvent?: boolean;
 }

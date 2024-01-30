@@ -13,6 +13,7 @@ import {
   FolderIcon,
   GearIcon,
   KebabIcon,
+  LanguageIcon,
   LoaderIcon,
   LogoutIcon,
   MembersIcon,
@@ -59,3 +60,4 @@ export const Folder = getComponent(FolderIcon).bind({});
 export const Chat = getComponent(ChatIcon).bind({});
 export const ChatQuestion = getComponent(ChatQuestionIcon).bind({});
 export const Star = getComponent(StarIcon).bind({});
+export const Language = getComponent(LanguageIcon).bind({});

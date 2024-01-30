@@ -1,10 +1,10 @@
 import { SERVER_URL } from "../common/constants";
+import { IMember } from "../interfaces";
 
 export const getMembers = async (eventUid: string) => {
   const response = await fetch(`${SERVER_URL}/Trip/${eventUid}/Members`);
   if (response.ok) {
-    const json: [{ name: string; member_uid: string }] =
-      (await response.json()) as [{ name: string; member_uid: string }];
+    const json = (await response.json()) as IMember[];
     return json;
   }
   return [];
@@ -12,19 +12,19 @@ export const getMembers = async (eventUid: string) => {
 
 export const deleteMember = async (
   eventUid: string,
-  memberUid: string
+  memberUid: string,
 ): Promise<void> => {
   await fetch(`${SERVER_URL}/Trip/${eventUid}/Members/${memberUid}`, {
     method: "DELETE",
   })
-    .then((response) => response.json())
+    .then(response => response.json())
     .catch(() => {});
 };
 
 export const renameMember = async (
   eventUid: string,
   memberUid: string,
-  memberName: string
+  memberName: string,
 ): Promise<Response> => {
   const res = await fetch(
     `${SERVER_URL}/Trip/${eventUid}/Members/RenameMember`,
@@ -34,17 +34,17 @@ export const renameMember = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        member_uid: memberUid,
         name: memberName,
+        memberUid,
       }),
-    }
+    },
   );
   return res;
 };
 
 export const addMember = async (
   eventUid: string,
-  memberName: string
+  memberName: string,
 ): Promise<Response> => {
   const response = await fetch(
     `${SERVER_URL}/Trip/${eventUid}/Members/AddMember`,
@@ -54,10 +54,10 @@ export const addMember = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        member_uid: null,
         name: memberName,
+        memberUid: null,
       }),
-    }
+    },
   );
   return response;
 };

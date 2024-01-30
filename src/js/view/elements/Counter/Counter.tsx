@@ -39,7 +39,11 @@ export const Counter = (props: ICounterProps) => {
 
   useEffect(() => {
     onChange(Number(localValue));
-  }, [localValue, onChange]);
+  }, [localValue]);
+
+  useEffect(() => {
+    setLocalValue(String(value));
+  }, [value]);
 
   return (
     <>

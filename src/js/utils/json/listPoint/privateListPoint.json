@@ -1,76 +1,135 @@
 {
-  "privateListPointsFromBE": [{
-    "point_uid":"ff5c61e4-c355-4a8a-8b81-72a1757fe9bd",
-    "member_uid":"cbf1075c-5385-49e0-b390-5fb4ae8d6b95",
-    "count":4,
-    "is_taken":false,
-    "point":{
-      "item_uid":"e788948e-e883-424e-a919-a8b26f7b11e0",
-      "trip_uid":"9b60a4e6-f146-4e84-9942-3c039a95a914",
-      "unit":"piece",
-      "count":6,
-      "is_private":true,
-      "item":{
-        "name":"Шоколадки/батончики",
-        "estimated_price":0,
-        "weight":0,
-        "volume":0,
-        "photo":"",
-        "tags":[
-          "food"
-        ],
-        "is_presaved":true,
-        "item_uid":"e788948e-e883-424e-a919-a8b26f7b11e0"
-      }
-    }
-  },
+  "privateListPointsFromBE": [
     {
-      "point_uid":"2fdc9d75-ea7f-40d8-bff8-7fbecaf7b0f4",
-      "member_uid":"cbf1075c-5385-49e0-b390-5fb4ae8d6b95",
-      "count":2,
-      "is_taken":false,
-      "point":{
-        "item_uid":"65ff2e8c-8988-482f-92a6-51dad3e25d94",
-        "trip_uid":"9b60a4e6-f146-4e84-9942-3c039a95a914",
-        "unit":"piece",
-        "count":2,
-        "is_private":true,
-        "item":{
-          "name":"Ролтон",
-          "estimated_price":0,
-          "weight":0,
-          "volume":0,
-          "photo":"",
-          "tags":[
-            "food"
-          ],
-          "is_presaved":true,
-          "item_uid":"65ff2e8c-8988-482f-92a6-51dad3e25d94"
+      "pointUid": "ff5c61e4-c355-4a8a-8b81-72a1757fe9bd",
+      "memberUid": "cbf1075c-5385-49e0-b390-5fb4ae8d6b95",
+      "count": 4,
+      "isTaken": false,
+      "point": {
+        "pointUid": "ff5c61e4-c355-4a8a-8b81-72a1757fe9bd",
+        "itemUid": "e788948e-e883-424e-a919-a8b26f7b11e0",
+        "tripUid": "9b60a4e6-f146-4e84-9942-3c039a95a914",
+        "unit": "piece",
+        "count": 6,
+        "isPrivate": true,
+        "item": {
+          "name": "Шоколадки/батончики",
+          "tags": ["food"],
+          "itemUid": "e788948e-e883-424e-a919-a8b26f7b11e0"
         }
       }
     },
     {
-      "point_uid":"72125ba0-0fb9-4821-87cf-257bbdb3d1ab",
-      "member_uid":"cbf1075c-5385-49e0-b390-5fb4ae8d6b95",
-      "count":300,
-      "is_taken":false,
-      "point":{
-        "item_uid":"424f3c70-7b08-4bdf-89a8-067021110b2e",
-        "trip_uid":"9b60a4e6-f146-4e84-9942-3c039a95a914",
-        "unit":"gram",
-        "count":300,
-        "is_private":true,
-        "item":{
-          "name":"Макароны",
-          "estimated_price":0,
-          "weight":0,
-          "volume":0,
-          "photo":"",
-          "tags":[
-            "food"
-          ],
-          "is_presaved":true,
-          "item_uid":"424f3c70-7b08-4bdf-89a8-067021110b2e"
+      "pointUid": "2fdc9d75-ea7f-40d8-bff8-7fbecaf7b0f4",
+      "memberUid": "cbf1075c-5385-49e0-b390-5fb4ae8d6b95",
+      "count": 2,
+      "isTaken": false,
+      "point": {
+        "pointUid": "2fdc9d75-ea7f-40d8-bff8-7fbecaf7b0f4",
+        "itemUid": "65ff2e8c-8988-482f-92a6-51dad3e25d94",
+        "tripUid": "9b60a4e6-f146-4e84-9942-3c039a95a914",
+        "unit": "piece",
+        "count": 2,
+        "isPrivate": true,
+        "item": {
+          "name": "Ролтон",
+          "tags": ["food"],
+          "itemUid": "65ff2e8c-8988-482f-92a6-51dad3e25d94"
+        }
+      }
+    },
+    {
+      "pointUid": "72125ba0-0fb9-4821-87cf-257bbdb3d1ab",
+      "memberUid": "cbf1075c-5385-49e0-b390-5fb4ae8d6b95",
+      "count": 300,
+      "isTaken": false,
+      "point": {
+        "pointUid": "72125ba0-0fb9-4821-87cf-257bbdb3d1ab",
+        "itemUid": "424f3c70-7b08-4bdf-89a8-067021110b2e",
+        "tripUid": "9b60a4e6-f146-4e84-9942-3c039a95a914",
+        "unit": "gram",
+        "count": 300,
+        "isPrivate": true,
+        "item": {
+          "name": "Макароны",
+          "tags": ["food"],
+          "itemUid": "424f3c70-7b08-4bdf-89a8-067021110b2e"
+        }
+      }
+    },
+    {
+      "pointUid": "95693481-7773-4f77-8a76-4a2d169944e3",
+      "memberUid": "8bb8d08b-ab41-4a60-bdfe-1030c4aeb9e9",
+      "count": 1.0,
+      "isTaken": false,
+      "point": {
+        "itemUid": "0073cf17-1891-4429-bd62-c88fe69369bb",
+        "tripUid": "9a6adaef-0b4e-4450-a7cf-5a5092b48516",
+        "unit": "piece",
+        "count": 1.0,
+        "isPrivate": true,
+        "pointUid": "95693481-7773-4f77-8a76-4a2d169944e3",
+        "item": {
+          "name": "Теплый спальник",
+          "tags": ["equipment"],
+          "itemUid": "0073cf17-1891-4429-bd62-c88fe69369bb"
+        }
+      }
+    },
+    {
+      "pointUid": "c5e79fa6-ac22-425c-8e63-648e18513296",
+      "memberUid": "8bb8d08b-ab41-4a60-bdfe-1030c4aeb9e9",
+      "count": 2.0,
+      "isTaken": false,
+      "point": {
+        "itemUid": "aa4ac14e-9c69-48a1-86f6-84a60ace7ff7",
+        "tripUid": "9a6adaef-0b4e-4450-a7cf-5a5092b48516",
+        "unit": "piece",
+        "count": 2.0,
+        "isPrivate": true,
+        "pointUid": "c5e79fa6-ac22-425c-8e63-648e18513296",
+        "item": {
+          "name": "Зажигалка",
+          "tags": ["equipment"],
+          "itemUid": "aa4ac14e-9c69-48a1-86f6-84a60ace7ff7"
+        }
+      }
+    },
+    {
+      "pointUid": "0ff99b2a-6345-440b-9dd5-9cc7f6af0df8",
+      "memberUid": "8bb8d08b-ab41-4a60-bdfe-1030c4aeb9e9",
+      "count": 2.0,
+      "isTaken": false,
+      "point": {
+        "itemUid": "a7feb20e-1b81-411a-89a0-eec8e85a95f1",
+        "tripUid": "9a6adaef-0b4e-4450-a7cf-5a5092b48516",
+        "unit": "piece",
+        "count": 2.0,
+        "isPrivate": true,
+        "pointUid": "0ff99b2a-6345-440b-9dd5-9cc7f6af0df8",
+        "item": {
+          "name": "Аспирин",
+          "tags": ["medicines"],
+          "itemUid": "a7feb20e-1b81-411a-89a0-eec8e85a95f1"
+        }
+      }
+    },
+    {
+      "pointUid": "f067a527-3e99-40a2-94b3-8d73310f23f1",
+      "memberUid": "8bb8d08b-ab41-4a60-bdfe-1030c4aeb9e9",
+      "count": 1.0,
+      "isTaken": false,
+      "point": {
+        "itemUid": "a9efa95f-fadf-4b45-9eff-7ce627b0ebc8",
+        "tripUid": "9a6adaef-0b4e-4450-a7cf-5a5092b48516",
+        "unit": "piece",
+        "count": 1.0,
+        "isPrivate": true,
+        "pointUid": "f067a527-3e99-40a2-94b3-8d73310f23f1",
+        "item": {
+          "name": "Шапка",
+          "tags": ["clothes"],
+          "itemUid": "a9efa95f-fadf-4b45-9eff-7ce627b0ebc8"
         }
       }
     }

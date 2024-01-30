@@ -1,16 +1,17 @@
 import { SERVER_URL } from "../../common/constants";
 
 import { IListPoint } from "../../interfaces";
-import { convertIListPointToIListPointFromBE } from "../../utils";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/CommonList/${eventUid}`;
 
 export const commonListPointApi = ({
   eventUid,
   pointUid,
+  pointName,
 }: {
   eventUid: string;
   pointUid?: string;
+  pointName?: string;
 }) => ({
   addItem: `${endPoint(eventUid)}/AddItem`,
   editItem: `${endPoint(eventUid)}/EditItem/${pointUid || ""}`,
@@ -22,6 +23,9 @@ export const commonListPointApi = ({
   unbindItem: `${endPoint(eventUid)}/Unbind`,
   getMemberBindings: `${endPoint(eventUid)}/GetMemberBindings/${
     pointUid || ""
+  }`,
+  getDuplicateListPoints: `${endPoint(eventUid)}/Duplicates?item_name=${
+    pointName || ""
   }`,
 });
 
@@ -38,7 +42,7 @@ export const getCommonListPoints = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      member_uid: memberUid,
+      memberUid,
     }),
   });
 
@@ -63,10 +67,10 @@ export const editCommonListPoint = ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        point: convertIListPointToIListPointFromBE(listPoint),
-        member_uid: memberUid,
+        point: { ...listPoint, isPrivate: true },
+        memberUid,
       }),
-    }
+    },
   );
 
 export const deleteCommonListPoint = ({
@@ -84,8 +88,8 @@ export const deleteCommonListPoint = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
+      pointUid,
+      memberUid,
     }),
   });
 
@@ -104,8 +108,8 @@ export const lockCommonListPoint = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
+      pointUid,
+      memberUid,
     }),
   });
 
@@ -124,8 +128,8 @@ export const unlockCommonListPoint = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
+      pointUid,
+      memberUid,
     }),
   });
 
@@ -146,9 +150,9 @@ export const changeCommonListPointBindStatus = ({
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      point_uid: pointUid,
-      member_uid: memberUid,
       count,
+      pointUid,
+      memberUid,
     }),
   });
 
@@ -165,3 +169,33 @@ export const getMemberBindings = ({
       "Content-Type": "application/json",
     },
   });
+
+export const getDuplicateListPoints = async ({
+  eventUid,
+  pointName,
+}: {
+  eventUid: string;
+  pointName: IListPoint["item"]["name"];
+}) => {
+  let data: IListPoint[] = [];
+
+  try {
+    const response = await fetch(
+      commonListPointApi({ eventUid, pointName }).getDuplicateListPoints,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (response.ok) {
+      data = (await response.json()) as IListPoint[];
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return data;
+};

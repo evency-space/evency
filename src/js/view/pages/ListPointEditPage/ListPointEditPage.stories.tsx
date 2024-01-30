@@ -4,9 +4,8 @@ import { withRouter } from "storybook-addon-react-router-v6";
 import { ListPointEditPage } from "./ListPointEditPage";
 import {
   ICommonListPoint,
-  ICommonListPointFromBE,
   IListPoint,
-  IPrivateListPointFromBE,
+  IPrivateListPoint,
 } from "../../../interfaces";
 import {
   mockedPrivateListPointsApi,
@@ -15,10 +14,8 @@ import {
 import {
   accessIds,
   privateListPointsFromBE,
-  convertIPrivateListPointFromBEToIListPoint,
   getEmptyListPoint,
   commonListPointsFromBE,
-  convertICommonListPointFromBEToIListPoint,
 } from "../../../utils";
 import {
   pushAccessIdsInLocalStorage,
@@ -27,14 +24,10 @@ import {
   TLocalStorageListPointTypes,
 } from "../../../utils/localStorage";
 
-const commonListPoint = convertICommonListPointFromBEToIListPoint(
-  (commonListPointsFromBE as ICommonListPointFromBE[])[0]
-);
-
-const privateListPoint = convertIPrivateListPointFromBEToIListPoint(
-  (privateListPointsFromBE as IPrivateListPointFromBE[])[0]
-);
-
+const commonListPoint = (commonListPointsFromBE as ICommonListPoint[])[0];
+const privateListPoint = (
+  privateListPointsFromBE as unknown as IPrivateListPoint[]
+)[0];
 const emptyListPoint = getEmptyListPoint();
 
 const initialLocalStorageState = ({
@@ -42,7 +35,7 @@ const initialLocalStorageState = ({
   listPoint,
 }: {
   type: TLocalStorageListPointTypes;
-  listPoint: IListPoint | ICommonListPoint;
+  listPoint: IListPoint | ICommonListPoint | IPrivateListPoint;
 }) => {
   pushAccessIdsInLocalStorage(accessIds);
   saveListPointTypeInLocalStorage(type);

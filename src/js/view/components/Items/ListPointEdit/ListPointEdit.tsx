@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IListPointEditProps } from "./ListPointEditProps";
 import { IListPoint } from "../../../../interfaces";
@@ -44,6 +44,12 @@ export const ListPointEdit = (props: IListPointEditProps) => {
       primaryButtonDisabled={disabledPrimaryButton}
     />
   );
+
+  useEffect(() => {
+    if (listPoint) {
+      setLocalListPoint(listPoint);
+    }
+  }, [listPoint]);
 
   return (
     <PageWrapper
