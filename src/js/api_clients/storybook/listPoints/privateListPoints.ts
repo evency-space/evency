@@ -1,5 +1,4 @@
 import { accessIds, privateListPointsFromBE } from "../../../utils";
-import { IPrivateListPoint } from "../../../interfaces";
 import { privateListPointApi } from "../../listPoint";
 
 const status = 200;
