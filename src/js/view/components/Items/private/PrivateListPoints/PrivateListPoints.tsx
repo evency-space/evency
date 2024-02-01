@@ -17,6 +17,7 @@ import {
   eventEditListPointPageUrl,
 } from "../../../../../../router/constants";
 import { getEmptyListPointWithCurrentCategory } from "../../utils";
+import { convertListPointToIEditListPoint } from "../../../../../utils";
 
 export const PrivateListPoints = (props: IPrivateListPointsProps) => {
   const { accessIds } = props;
@@ -32,7 +33,12 @@ export const PrivateListPoints = (props: IPrivateListPointsProps) => {
   const modalContext = useModal();
 
   const goToListPointEditPage = (listPoint: IListPoint | IPrivateListPoint) => {
-    saveCurrentListPointInLocalStorage(listPoint);
+    const currentListPoint = convertListPointToIEditListPoint({
+      point: listPoint,
+      pointType: "private",
+    });
+
+    saveCurrentListPointInLocalStorage(currentListPoint);
     navigate(
       listPoint.pointUid
         ? eventEditListPointPageUrl({

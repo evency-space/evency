@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CommonListPointItem } from "../CommonListPointItem/CommonListPointItem";
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
-import {} from "../../../../../utils";
+import { convertListPointToIEditListPoint } from "../../../../../utils";
 import {
   changeCommonListPointBindStatus,
   deleteCommonListPoint,
@@ -74,7 +74,12 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
   };
 
   const goToListPointEditPage = (listPoint: IListPoint | ICommonListPoint) => {
-    saveCurrentListPointInLocalStorage(listPoint);
+    const currentListPoint = convertListPointToIEditListPoint({
+      point: listPoint,
+      pointType: "common",
+    });
+
+    saveCurrentListPointInLocalStorage(currentListPoint);
     navigate(
       listPoint.pointUid
         ? eventEditListPointPageUrl({

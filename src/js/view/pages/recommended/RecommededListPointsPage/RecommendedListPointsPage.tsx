@@ -14,7 +14,10 @@ import {
   getRecommendedListPointsFromLocalStorage,
 } from "../storages";
 import { ListPointsWrapper } from "../../../components/Items/ListPointsWrapper/ListPointsWrapper";
-import { getEmptyListPoint } from "../../../../utils";
+import {
+  convertListPointToIEditListPoint,
+  getEmptyListPoint,
+} from "../../../../utils";
 import { BaseListPointItem } from "../../../components/Items/BaseListPointItem/BaseListPointItem";
 import {
   eventCreateRecommendedListPointPageUrl,
@@ -41,8 +44,11 @@ export const RecommendedListPointsPage = () => {
     const index = listPoints.findIndex(
       (lp) => lp.item.name === listPoint.item.name
     );
+    const currentListPoint = convertListPointToIEditListPoint({
+      point: listPoint,
+    });
 
-    saveCurrentListPointInLocalStorage(listPoint);
+    saveCurrentListPointInLocalStorage(currentListPoint);
     navigate(
       index !== -1
         ? eventEditRecommendedListPointPageUrl({ eventUid, index })

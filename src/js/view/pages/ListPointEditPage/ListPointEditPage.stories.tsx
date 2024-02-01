@@ -16,11 +16,11 @@ import {
   privateListPointsFromBE,
   getEmptyListPoint,
   commonListPointsFromBE,
+  convertListPointToIEditListPoint,
 } from "../../../utils";
 import {
   pushAccessIdsInLocalStorage,
   saveCurrentListPointInLocalStorage,
-  saveListPointTypeInLocalStorage,
   TLocalStorageListPointTypes,
 } from "../../../utils/localStorage";
 
@@ -37,9 +37,12 @@ const initialLocalStorageState = ({
   type: TLocalStorageListPointTypes;
   listPoint: IListPoint | ICommonListPoint | IPrivateListPoint;
 }) => {
+  const currentListPoint = convertListPointToIEditListPoint({
+    point: listPoint,
+    pointType: type,
+  });
   pushAccessIdsInLocalStorage(accessIds);
-  saveListPointTypeInLocalStorage(type);
-  saveCurrentListPointInLocalStorage(listPoint);
+  saveCurrentListPointInLocalStorage(currentListPoint);
   return Promise.resolve({});
 };
 

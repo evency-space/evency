@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { IListPoint } from "../../../../interfaces";
 import { ListPointEdit } from "../../../components/Items/ListPointEdit/ListPointEdit";
 
 import {
@@ -11,25 +10,30 @@ import {
   deleteCurrentListPointFromLocalStorage,
   getCurrentListPointFromLocalStorage,
 } from "../../../../utils/localStorage";
+import { IEditListPoint } from "../../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
+import { convertIEditListPointToIListPoint } from "../../../../utils";
 
 export const RecommendedListPointEditPage = () => {
   const navigate = useNavigate();
 
   const { index } = useParams();
 
-  const listPoint = getCurrentListPointFromLocalStorage() as IListPoint;
+  const listPoint = getCurrentListPointFromLocalStorage();
 
   const indexIsUndefined = index === undefined;
 
   const isCreationMode = indexIsUndefined;
 
-  const changeListPoints = (editedListPoint: IListPoint) => {
+  const changeListPoints = (editedListPoint: IEditListPoint) => {
+    const convertedListPoint =
+      convertIEditListPointToIListPoint(editedListPoint);
+
     if (isCreationMode) {
-      pushListPointToLocalStorageRecommendedListPoints(editedListPoint);
+      pushListPointToLocalStorageRecommendedListPoints(convertedListPoint);
     } else if (!indexIsUndefined) {
       replaceListPointToLocalStorageRecommendedListPoints(
         Number(index),
-        editedListPoint
+        convertedListPoint
       );
     }
 

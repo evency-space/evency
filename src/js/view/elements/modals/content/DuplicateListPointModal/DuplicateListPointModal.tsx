@@ -13,6 +13,7 @@ import { eventEditListPointPageUrl } from "../../../../../../router/constants";
 import { lockCommonListPoint } from "../../../../../api_clients";
 import { useLoading, useModal } from "../../../../../hooks";
 import { BlockedListPointModal } from "../BlockedListPointModal/BlockedListPointModal";
+import { convertListPointToIEditListPoint } from "../../../../../utils";
 
 export const DuplicateListPointModal = (
   props: IDuplicateListPointModalProps
@@ -29,7 +30,12 @@ export const DuplicateListPointModal = (
   const { t } = useTranslation();
 
   const goToListPointEditPage = () => {
-    saveCurrentListPointInLocalStorage(listPoint);
+    const currentListPoint = convertListPointToIEditListPoint({
+      point: listPoint,
+      pointType: "common",
+    });
+
+    saveCurrentListPointInLocalStorage(currentListPoint);
     navigate(
       eventEditListPointPageUrl({
         eventUid: accessIds.eventUid,

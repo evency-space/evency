@@ -7,12 +7,12 @@ import { TakenListPoints } from "../../Items/taken/TakenListPoints/TakenListPoin
 import {
   TEventCardListPointTypes,
   IEventListPointsTabsProps,
+  TEventTabContents,
 } from "./EventListPointsTabsProps";
 import {
   getListPointTypeFromLocalStorage,
   saveListPointTypeInLocalStorage,
 } from "../../../../utils/localStorage";
-import { LIST_POINT_TYPES } from "../../../../common/constants";
 import { classesOf } from "../../../../utils";
 
 export const EventListPointsTabs = (props: IEventListPointsTabsProps) => {
@@ -23,17 +23,17 @@ export const EventListPointsTabs = (props: IEventListPointsTabsProps) => {
   const listPointTypeFromLS = getListPointTypeFromLocalStorage();
 
   const initialListPointType =
-    listPointTypeFromLS && listPointTypeFromLS !== "recommended"
+    listPointTypeFromLS === "private" || listPointTypeFromLS === "taken"
       ? listPointTypeFromLS
       : "common";
 
   const [activeTab, setActiveTab] =
     useState<TEventCardListPointTypes>(initialListPointType);
 
-  const tabContents = {
-    [LIST_POINT_TYPES.common]: <CommonListPoints accessIds={accessIds} />,
-    [LIST_POINT_TYPES.private]: <PrivateListPoints accessIds={accessIds} />,
-    [LIST_POINT_TYPES.taken]: <TakenListPoints accessIds={accessIds} />,
+  const tabContents: TEventTabContents = {
+    common: <CommonListPoints accessIds={accessIds} />,
+    private: <PrivateListPoints accessIds={accessIds} />,
+    taken: <TakenListPoints accessIds={accessIds} />,
   };
 
   const possibleListPointTypes = Object.keys(

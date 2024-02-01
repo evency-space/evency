@@ -1,0 +1,13 @@
+{
+  "favoriteListPointsFromBE": [
+    {
+      "pointUid": "f067a527-3e99-40a2-94b3-8d73310f23f1",
+      "item": {
+        "itemUid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "Шапка",
+        "tags": ["clothes"]
+      },
+      "unit": "piece"
+    }
+  ]
+}

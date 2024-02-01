@@ -1,4 +1,4 @@
-import { TLocalStorageListPoint, TLocalStorageListPointTypes } from "./types";
+import { TLocalStorageListPointTypes } from "./types";
 import {
   deleteLocalStorage,
   getLocalStorage,
@@ -6,21 +6,22 @@ import {
 } from "./localStorage";
 import {
   localStorageCurrentListPointObject,
+  localStorageFavoritesIds,
   localStorageListPointType,
 } from "./constants";
+import { IEditListPoint } from "../../view/elements/Forms/ListPointEditForm/ListPointEditFormProps";
 
 export const saveCurrentListPointInLocalStorage = (
-  listPoint: TLocalStorageListPoint,
+  listPoint: IEditListPoint,
 ) => {
-  setLocalStorage<TLocalStorageListPoint>(
+  setLocalStorage<IEditListPoint>(
     localStorageCurrentListPointObject,
     listPoint,
   );
 };
 
-export const getCurrentListPointFromLocalStorage =
-  (): TLocalStorageListPoint | null =>
-    getLocalStorage<TLocalStorageListPoint>(localStorageCurrentListPointObject);
+export const getCurrentListPointFromLocalStorage = (): IEditListPoint | null =>
+  getLocalStorage<IEditListPoint>(localStorageCurrentListPointObject);
 
 export const deleteCurrentListPointFromLocalStorage = () =>
   deleteLocalStorage(localStorageCurrentListPointObject);
@@ -33,3 +34,16 @@ export const saveListPointTypeInLocalStorage = (
 
 export const getListPointTypeFromLocalStorage = () =>
   getLocalStorage<TLocalStorageListPointTypes>(localStorageListPointType);
+
+export const getFavoritesIdsFromLocalStorage = () =>
+  getLocalStorage<string[]>(localStorageFavoritesIds) || [];
+
+export const saveFavoritesListPointsUidsInLocalStorage = (list: string[]) => {
+  setLocalStorage<string[]>(localStorageFavoritesIds, list);
+};
+
+export const pushFavoriteListPointUidInLocalStorage = (favoriteId: string) => {
+  const list = new Set([...getFavoritesIdsFromLocalStorage(), favoriteId]);
+
+  setLocalStorage<string[]>(localStorageFavoritesIds, Array.from(list));
+};

@@ -13,6 +13,7 @@ import {
   EventWelcomePage,
   FaqPage,
   SettingsPage,
+  FavoritesListPointsPage,
 } from "../js/view/pages";
 import { EventPage } from "../js/view/pages/EventPage/EventPage";
 import { ListPointEditPage } from "../js/view/pages/ListPointEditPage/ListPointEditPage";
@@ -164,6 +165,23 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <SettingsPage />,
+      },
+      {
+        path: "favorites",
+        children: [
+          {
+            index: true,
+            element: <FavoritesListPointsPage />,
+          },
+          {
+            path: "item",
+            element: <ListPointEditPage />,
+          },
+          {
+            path: "item/:listPointUid",
+            element: <ListPointEditPage />,
+          },
+        ],
       },
       {
         path: "*",

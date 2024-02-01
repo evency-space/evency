@@ -1,3 +1,4 @@
+import { LIST_POINT_TYPES } from "../../../../common/constants";
 import { IListPoint, LIST_POINT_UNITS } from "../../../../interfaces";
 
 export const LIST_POINT_UNITS_STEP = {
@@ -9,8 +10,18 @@ export const LIST_POINT_UNITS_STEP = {
   [LIST_POINT_UNITS.milliliter]: 100,
 };
 
+export interface IEditListPoint {
+  pointType?: keyof typeof LIST_POINT_TYPES;
+  name: IListPoint["item"]["name"];
+  tag: IListPoint["item"]["tags"][0];
+  unit: IListPoint["unit"];
+  count?: IListPoint["count"];
+  itemUid?: IListPoint["item"]["itemUid"];
+  pointUid?: IListPoint["pointUid"];
+}
+
 export interface IListPointEditFormProps {
-  listPoint: IListPoint;
-  onChange: (listPointInModel: IListPoint) => void;
+  listPointData: IEditListPoint;
+  onChange: (listPointInModel: IEditListPoint) => void;
   onFullFill: (filled: boolean) => void;
 }

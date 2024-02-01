@@ -1,7 +1,7 @@
-import { IListPoint } from "../../../../interfaces";
+import { IEditListPoint } from "../../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
 
 export interface IListPointEditProps {
-  listPoint: IListPoint;
+  listPoint: IEditListPoint;
   isCreationMode: boolean;
-  onClick: (listPoint: IListPoint) => void;
+  onClick: (listPoint: IEditListPoint) => void;
 }
