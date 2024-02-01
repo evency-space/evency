@@ -16,7 +16,8 @@
     "eventsPage": "Your events",
     "recommendedListPointsPage": "Recommended items",
     "eventMembersPage": "Add members",
-    "editEventPage": "Edit event"
+    "editEventPage": "Edit event",
+    "favoritesListPointsPage": "Favorites items"
   },
   "events": {
     "list": {
@@ -56,7 +57,7 @@
     "done": "Done",
     "next": "Next",
     "settings": "Settings",
-    "favorite_items": "Favorite items",
+    "favorites_items": "Favorites items",
     "feedback_form": "Feedback",
     "faq": "FAQ"
   },

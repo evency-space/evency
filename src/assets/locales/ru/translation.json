@@ -16,7 +16,8 @@
     "eventsPage": "Ваши мероприятия",
     "recommendedListPointsPage": "Рекомендуемые вещи",
     "eventMembersPage": "Добавьте участников",
-    "editEventPage": "Редактировать мероприятие"
+    "editEventPage": "Редактировать мероприятие",
+    "favoritesListPointsPage": "Избранные вещи"
   },
   "events": {
     "list": {
@@ -57,7 +58,7 @@
     "done": "Готово",
     "next": "Далее",
     "settings": "Настройки",
-    "favorite_items": "Сохраненные списки вещей",
+    "favorite_items": "Избранные вещи",
     "feedback_form": "Форма обратной связи",
     "faq": "FAQ"
   },
