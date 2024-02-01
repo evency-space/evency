@@ -1,10 +1,10 @@
 import React from "react";
 import { ComponentStory } from "@storybook/react";
 import { ListPointEditForm } from "./ListPointEditForm";
-import {
-  LIST_POINT_CATEGORIES,
-  LIST_POINT_UNITS,
-} from "../../../../interfaces";
+import { editListPoints } from "../../../../utils";
+import { IEditListPoint } from "./ListPointEditFormProps";
+
+const editListPoint = (editListPoints as IEditListPoint[])[0];
 
 export default {
   title: "elements/forms/itemEdit",
@@ -22,14 +22,5 @@ const Template: ComponentStory<typeof ListPointEditForm> = (args) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  listPoint: {
-    item: {
-      name: "Греча",
-      tags: [LIST_POINT_CATEGORIES.food],
-      itemUid: "",
-    },
-    unit: LIST_POINT_UNITS.gram,
-    count: 3,
-    pointUid: "",
-  },
+  listPointData: editListPoint,
 };

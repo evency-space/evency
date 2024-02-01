@@ -53,6 +53,17 @@ export const eventEditRecommendedListPointPageUrl = ({
   index: number;
 }) => `${eventRecommendedListPointsPageUrl({ eventUid })}/item/${index}`;
 
+export const favoritesListPointsPageUrl = () => "/favorites";
+
+export const createFavoriteListPointPageUrl = () =>
+  `${favoritesListPointsPageUrl()}/item`;
+
+export const editFavoriteListPointPageUrl = ({
+  listPointUid,
+}: {
+  listPointUid: string;
+}) => `${favoritesListPointsPageUrl()}/item/${listPointUid}`;
+
 export const faqPageUrl = () => "/help";
 
 export const settingsPageUrl = () => "/settings";

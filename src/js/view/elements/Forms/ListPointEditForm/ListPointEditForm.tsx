@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  IEditListPoint,
   IListPointEditFormProps,
   LIST_POINT_UNITS_STEP,
 } from "./ListPointEditFormProps";
 import {
-  IListPoint,
   LIST_POINT_CATEGORIES,
   LIST_POINT_UNITS,
 } from "../../../../interfaces";
@@ -17,40 +17,40 @@ import { TextBodyStandard } from "../../typography";
 import { Counter } from "../../Counter/Counter";
 
 export const ListPointEditForm = (props: IListPointEditFormProps) => {
-  const { listPoint, onChange, onFullFill } = props;
+  const { listPointData, onChange, onFullFill } = props;
 
   const { t } = useTranslation();
 
+  const { name, unit, tag, count } = listPointData;
+
   const [countStep, setCountStep] = useState<number>(
-    LIST_POINT_UNITS_STEP[listPoint.unit]
+    LIST_POINT_UNITS_STEP[unit]
   );
 
-  const checkFormFullFilled = () =>
-    !!listPoint.item.name && listPoint.count > 0;
+  const countIsNumber = typeof count === "number";
+
+  const checkFormFullFilled = () => !!name && (!countIsNumber || !!count);
 
   const listPointCategories = Object.values(LIST_POINT_CATEGORIES);
 
   const listPointUnits = Object.values(LIST_POINT_UNITS);
 
   const activeTagIndex = listPointCategories.findIndex(
-    (category) => category === listPoint.item.tags[0]
+    (category) => category === tag
   );
 
-  const changeItem = (value: Partial<IListPoint>) => {
+  const changeItem = (value: Partial<IEditListPoint>) => {
     onChange({
-      ...listPoint,
+      ...listPointData,
       ...value,
     });
   };
 
   const changeUnits = (u: string) => {
-    const unit = u as LIST_POINT_UNITS;
+    const selectedUnit = u as LIST_POINT_UNITS;
 
     setCountStep(LIST_POINT_UNITS_STEP[unit]);
-    changeItem({
-      ...listPoint,
-      unit,
-    });
+    changeItem({ unit: selectedUnit });
   };
 
   useEffect(() => {
@@ -67,48 +67,31 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
           tags={listPointCategories}
           activeTagIndex={activeTagIndex}
           localizationPath="list_point.categories"
-          onClick={(value) =>
-            changeItem({
-              item: {
-                ...listPoint.item,
-                tags: [listPointCategories[value]],
-              },
-            })
-          }
+          onClick={(value) => changeItem({ tag: listPointCategories[value] })}
         />
       </div>
       <div>
         <Input
           label={t("list_point.edit_form.item")}
-          value={listPoint.item.name}
-          onChange={(value) =>
-            changeItem({
-              item: {
-                ...listPoint.item,
-                name: value,
-              },
-            })
-          }
+          value={name}
+          onChange={(value) => changeItem({ name: value })}
         />
       </div>
       <Select
         label={t("list_point.edit_form.unit")}
         localizationPath="list_point.units"
-        value={listPoint.unit}
+        value={unit}
         options={listPointUnits}
         onChange={changeUnits}
       />
-      <Counter
-        label={t("list_point.edit_form.count")}
-        value={listPoint.count}
-        step={countStep}
-        onChange={(value) =>
-          changeItem({
-            ...listPoint,
-            count: value,
-          })
-        }
-      />
+      {countIsNumber && (
+        <Counter
+          label={t("list_point.edit_form.count")}
+          value={count}
+          step={countStep}
+          onChange={(value) => changeItem({ count: value })}
+        />
+      )}
     </form>
   );
 };

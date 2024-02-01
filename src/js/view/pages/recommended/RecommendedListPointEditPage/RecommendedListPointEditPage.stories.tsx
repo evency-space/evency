@@ -2,17 +2,19 @@ import React from "react";
 import { ComponentStory } from "@storybook/react";
 import { withRouter } from "storybook-addon-react-router-v6";
 import { RecommendedListPointEditPage } from "./RecommendedListPointEditPage";
-import { IListPoint, IPrivateListPoint } from "../../../../interfaces";
-import { privateListPointsFromBE, getEmptyListPoint } from "../../../../utils";
+import { editListPoints } from "../../../../utils";
 import { saveCurrentListPointInLocalStorage } from "../../../../utils/localStorage";
 import { accessIds } from "../../../../utils/json/accessIds/accessIds.json";
+import { IEditListPoint } from "../../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
 
-const privateListPoint = (
-  privateListPointsFromBE as unknown as IPrivateListPoint[]
-)[0];
-const emptyListPoint = getEmptyListPoint();
+const editListPoint = (editListPoints as IEditListPoint[])[0];
+const emptyListPoint = { ...editListPoint, name: "" };
 
-const initialLocalStorageState = ({ listPoint }: { listPoint: IListPoint }) => {
+const initialLocalStorageState = ({
+  listPoint,
+}: {
+  listPoint: IEditListPoint;
+}) => {
   saveCurrentListPointInLocalStorage(listPoint);
   return Promise.resolve({});
 };
@@ -40,7 +42,7 @@ CreateMode.parameters = {
 
 export const EditMode = Template.bind({});
 EditMode.loaders = [
-  () => initialLocalStorageState({ listPoint: privateListPoint.point }),
+  () => initialLocalStorageState({ listPoint: editListPoint }),
 ];
 EditMode.parameters = {
   reactRouter: {

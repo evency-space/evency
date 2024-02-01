@@ -18,4 +18,5 @@ export enum LIST_POINT_TYPES {
   "private" = "private",
   "common" = "common",
   "taken" = "taken",
+  "favorite" = "favorite",
 }

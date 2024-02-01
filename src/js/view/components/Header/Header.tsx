@@ -13,7 +13,11 @@ import { BtnIcon, MenuModal, TagSmall, TextBodyMedium } from "../../elements";
 import { IHeaderRoute, IRouteState } from "./types";
 import { ArrowIcon, BurgerIcon } from "../../icons";
 import { useModal } from "../../../hooks";
-import { faqPageUrl, settingsPageUrl } from "../../../../router/constants";
+import {
+  faqPageUrl,
+  favoritesListPointsPageUrl,
+  settingsPageUrl,
+} from "../../../../router/constants";
 
 export const Header = () => {
   const location = useLocation();
@@ -41,7 +45,7 @@ export const Header = () => {
       content: (
         <MenuModal
           onSettingsClick={() => navigate(settingsPageUrl())}
-          onFavoriteItemsClick={() => {}}
+          onFavoritesItemsClick={() => navigate(favoritesListPointsPageUrl())}
           onFeedbackClick={() => {}}
           onQuestionsClick={() => navigate(faqPageUrl())}
         />

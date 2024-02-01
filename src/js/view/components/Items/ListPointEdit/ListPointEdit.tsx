@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IListPointEditProps } from "./ListPointEditProps";
-import { IListPoint } from "../../../../interfaces";
 import { PageWrapper } from "../../PageWrapper/PageWrapper";
-import { getEmptyListPoint } from "../../../../utils";
 
 import { ActionPanel, ListPointEditForm, TitleH1 } from "../../../elements";
+import { IEditListPoint } from "../../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
 
 export const ListPointEdit = (props: IListPointEditProps) => {
   const { listPoint, isCreationMode, onClick } = props;
 
   const { t } = useTranslation();
 
-  const [localListPoint, setLocalListPoint] = useState<IListPoint>(
-    listPoint || getEmptyListPoint()
-  );
+  const [localListPoint, setLocalListPoint] =
+    useState<IEditListPoint>(listPoint);
 
   const [disabledPrimaryButton, setDisabledPrimaryButton] = useState(true);
 
-  const changeLocalListPoint = (updatedListPoint: IListPoint) => {
+  const changeLocalListPoint = (updatedListPoint: IEditListPoint) => {
     setLocalListPoint(updatedListPoint);
   };
 
@@ -28,7 +26,7 @@ export const ListPointEdit = (props: IListPointEditProps) => {
         {isCreationMode ? t("list_point.add_item") : t("list_point.edit_item")}
       </TitleH1>
       <ListPointEditForm
-        listPoint={localListPoint}
+        listPointData={localListPoint}
         onChange={changeLocalListPoint}
         onFullFill={(filled) => setDisabledPrimaryButton(!filled)}
       />

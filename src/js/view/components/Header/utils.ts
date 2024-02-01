@@ -1,6 +1,8 @@
 import {
   createEventPageUrl,
+  createFavoriteListPointPageUrl,
   editEventPageUrl,
+  editFavoriteListPointPageUrl,
   eventCreateListPointPageUrl,
   eventCreateRecommendedListPointPageUrl,
   eventEditListPointPageUrl,
@@ -9,6 +11,7 @@ import {
   eventPageUrl,
   eventRecommendedListPointsPageUrl,
   eventWelcomePageUrl,
+  favoritesListPointsPageUrl,
   homePageUrl,
   shareEventPageUrl,
 } from "../../../../router/constants";
@@ -92,10 +95,20 @@ export const getRoutesParentData = ({
     parentPathName: eventRecommendedListPointsPageUrl({ eventUid }),
     parentLocalePath: "recommendedListPointsPage",
   },
+  // создание избранной вещи
+  [createFavoriteListPointPageUrl()]: {
+    parentPathName: favoritesListPointsPageUrl(),
+    parentLocalePath: "favoritesListPointsPage",
+  },
+  // редактирование избранной вещи
+  [editFavoriteListPointPageUrl({ listPointUid: state.listPointUid || "" })]: {
+    parentPathName: favoritesListPointsPageUrl(),
+    parentLocalePath: "favoritesListPointsPage",
+  },
 });
 
 export const getRouteParentData = (
-  payload: IRoutesParentDataArgs & { pathName: string }
+  payload: IRoutesParentDataArgs & { pathName: string },
 ): IHeaderRoute => {
   if (payload.state.fromEventsListModal) {
     return {

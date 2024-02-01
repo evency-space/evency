@@ -1,6 +1,6 @@
 export interface IMenuModal {
   onSettingsClick: () => void;
-  onFavoriteItemsClick: () => void;
+  onFavoritesItemsClick: () => void;
   onFeedbackClick: () => void;
   onQuestionsClick: () => void;
 }

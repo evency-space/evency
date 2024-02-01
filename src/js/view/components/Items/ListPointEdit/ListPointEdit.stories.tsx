@@ -1,12 +1,10 @@
 import React from "react";
 import { ComponentStory } from "@storybook/react";
 import { ListPointEdit } from "./ListPointEdit";
-import { IPrivateListPoint } from "../../../../interfaces";
-import { privateListPointsFromBE } from "../../../../utils";
+import { editListPoints } from "../../../../utils";
+import { IEditListPoint } from "../../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
 
-const privateListPoint = (
-  privateListPointsFromBE as unknown as IPrivateListPoint[]
-)[0].point;
+const editListPoint = (editListPoints as IEditListPoint[])[0];
 export default {
   title: "components/ListPoint/ListPointEdit",
   component: ListPointEdit,
@@ -23,5 +21,5 @@ CreateMode.args = {
 
 export const EditMode = Template.bind({});
 EditMode.args = {
-  listPoint: privateListPoint,
+  listPoint: editListPoint,
 };

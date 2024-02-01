@@ -20,6 +20,7 @@ import {
   MinusIcon,
   PlusIcon,
   ShareIcon,
+  StarIcon,
   ZoomIcon,
 } from "./index";
 
@@ -27,6 +28,8 @@ export default {
   title: "elements/icons",
   args: {
     size: 64,
+    iconStyle: "outline",
+    fill: "currentColor",
   },
 };
 
@@ -56,4 +59,5 @@ export const Burger = getComponent(BurgerIcon).bind({});
 export const Folder = getComponent(FolderIcon).bind({});
 export const Chat = getComponent(ChatIcon).bind({});
 export const ChatQuestion = getComponent(ChatQuestionIcon).bind({});
+export const Star = getComponent(StarIcon).bind({});
 export const Language = getComponent(LanguageIcon).bind({});

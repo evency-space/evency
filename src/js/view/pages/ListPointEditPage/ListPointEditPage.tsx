@@ -3,21 +3,30 @@ import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import {
   deleteCurrentListPointFromLocalStorage,
   getCurrentListPointFromLocalStorage,
-  getListPointTypeFromLocalStorage,
+  pushFavoriteListPointUidInLocalStorage,
 } from "../../../utils/localStorage";
 import { ListPointEdit } from "../../components/Items/ListPointEdit/ListPointEdit";
 import { useLoading, useModal } from "../../../hooks";
 
-import { IAccessIds, IListPoint } from "../../../interfaces";
+import {
+  IAccessIds,
+  IFavoriteListPoint,
+  IListPoint,
+} from "../../../interfaces";
 import { TProvidedEvent } from "../../../../router/types";
 import { DuplicateListPointModal, Loader } from "../../elements";
-import { eventPageUrl } from "../../../../router/constants";
+import {
+  eventPageUrl,
+  favoritesListPointsPageUrl,
+} from "../../../../router/constants";
 import {
   editCommonListPoint,
+  editFavoriteListPoint,
   editPrivateListPoint,
   getDuplicateListPoints,
 } from "../../../api_clients";
-import { convertListPointToBaseListPoint } from "../../../utils";
+import { convertIEditListPointToIListPoint } from "../../../utils";
+import { IEditListPoint } from "../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
 
 export const ListPointEditPage = () => {
   const routeData = useLoaderData() as TProvidedEvent;
@@ -30,29 +39,30 @@ export const ListPointEditPage = () => {
 
   const [accessIds, setAccessIds] = useState<IAccessIds>();
 
-  const [listPoint, setListPoint] = useState<IListPoint>();
+  const [listPoint, setListPoint] = useState<IEditListPoint>();
 
-  const listPointType = getListPointTypeFromLocalStorage();
+  const isCreationMode = !listPoint?.pointUid && !listPoint?.itemUid;
 
-  const isCreationMode = !listPoint?.pointUid;
-
-  const goBackToListPointsPage = () => {
-    navigate(eventPageUrl({ eventUid: accessIds?.eventUid || "" }));
+  const goBackToListPointsPage = (url?: string) => {
+    navigate(url || eventPageUrl({ eventUid: accessIds?.eventUid || "" }), {
+      replace: true,
+    });
     deleteCurrentListPointFromLocalStorage();
   };
 
-  const getListPointData = (lp: IListPoint) => {
+  const getListPointData = (point: IEditListPoint) => {
     const mode: "add" | "edit" = isCreationMode ? "add" : "edit";
+    const convertedListPoint = convertIEditListPointToIListPoint(point);
 
     return {
       mode,
       eventUid: accessIds?.eventUid || "",
       memberUid: accessIds?.memberUid || "",
-      listPoint: lp,
+      listPoint: convertedListPoint,
     };
   };
 
-  const addDuplicateCommonListPoint = async (baseListPoint: IListPoint) => {
+  const addDuplicateCommonListPoint = async (baseListPoint: IEditListPoint) => {
     try {
       setLoading(true);
 
@@ -64,7 +74,7 @@ export const ListPointEditPage = () => {
   };
 
   const showDuplicateListPointModal = (
-    baseListPoint: IListPoint,
+    baseListPoint: IEditListPoint,
     duplicateListPoint: IListPoint
   ) => {
     if (accessIds) {
@@ -84,36 +94,48 @@ export const ListPointEditPage = () => {
     }
   };
 
-  const changeListPoint = async (editedListPoint: IListPoint) => {
+  const changeListPoint = async (editedListPoint: IEditListPoint) => {
     try {
       setLoading(true);
 
-      if (accessIds) {
-        const listPointData = getListPointData(editedListPoint);
+      const { pointType } = editedListPoint;
+      const listPointData = getListPointData(editedListPoint);
+      let navigateUrl;
 
-        if (listPointType === "common") {
-          if (isCreationMode) {
-            const duplicateListPoints = await getDuplicateListPoints({
-              eventUid: accessIds.eventUid,
-              pointName: editedListPoint.item.name,
-            });
+      if (pointType === "common") {
+        if (isCreationMode) {
+          const duplicateListPoints = await getDuplicateListPoints({
+            eventUid: accessIds?.eventUid || "",
+            pointName: editedListPoint.name,
+          });
 
-            if (duplicateListPoints?.length > 0) {
-              showDuplicateListPointModal(
-                editedListPoint,
-                duplicateListPoints[0]
-              );
-              return;
-            }
+          if (duplicateListPoints?.length > 0) {
+            showDuplicateListPointModal(
+              editedListPoint,
+              duplicateListPoints[0]
+            );
+            return;
           }
-
-          await editCommonListPoint(listPointData);
-        } else if (listPointType === "private") {
-          await editPrivateListPoint(listPointData);
         }
 
-        goBackToListPointsPage();
+        await editCommonListPoint(listPointData);
+      } else if (pointType === "private") {
+        await editPrivateListPoint(listPointData);
+      } else if (pointType === "favorite") {
+        const points = (await editFavoriteListPoint(
+          listPointData
+        )) as IFavoriteListPoint[];
+
+        if (isCreationMode) {
+          points.forEach((point) => {
+            pushFavoriteListPointUidInLocalStorage(point.item.itemUid);
+          });
+        }
+
+        navigateUrl = favoritesListPointsPageUrl();
       }
+
+      goBackToListPointsPage(navigateUrl);
     } finally {
       setLoading(false);
     }
@@ -124,17 +146,14 @@ export const ListPointEditPage = () => {
       void routeData.data.then((d) => {
         setAccessIds(d.accessIds);
       });
-      const currentListPoint = getCurrentListPointFromLocalStorage();
-
-      if (currentListPoint && listPointType) {
-        const convertedListPoint = convertListPointToBaseListPoint({
-          listPointType,
-          listPoint: currentListPoint,
-        });
-        setListPoint(convertedListPoint);
-      }
     }
-  }, [routeData, listPointType]);
+
+    const currentListPoint = getCurrentListPointFromLocalStorage();
+
+    if (currentListPoint) {
+      setListPoint(currentListPoint);
+    }
+  }, [routeData]);
 
   return (
     <React.Suspense fallback={<Loader />}>

@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import { IMenuModal } from "./MenuModalProps";
 import { ModalListItem } from "../../Modal/ModalListItem/ModalListItem";
 import { IModalListItemProps } from "../../Modal/ModalListItem/ModalListItemProps";
-import { ChatQuestionIcon, GearIcon } from "../../../../icons";
+import { ChatQuestionIcon, GearIcon, StarIcon } from "../../../../icons";
 
 export const MenuModal = (props: IMenuModal) => {
   const {
     onSettingsClick,
-    // onFavoriteItemsClick,
+    onFavoritesItemsClick,
     // onFeedbackClick,
     onQuestionsClick,
   } = props;
@@ -23,13 +23,13 @@ export const MenuModal = (props: IMenuModal) => {
         onSettingsClick();
       },
     },
-    // {
-    //   title: t("buttons.favorite_items"),
-    //   icon: <FolderIcon size={16} />,
-    //   onClick: () => {
-    //     onFavoriteItemsClick();
-    //   },
-    // },
+    {
+      title: t("buttons.favorites_items"),
+      icon: <StarIcon size={16} />,
+      onClick: () => {
+        onFavoritesItemsClick();
+      },
+    },
     // {
     //   title: t("buttons.feedback_form"),
     //   icon: <ChatIcon size={16} />,
