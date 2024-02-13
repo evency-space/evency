@@ -35,6 +35,42 @@
           "count": 1
         }
       ]
+    },
+    {
+      "pointUid": "4fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "item": {
+        "itemUid": "5fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "Веревка",
+        "tags": ["equipment"]
+      },
+      "count": 5,
+      "unit": "piece",
+      "bindings": [
+        {
+          "member": {
+            "memberUid": "6fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "Иван",
+            "isAuthor": true
+          },
+          "count": 2
+        },
+        {
+          "member": {
+            "memberUid": "75625f64-5717-4562-b3fc-2c9b3fc65717",
+            "name": "Петр",
+            "isAuthor": false
+          },
+          "count": 2
+        },
+        {
+          "member": {
+            "memberUid": "83fc5f64-5717-4562-b3fc-2c9b3fc65717",
+            "name": "Евгений",
+            "isAuthor": false
+          },
+          "count": 1
+        }
+      ]
     }
   ],
   "commonListPointBindingsFromBE": [

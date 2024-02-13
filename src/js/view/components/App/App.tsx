@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "../Header/Header";
 import "../../../../styles/index.css";
 import { useDarkMode, useModal } from "../../../hooks";
-import { Modal } from "../../elements";
 
 export function App() {
   const modalContext = useModal();
@@ -25,13 +24,6 @@ export function App() {
 
         <main className="flex h-[calc(100%-theme(height.header))]">
           <Outlet />
-
-          {modalContext.content && (
-            <Modal
-              onClose={() => modalContext.onClose?.()}
-              content={modalContext.content}
-            />
-          )}
         </main>
       </div>
     </div>

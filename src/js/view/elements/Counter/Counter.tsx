@@ -3,14 +3,48 @@ import { ICounterProps } from "./CounterProps";
 import { ButtonSecondary } from "../buttons";
 import { MinusIcon, PlusIcon } from "../../icons";
 import { TextBodyStandard } from "../typography";
+import { classesOf } from "../../../utils";
 
 export const Counter = (props: ICounterProps) => {
-  const { label, value, step = 1, onChange } = props;
+  const {
+    label,
+    value,
+    step = 1,
+    size = "md",
+    color = "gray",
+    className,
+    onChange,
+  } = props;
 
   const id = "counter-input";
-  const stepMoreValue = value - step <= 0;
+  const stepMoreValue = value - step < 0;
+  const buttonIconSize = size === "sm" ? 12 : 24;
 
   const [localValue, setLocalValue] = useState<string>(String(value));
+
+  const inputClasses = classesOf(
+    "w-full text-center rounded-lg text-light-4 focus:outline-none",
+    color === "gray" && "bg-dark-2",
+    color === "green" && "bg-green-0"
+  );
+
+  const counterClasses = classesOf(
+    "flex w-full",
+    className,
+    size === "sm" && "gap-x-2 h-[40px]",
+    size === "md" && "gap-x-3 h-[55px]"
+  );
+
+  const counterButtonClasses = classesOf(
+    "h-auto min-h-[24px]",
+    size === "sm" && "px-3",
+    size === "md" && "px-4"
+  );
+
+  const minusCounterButtonClasses = classesOf(
+    counterButtonClasses,
+    stepMoreValue && "bg-black-2"
+  );
 
   const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue } = e.target;
@@ -38,7 +72,9 @@ export const Counter = (props: ICounterProps) => {
   };
 
   useEffect(() => {
-    onChange(Number(localValue));
+    if (value !== +localValue) {
+      onChange(Number(localValue));
+    }
   }, [localValue]);
 
   useEffect(() => {
@@ -55,24 +91,24 @@ export const Counter = (props: ICounterProps) => {
         </label>
       )}
 
-      <div className="flex h-[55px] w-full gap-x-3">
+      <div className={counterClasses}>
         <ButtonSecondary
-          className="h-full"
-          icon={<MinusIcon size={24} />}
+          className={minusCounterButtonClasses}
+          icon={<MinusIcon size={buttonIconSize} />}
           disabled={stepMoreValue}
           onClick={decrementInputValue}
         />
         <input
           id={id}
           inputMode="numeric"
-          className="w-full text-center rounded-lg bg-dark-2 text-light-4 focus:outline-none"
+          className={inputClasses}
           value={localValue}
           type="text"
           onChange={changeInputValue}
         />
         <ButtonSecondary
-          className="h-full"
-          icon={<PlusIcon size={24} />}
+          className={counterButtonClasses}
+          icon={<PlusIcon size={buttonIconSize} />}
           onClick={incrementInputValue}
         />
       </div>

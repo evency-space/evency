@@ -1,10 +1,11 @@
-import { TLocalStorageListPointTypes } from "./types";
+import { TCommonListPointViewMode, TLocalStorageListPointTypes } from "./types";
 import {
   deleteLocalStorage,
   getLocalStorage,
   setLocalStorage,
 } from "./localStorage";
 import {
+  localStorageCommonListPointViewMode,
   localStorageCurrentListPointObject,
   localStorageFavoritesIds,
   localStorageListPointType,
@@ -47,3 +48,17 @@ export const pushFavoriteListPointUidInLocalStorage = (favoriteId: string) => {
 
   setLocalStorage<string[]>(localStorageFavoritesIds, Array.from(list));
 };
+
+export const switchCommonListPointViewMode = (
+  mode: TCommonListPointViewMode,
+) => {
+  setLocalStorage<TCommonListPointViewMode>(
+    localStorageCommonListPointViewMode,
+    mode,
+  );
+};
+
+export const getCommonListPointViewMode = () =>
+  getLocalStorage<TCommonListPointViewMode>(
+    localStorageCommonListPointViewMode,
+  );

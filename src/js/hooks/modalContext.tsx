@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react";
 import { IModalProps } from "../view/elements/modals/Modal/ModalProps";
+import { Modal } from "../view/elements/modals/Modal/Modal";
 
 interface IModalContext extends Partial<IModalProps> {
   setContent: Dispatch<SetStateAction<IModalProps | undefined>>;
@@ -28,7 +29,13 @@ export const ModalProvider = ({ children }: { children: JSX.Element }) => {
   );
 
   return (
-    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
+    <ModalContext.Provider value={value}>
+      {children}
+
+      {value.content && (
+        <Modal onClose={() => value.onClose?.()} content={value.content} />
+      )}
+    </ModalContext.Provider>
   );
 };
 

@@ -4,31 +4,24 @@ import { CommonListPointItem } from "../CommonListPointItem/CommonListPointItem"
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
 import { convertListPointToIEditListPoint } from "../../../../../utils";
 import {
-  changeCommonListPointBindStatus,
   deleteCommonListPoint,
   getCommonListPoints,
-  getMemberBindings,
-  lockCommonListPoint,
-  unlockCommonListPoint,
 } from "../../../../../api_clients";
-import { useLoading, useModal } from "../../../../../hooks";
-import {
-  ICommonListPoint,
-  IListPoint,
-  IListPointBinding,
-} from "../../../../../interfaces";
-import {
-  BindListPointModal,
-  BlockedListPointModal,
-  ListPointActionModal,
-} from "../../../../elements";
+import { useLoading } from "../../../../../hooks";
+import { ICommonListPoint, IListPoint } from "../../../../../interfaces";
+import { ListPointActionModal } from "../../../../elements";
 import { ICommonListPointsProps } from "./CommonListPointsProps";
-import { saveCurrentListPointInLocalStorage } from "../../../../../utils/localStorage";
+import {
+  getCommonListPointViewMode,
+  saveCurrentListPointInLocalStorage,
+} from "../../../../../utils/localStorage";
 import {
   eventCreateListPointPageUrl,
   eventEditListPointPageUrl,
 } from "../../../../../../router/constants";
 import { getEmptyListPointWithCurrentCategory } from "../../utils";
+import { CommonListPointsUtils } from "../utils";
+import { TwoLinesCommonListPointItem } from "../TwoLinesCommonListPointItem/TwoLinesCommonListPointItem";
 
 export const CommonListPoints = (props: ICommonListPointsProps) => {
   const { accessIds } = props;
@@ -37,41 +30,9 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
 
   const { setLoading } = useLoading();
 
-  const modalContext = useModal();
-
   const [listPoints, setListPoints] = useState<ICommonListPoint[]>([]);
 
-  const [selectedListPoint, setSelectedListPoint] =
-    useState<ICommonListPoint>();
-
-  const [loadingPointUid, setLoadingPointUid] = useState<string>("");
-
-  const closeModal = () => {
-    modalContext.setContent(undefined);
-
-    if (selectedListPoint) {
-      void unlockCommonListPoint({
-        ...accessIds,
-        pointUid: selectedListPoint.pointUid,
-      });
-
-      setSelectedListPoint(undefined);
-    }
-  };
-
-  const showModal = ({
-    listPoint,
-    content,
-  }: {
-    listPoint?: ICommonListPoint;
-    content: JSX.Element;
-  }) => {
-    modalContext.setContent({ content, onClose: closeModal });
-
-    if (listPoint) {
-      setSelectedListPoint(listPoint);
-    }
-  };
+  const commonListPointsUtils = CommonListPointsUtils({ accessIds });
 
   const goToListPointEditPage = (listPoint: IListPoint | ICommonListPoint) => {
     const currentListPoint = convertListPointToIEditListPoint({
@@ -108,7 +69,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
   const removeListPoint = async (listPoint: IListPoint) => {
     try {
       setLoading(true);
-      closeModal();
+      commonListPointsUtils.closeModal();
 
       await deleteCommonListPoint({
         ...accessIds,
@@ -121,137 +82,39 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
     }
   };
 
-  const updateListPointMemberBindings = async ({
+  const checkListPointAvailability = ({
     listPoint,
   }: {
     listPoint: ICommonListPoint;
-  }) => {
-    try {
-      setLoadingPointUid(listPoint.pointUid);
-
-      const response = await getMemberBindings({
-        eventUid: accessIds.eventUid,
-        pointUid: listPoint.pointUid,
-      });
-
-      const index = listPoints.findIndex(
-        (lp) => lp.pointUid === listPoint.pointUid
-      );
-
-      listPoints[index].bindings =
-        (await response.json()) as IListPointBinding[];
-    } finally {
-      setLoadingPointUid("");
-    }
-  };
-
-  const showBlockedListPointModal = () =>
-    showModal({
-      content: (
-        <BlockedListPointModal
-          onClick={() => {
-            closeModal();
-          }}
-        />
-      ),
+  }): Promise<ICommonListPoint> =>
+    new Promise((resolve) => {
+      commonListPointsUtils
+        .checkListPointAvailability({
+          pointUid: listPoint.pointUid,
+        })
+        .then(() => resolve(listPoint))
+        .catch(commonListPointsUtils.showBlockedListPointModal);
     });
 
-  const checkListPointAvailability = async ({
-    listPoint,
-    cb,
-  }: {
-    listPoint: ICommonListPoint;
-    cb: (listPoint: ICommonListPoint) => void | Promise<void>;
-  }) => {
-    try {
-      setLoading(true);
-
-      const { status } = await lockCommonListPoint({
-        ...accessIds,
-        pointUid: listPoint.pointUid,
-      });
-
-      if (status === 201) {
-        await cb(listPoint);
-      } else {
-        showBlockedListPointModal();
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const editListPoint = (listPoint: ICommonListPoint) => {
-    closeModal();
+    commonListPointsUtils.closeModal();
     goToListPointEditPage(listPoint);
   };
 
-  const bindListPoint = async ({
-    pointUid,
-    count,
-  }: {
-    pointUid: string;
-    count: number;
-  }) => {
-    try {
-      setLoading(true);
-      closeModal();
-
-      const payload = {
-        ...accessIds,
-        pointUid,
-        count: 0,
-      };
-      if (count !== 0) {
-        payload.count = count;
-      }
-
-      await changeCommonListPointBindStatus(payload);
-
-      await getListPoints();
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const showBindModal = (listPoint: ICommonListPoint) => {
-    const binding = listPoint.bindings.find(
-      (b) => b.member.memberUid === accessIds.memberUid
-    );
-    const countItemTaken = binding ? binding.count : 0;
-
-    showModal({
-      listPoint,
-      content: (
-        <BindListPointModal
-          listPoint={listPoint}
-          countItemTaken={countItemTaken}
-          onClick={(count) => {
-            void bindListPoint({ pointUid: listPoint.pointUid, count });
-          }}
-        />
-      ),
-    });
-  };
-
   const showActionListPointModal = (listPoint: ICommonListPoint) => {
-    showModal({
+    commonListPointsUtils.showModal({
       listPoint,
       content: (
         <ListPointActionModal
           listPointName={listPoint.item.name}
           showDeletionWarningMessage
           onEditClick={() => {
-            void checkListPointAvailability({
-              listPoint,
-              cb: editListPoint,
-            });
+            void checkListPointAvailability({ listPoint }).then(editListPoint);
           }}
           onRemoveClick={() => {
-            void checkListPointAvailability({
-              listPoint,
-              cb: removeListPoint,
-            });
+            void checkListPointAvailability({ listPoint }).then(
+              removeListPoint
+            );
           }}
         />
       ),
@@ -261,26 +124,30 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
   const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
 
-    const itemTemplate = (
-      <CommonListPointItem
-        listPoint={listPoint}
-        key={listPoint.pointUid}
-        memberUid={accessIds.memberUid}
-        loading={loadingPointUid === listPoint.pointUid}
-        onBindListPoint={() => {
-          void checkListPointAvailability({
-            listPoint,
-            cb: showBindModal,
-          });
-        }}
-        onShowListPointSettings={() => {
-          void showActionListPointModal(listPoint);
-        }}
-        onClickTitle={() => {
-          void updateListPointMemberBindings({ listPoint });
-        }}
-      />
-    );
+    const viewMode = getCommonListPointViewMode() || "oneLine";
+    let itemTemplate;
+
+    if (viewMode === "twoLines") {
+      itemTemplate = (
+        <TwoLinesCommonListPointItem
+          listPoint={listPoint}
+          accessIds={accessIds}
+          key={listPoint.pointUid}
+        />
+      );
+    } else {
+      itemTemplate = (
+        <CommonListPointItem
+          listPoint={listPoint}
+          key={listPoint.pointUid}
+          accessIds={accessIds}
+          onShowListPointSettings={() => {
+            void showActionListPointModal(listPoint);
+          }}
+          updateListPoint={getListPoints}
+        />
+      );
+    }
 
     return {
       itemTemplate,
