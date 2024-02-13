@@ -8,6 +8,7 @@ import {
 } from "../../elements";
 import { LanguageIcon } from "../../icons";
 import { LOCALES } from "../../../common/constants";
+import { CommonListPointViewOptions } from "./CommonListPointViewOptions/CommonListPointViewOptions";
 
 export const SettingsPage = () => {
   const { t, i18n } = useTranslation();
@@ -30,33 +31,37 @@ export const SettingsPage = () => {
   );
 
   return (
-    <div className="flex flex-col w-full gap-y-6">
+    <div className="flex flex-col w-full gap-y-8">
       <TitleH1>{t("pages.settings.title")}</TitleH1>
 
-      <TextBodyLarge fontWeight="semibold">{t("language")}</TextBodyLarge>
+      <div className="flex flex-col gap-y-6">
+        <TextBodyLarge fontWeight="semibold">{t("language")}</TextBodyLarge>
 
-      <ul className="flex flex-col gap-y-2">
-        {locales.map((locale) => (
-          <li
-            key={locale}
-            className="flex justify-between p-3 bg-black-2 rounded-lg"
-          >
-            <span className="inline-flex items-center gap-x-3">
-              <LanguageIcon language={locale} />
-              <TextBodyStandard className="text-dark-4">
-                {localesText[locale]}
-              </TextBodyStandard>
-            </span>
-            <Radio
-              name={locale}
-              value={locale === language}
-              onChange={() => {
-                void changeLocale(locale);
-              }}
-            />
-          </li>
-        ))}
-      </ul>
+        <ul className="flex flex-col gap-y-2">
+          {locales.map((locale) => (
+            <li
+              key={locale}
+              className="flex justify-between p-3 bg-black-2 rounded-lg"
+            >
+              <span className="inline-flex items-center gap-x-3">
+                <LanguageIcon language={locale} />
+                <TextBodyStandard className="text-dark-4">
+                  {localesText[locale]}
+                </TextBodyStandard>
+              </span>
+              <Radio
+                name={locale}
+                value={locale === language}
+                onChange={() => {
+                  void changeLocale(locale);
+                }}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <CommonListPointViewOptions />
     </div>
   );
 };

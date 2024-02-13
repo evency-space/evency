@@ -3,14 +3,20 @@ import { useTranslation } from "react-i18next";
 import { BindingProgressTagsProps } from "./BindingProgressTagsProps";
 import { TextBodySmall } from "../typography";
 import { TagSmall } from "../tags";
+import { classesOf } from "../../../utils";
 
 export const BindingProgressTags = (props: BindingProgressTagsProps) => {
-  const { progressCount, totalCount, unit } = props;
+  const { progressCount, totalCount, unit, className } = props;
 
   const { t } = useTranslation();
 
+  const classes = classesOf(
+    "flex items-center gap-x-1 w-max whitespace-nowrap",
+    className
+  );
+
   return (
-    <div className="flex items-center gap-x-1 w-max whitespace-nowrap">
+    <div className={classes}>
       <TagSmall isButton={false} className="text-sw-max">{`${progressCount} ${t(
         `list_point.short_units.${unit}`
       )}`}</TagSmall>

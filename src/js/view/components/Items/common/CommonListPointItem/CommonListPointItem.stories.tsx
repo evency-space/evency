@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory } from "@storybook/react";
 import { CommonListPointItem } from "./CommonListPointItem";
 import { ICommonListPoint } from "../../../../../interfaces";
-import { commonListPointsFromBE } from "../../../../../utils";
+import { accessIds, commonListPointsFromBE } from "../../../../../utils";
 
 const commonListPoint = (commonListPointsFromBE as ICommonListPoint[])[0];
 export default {
@@ -48,23 +48,23 @@ NotTakenItem.args = {
 
 export const TakenItem = Template.bind({});
 TakenItem.args = {
-  memberUid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  accessIds,
 };
 
 export const BindingSuccessfully = Template.bind({});
 
-export const Loading = Template.bind({});
-Loading.args = {
-  loading: true,
-};
+// export const Loading = Template.bind({});
+// Loading.args = {
+//   loading: true,
+// };
 
-export const LoadingWithLongNameItem = Template.bind({});
-LoadingWithLongNameItem.args = {
-  loading: true,
-  listPoint: {
-    ...commonListPoint,
-    item: { ...commonListPoint.item, name: "Очень чистая родниковая вода" },
-    count: 5,
-    unit: "liter",
-  },
-};
+// export const LoadingWithLongNameItem = Template.bind({});
+// LoadingWithLongNameItem.args = {
+//   loading: true,
+//   listPoint: {
+//     ...commonListPoint,
+//     item: { ...commonListPoint.item, name: "Очень чистая родниковая вода" },
+//     count: 5,
+//     unit: "liter",
+//   },
+// };

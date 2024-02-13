@@ -1,45 +1,54 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useCallback, useState } from "react";
 import { ICommonListPointItemProps } from "./CommonListPointItemProps";
 import { ListPointItem } from "../../ListPointItem/ListPointItem";
 import {
+  BindListPointModal,
   BindingProgressTags,
   BtnIcon,
-  ButtonTransparent,
   TagMe,
-  TagSmall,
-  TextBodyLarge,
   TextBodySmall,
-  TextBodyStandard,
 } from "../../../../elements";
-import { ArrowIcon, KebabIcon, LoaderIcon, PlusIcon } from "../../../../icons";
+import { KebabIcon, LoaderIcon, PlusIcon } from "../../../../icons";
 import { classesOf } from "../../../../../utils";
-import { ICommonListPoint } from "../../../../../interfaces";
+import { CommonListPointsUtils } from "../utils";
+import { useLoading } from "../../../../../hooks";
+import {
+  changeCommonListPointBindStatus,
+  getMemberBindings,
+} from "../../../../../api_clients";
+import { CommonItemBindingsDetails } from "../CommonItemBindingsDetails/CommonItemBindingsDetails";
+import { IListPointBinding } from "../../../../../interfaces";
 
 export const CommonListPointItem = (props: ICommonListPointItemProps) => {
-  const {
-    listPoint,
-    memberUid,
-    loading,
-    onBindListPoint,
-    onShowListPointSettings,
-    onClickTitle,
-  } = props;
+  const { listPoint, accessIds, onShowListPointSettings, updateListPoint } =
+    props;
 
-  const { t } = useTranslation();
+  const { setLoading } = useLoading();
 
-  const [collapseToggle, setCollapseToggle] = useState<boolean>(false);
+  const commonListPointsUtils = CommonListPointsUtils({ accessIds });
 
-  const changeOuterContentCollapseStatus = () => {
-    if (!collapseToggle && onClickTitle) {
-      onClickTitle();
-    }
+  const { memberUid, eventUid } = accessIds;
 
-    setCollapseToggle(!collapseToggle);
-  };
+  const [itemLoading, setItemLoading] = useState<boolean>(false);
 
-  const showOuterContent = () =>
-    listPoint.bindings.length > 0 && collapseToggle && !loading;
+  const [bindingsDetails, setBindingsDetails] = useState<IListPointBinding[]>(
+    []
+  );
+
+  const hideAdditionalContent = () => setBindingsDetails([]);
+
+  const showBindingsDetails = bindingsDetails.length > 0;
+
+  const getBindingsProgress = useCallback(
+    () =>
+      commonListPointsUtils.getBindingsProgress({
+        bindings: listPoint.bindings,
+        memberUid,
+      }),
+    [commonListPointsUtils, listPoint, memberUid]
+  );
+
+  const bindingsProgress = getBindingsProgress();
 
   const getBindingProgress = () => {
     let progress = 0;
@@ -51,38 +60,105 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
     return progress;
   };
 
-  const getTakenListPointCount = () => {
-    const memberBinding = listPoint.bindings.find(
-      (b) => b.member.memberUid === memberUid
-    );
-    return memberBinding ? memberBinding.count : 0;
-  };
-
-  const takenListPointCount = getTakenListPointCount();
-
   const bindingProgress = getBindingProgress();
 
   const bindingButtonClasses = classesOf(
     "btn btn-sm btn-square normal-case border-0",
-    takenListPointCount === 0 &&
+    bindingsProgress.selectedMember === 0 &&
       "btn-primary focus:bg-green-2 focus-visible:bg-green-2",
-    takenListPointCount > 0 && "dark:bg-green-0 text-white"
+    bindingsProgress.selectedMember > 0 && "dark:bg-green-0 text-white"
   );
 
   const outerBlockClasses = classesOf(
     "flex items-center justify-between gap-x-4 w-full transition duration-150 ease-out",
-    loading && "opacity-10"
+    itemLoading && "opacity-10"
   );
 
-  const listPointBindingCount = ({
+  const bindListPoint = async ({
+    pointUid,
     count,
   }: {
-    count: ICommonListPoint["count"];
-  }) => (
-    <TagSmall isButton={false} className="w-max">{`${count} ${t(
-      `list_point.short_units.${listPoint.unit}`
-    )}`}</TagSmall>
-  );
+    pointUid: string;
+    count: number;
+  }) => {
+    try {
+      setLoading(true);
+      commonListPointsUtils.closeModal();
+
+      const payload = {
+        ...accessIds,
+        pointUid,
+        count: 0,
+      };
+      if (count !== 0) {
+        payload.count = count;
+      }
+
+      await changeCommonListPointBindStatus(payload);
+
+      await updateListPoint();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const showBindModal = () => {
+    const binding = listPoint.bindings.find(
+      (b) => b.member.memberUid === accessIds.memberUid
+    );
+    const countItemTaken = binding ? binding.count : 0;
+
+    commonListPointsUtils.showModal({
+      listPoint,
+      content: (
+        <BindListPointModal
+          listPoint={listPoint}
+          countItemTaken={countItemTaken}
+          onClick={(count) => {
+            void bindListPoint({ pointUid: listPoint.pointUid, count });
+          }}
+        />
+      ),
+    });
+  };
+
+  const checkListPointAvailability = async () => {
+    try {
+      setLoading(true);
+
+      await commonListPointsUtils
+        .checkListPointAvailability({
+          pointUid: listPoint.pointUid,
+        })
+        .then(showBindModal)
+        .catch(commonListPointsUtils.showBlockedListPointModal);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getBindingsDetails = useCallback(async () => {
+    try {
+      setItemLoading(true);
+
+      const result = await getMemberBindings({
+        eventUid,
+        pointUid: listPoint.pointUid,
+      });
+
+      setBindingsDetails(result);
+    } finally {
+      setItemLoading(false);
+    }
+  }, [eventUid, listPoint]);
+
+  const toggleAdditionalContent = async () => {
+    if (showBindingsDetails) {
+      hideAdditionalContent();
+    } else {
+      await getBindingsDetails();
+    }
+  };
 
   const listPointBindingProgress = (
     <BindingProgressTags
@@ -94,16 +170,21 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
 
   const listPointCount = (
     <div className="flex items-center gap-x-4">
-      {!!takenListPointCount && <TagMe />}
-      {!showOuterContent() && listPointBindingProgress}
+      {bindingsProgress.selectedMember > 0 && <TagMe />}
+      {!showBindingsDetails && listPointBindingProgress}
     </div>
   );
 
   const actionButtons = (
     <div className="flex gap-x-2">
-      <button className={bindingButtonClasses} onClick={onBindListPoint}>
-        {takenListPointCount ? (
-          <TextBodySmall>{takenListPointCount}</TextBodySmall>
+      <button
+        className={bindingButtonClasses}
+        onClick={() => {
+          void checkListPointAvailability();
+        }}
+      >
+        {bindingsProgress.selectedMember > 0 ? (
+          <TextBodySmall>{bindingsProgress.selectedMember}</TextBodySmall>
         ) : (
           <PlusIcon size={16} />
         )}
@@ -123,7 +204,7 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
         {listPointCount}
         {actionButtons}
       </div>
-      {loading && (
+      {itemLoading && (
         <LoaderIcon
           size={24}
           className="animate-spin absolute inset-0 m-auto"
@@ -132,56 +213,26 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
     </div>
   );
 
-  const outerContent = showOuterContent() ? (
-    <div className="collapse collapse-open">
-      <div className="collapse-content flex flex-col justify-center gap-y-3 px-0 duration-200">
-        <div className="flex justify-between pt-1">
-          <TextBodyStandard>Разобрано</TextBodyStandard>
-          {listPointBindingProgress}
-        </div>
-
-        <TextBodyStandard>Кто взял</TextBodyStandard>
-
-        <ul className="flex flex-col gap-y-3">
-          {listPoint.bindings.map((binding) => (
-            <li className="flex justify-between" key={binding.member.name}>
-              <div className="flex items-center gap-x-2">
-                <TextBodyLarge className="font-semibold text-light-4">
-                  {binding.member.name}
-                </TextBodyLarge>
-                {collapseToggle && binding.member.memberUid === memberUid && (
-                  <TagMe />
-                )}
-              </div>
-
-              {listPointBindingCount({
-                count: binding.count,
-              })}
-            </li>
-          ))}
-        </ul>
-
-        <ButtonTransparent
-          className="btn-sm"
-          icon={<ArrowIcon size={16} direction="up" />}
-          onClick={() => setCollapseToggle(!collapseToggle)}
-        >
-          {t("hide")}
-        </ButtonTransparent>
-      </div>
-    </div>
-  ) : (
-    <div />
+  const bindingsDetailsContent = (
+    <CommonItemBindingsDetails
+      bindingsDetails={bindingsDetails}
+      accessIds={accessIds}
+      count={listPoint.count}
+      unit={listPoint.unit}
+      onHide={hideAdditionalContent}
+    />
   );
 
   return (
     <ListPointItem
       listPointName={listPoint.item.name}
-      grayTitle={bindingProgress >= listPoint.count}
+      grayTitle={bindingsProgress.all >= listPoint.count}
       isButton
       content={content}
-      outerContent={outerContent}
-      onClickTitle={changeOuterContentCollapseStatus}
+      outerContent={bindingsDetailsContent}
+      onClickTitle={() => {
+        void toggleAdditionalContent();
+      }}
     />
   );
 };

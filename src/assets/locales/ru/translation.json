@@ -133,7 +133,12 @@
       }
     },
     "settings": {
-      "title": "Настройки"
+      "title": "Настройки",
+      "commonListPointViewOptions": {
+        "title": "Отображение общих вещей",
+        "oneLine": "В одну строку",
+        "twoLines": "В две строки"
+      }
     },
     "favorites": {
       "title": "Избранные вещи"

@@ -1,8 +1,6 @@
 import { IAccessIds, ICommonListPoint } from "../../../../../interfaces";
 
-export interface ICommonListPointItemProps {
+export interface ITwoLinesCommonListPointItem {
   listPoint: ICommonListPoint;
   accessIds: IAccessIds;
-  onShowListPointSettings: () => void;
-  updateListPoint: () => Promise<void>;
 }

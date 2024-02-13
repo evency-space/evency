@@ -18,3 +18,10 @@ export type TLocalStorageListPointTypes = keyof typeof LIST_POINT_TYPES;
 export type TLocalStorageAccessIdsList = {
   [key: string]: IAccessIds;
 };
+
+enum CommonListPointViewMode {
+  "oneLine",
+  "twoLines",
+}
+
+export type TCommonListPointViewMode = keyof typeof CommonListPointViewMode;

@@ -6,6 +6,10 @@ import { mockedCommonListPointsApi } from "../../../../../api_clients";
 import { accessIds } from "../../../../../utils/json/accessIds/accessIds.json";
 import { IAccessIds } from "../../../../../interfaces";
 import { commonListPointsFromBE } from "../../../../../utils";
+import {
+  TCommonListPointViewMode,
+  switchCommonListPointViewMode,
+} from "../../../../../utils/localStorage";
 
 export default {
   title: "components/listPoint/common/CommonListPoints",
@@ -19,13 +23,20 @@ export default {
   },
 };
 
+const initialViewMode = (viewMode: TCommonListPointViewMode) => {
+  switchCommonListPointViewMode(viewMode);
+  return Promise.resolve({});
+};
+
 const Template: ComponentStory<typeof CommonListPoints> = (args) => (
   <CommonListPoints {...args} />
 );
 
 export const Primary = Template.bind({});
+Primary.loaders = [() => initialViewMode("oneLine")];
 
 export const Locked = Template.bind({});
+Locked.loaders = [() => initialViewMode("oneLine")];
 Locked.parameters = {
   mockData: Object.values({
     ...mockedCommonListPointsApi,
@@ -34,6 +45,7 @@ Locked.parameters = {
 };
 
 export const GetNewBindings = Template.bind({});
+GetNewBindings.loaders = [() => initialViewMode("oneLine")];
 GetNewBindings.parameters = {
   mockData: Object.values({
     ...mockedCommonListPointsApi,
@@ -45,6 +57,7 @@ GetNewBindings.parameters = {
 };
 
 export const EmptyBindings = Template.bind({});
+EmptyBindings.loaders = [() => initialViewMode("oneLine")];
 EmptyBindings.parameters = {
   mockData: Object.values({
     ...mockedCommonListPointsApi,
@@ -54,3 +67,6 @@ EmptyBindings.parameters = {
     },
   }),
 };
+
+export const TwoLinesPrimary = Template.bind({});
+TwoLinesPrimary.loaders = [() => initialViewMode("twoLines")];

@@ -106,7 +106,12 @@
       "description": "Add private items that you recommend to take for all participants"
     },
     "settings": {
-      "title": "Settings"
+      "title": "Settings",
+      "commonListPointViewOptions": {
+        "title": "Отображение общих вещей",
+        "oneLine": "В одну строку",
+        "twoLines": "В две строки"
+      }
     },
     "favorites": {
       "title": "Favorites items"
