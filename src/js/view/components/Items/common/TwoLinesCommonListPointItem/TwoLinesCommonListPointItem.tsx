@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { debounce } from "underscore";
+import { debounce } from "lodash";
 import { ITwoLinesCommonListPointItem } from "./TwoLinesCommonListPointItemProps";
 import { ArrowIcon, LoaderIcon } from "../../../../icons";
 import { classesOf } from "../../../../../utils";
@@ -15,7 +15,8 @@ import { CommonItemBindingsDetails } from "../CommonItemBindingsDetails/CommonIt
 export const TwoLinesCommonListPointItem = (
   props: ITwoLinesCommonListPointItem
 ) => {
-  const { listPoint, accessIds } = props;
+  const { listPoint, accessIds, updateListPoint, onShowListPointSettings } =
+    props;
 
   const [itemLoading, setItemLoading] = useState<boolean>(false);
 
@@ -37,6 +38,10 @@ export const TwoLinesCommonListPointItem = (
   );
 
   const bindingsProgress = getBindingsProgress();
+
+  const [memberCountItemTaken, setMemberCountItemTaken] = useState(
+    bindingsProgress.selectedMember
+  );
 
   const showBindingsDetails = bindingsDetails.length > 0;
 
@@ -74,6 +79,7 @@ export const TwoLinesCommonListPointItem = (
       accessIds={accessIds}
       count={listPoint.count}
       unit={listPoint.unit}
+      showTotalBindingsProgress={false}
       onHide={hideAdditionalContent}
     />
   );
@@ -88,7 +94,9 @@ export const TwoLinesCommonListPointItem = (
         count,
       };
 
-      await changeCommonListPointBindStatus(payload);
+      const updatedListPoint = await changeCommonListPointBindStatus(payload);
+
+      updateListPoint(updatedListPoint);
 
       if (showBindingsDetails) {
         await getBindingsDetails();
@@ -98,13 +106,20 @@ export const TwoLinesCommonListPointItem = (
     }
   };
 
+  const handleBlockedListPoint = () => {
+    commonListPointsUtils.showBlockedListPointModal();
+    setMemberCountItemTaken(bindingsProgress.selectedMember);
+  };
+
   const checkListPointAvailability = debounce((count: number) => {
+    setMemberCountItemTaken(count);
+
     void commonListPointsUtils
       .checkListPointAvailability({
         pointUid: listPoint.pointUid,
       })
       .then(() => bindListPoint({ count }))
-      .catch(commonListPointsUtils.showBlockedListPointModal);
+      .catch(handleBlockedListPoint);
   }, 500);
 
   const toggleAdditionalContent = async () => {
@@ -122,7 +137,7 @@ export const TwoLinesCommonListPointItem = (
         unit={listPoint.unit}
         count={listPoint.count}
         countItemTaken={bindingsProgress.all}
-        memberCountItemTaken={bindingsProgress.selectedMember}
+        memberCountItemTaken={memberCountItemTaken}
         listPointName={listPoint.item.name}
         prependContent={prependContent}
         isButton
@@ -131,6 +146,7 @@ export const TwoLinesCommonListPointItem = (
           void toggleAdditionalContent();
         }}
         onBindListPoint={checkListPointAvailability}
+        onShowListPointSettings={onShowListPointSettings}
       />
       {itemLoading && (
         <LoaderIcon

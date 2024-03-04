@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { cloneDeep } from "lodash";
 import { CommonListPointItem } from "../CommonListPointItem/CommonListPointItem";
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
 import { convertListPointToIEditListPoint } from "../../../../../utils";
@@ -121,6 +122,13 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
     });
   };
 
+  const updateListPoint = (index: number, point: ICommonListPoint) => {
+    const clonedListPoints = cloneDeep(listPoints);
+
+    clonedListPoints.splice(index, 1, point);
+    setListPoints(clonedListPoints);
+  };
+
   const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
 
@@ -133,6 +141,10 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
           listPoint={listPoint}
           accessIds={accessIds}
           key={listPoint.pointUid}
+          onShowListPointSettings={() => {
+            void showActionListPointModal(listPoint);
+          }}
+          updateListPoint={(point) => updateListPoint(index, point)}
         />
       );
     } else {

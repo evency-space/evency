@@ -7,6 +7,8 @@
   "i_take": "I’m taking",
   "language": "Language",
   "search": "Search",
+  "taken": "Taken",
+  "whoTookIt": "Who took it",
   "headerRoutes": {
     "goBack": "Back",
     "eventEditListPointPage": {
