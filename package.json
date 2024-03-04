@@ -51,7 +51,9 @@
   },
   "scripts": {
     "start": "cross-env PORT=8080 react-scripts start",
+    "start:dev": "cross-env PORT=8080 REACT_APP_IS_DEV_SERVER=true react-scripts start",
     "build": "react-scripts build",
+    "build:dev": "cross-env REACT_APP_IS_DEV_SERVER=true react-scripts build",
     "format": "prettier --write src/**/*.{ts,tsx}",
     "lint": "eslint --fix src/**/*.{ts,tsx}",
     "server": "nodemon server/index.js",
