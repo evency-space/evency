@@ -78,6 +78,7 @@ export const TwoLinesCommonListPointItem = (
       accessIds={accessIds}
       count={listPoint.count}
       unit={listPoint.unit}
+      showTotalBindingsProgress={false}
       onHide={hideAdditionalContent}
     />
   );

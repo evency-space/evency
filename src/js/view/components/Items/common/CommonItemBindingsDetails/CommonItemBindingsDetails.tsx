@@ -15,7 +15,14 @@ import { IListPointBinding } from "../../../../../interfaces";
 export const CommonItemBindingsDetails = (
   props: ICommonItemBindingsDetailsProps
 ) => {
-  const { bindingsDetails, accessIds, count, unit, onHide } = props;
+  const {
+    bindingsDetails,
+    accessIds,
+    count,
+    unit,
+    showTotalBindingsProgress = true,
+    onHide,
+  } = props;
 
   const { t } = useTranslation();
 
@@ -54,12 +61,14 @@ export const CommonItemBindingsDetails = (
   return bindingsDetails.length > 0 ? (
     <div className="collapse collapse-open">
       <div className="collapse-content flex flex-col justify-center gap-y-3 px-0 duration-200">
-        <div className="flex justify-between pt-1">
-          <TextBodyStandard>Разобрано</TextBodyStandard>
-          {listPointBindingProgress}
-        </div>
+        {showTotalBindingsProgress && (
+          <div className="flex justify-between pt-1">
+            <TextBodyStandard>{t("taken")}</TextBodyStandard>
+            {listPointBindingProgress}
+          </div>
+        )}
 
-        <TextBodyStandard>Кто взял</TextBodyStandard>
+        <TextBodyStandard>{t("whoTookIt")}</TextBodyStandard>
 
         <ul className="flex flex-col gap-y-3">
           {bindingsDetails.map((binding) => (
