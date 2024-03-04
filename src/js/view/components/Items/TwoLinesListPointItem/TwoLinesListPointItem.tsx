@@ -34,60 +34,55 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
     !isButton && "cursor-text"
   );
 
-  const mainClasses = classesOf(
-    "flex flex-col gap-y-3 zebra-list-item py-3",
-    className
-  );
+  const mainClasses = classesOf("flex gap-x-3 py-3", className);
 
   return (
     <div className={mainClasses}>
-      <div className="flex gap-x-3">
-        {prependContent}
+      {prependContent}
 
-        <div className="flex flex-col gap-y-3 w-full">
-          <div className="flex items-start">
-            <div
-              className="flex gap-x-3 grow"
-              role="button"
-              tabIndex={0}
-              onClick={onClickTitle}
-              onKeyDown={(e) => e}
-            >
-              <TextBodyLarge className={titleClasses}>
-                {listPointName}
-                {memberCountItemTaken > 0 && <TagMe />}
-              </TextBodyLarge>
-            </div>
-
-            <BtnIcon
-              icon={<KebabIcon size={16} />}
-              className="btn-xs"
-              onClick={() => {}}
-            />
+      <div className="flex flex-col gap-y-3 w-full">
+        <div className="flex items-start">
+          <div
+            className="flex gap-x-3 grow"
+            role="button"
+            tabIndex={0}
+            onClick={onClickTitle}
+            onKeyDown={(e) => e}
+          >
+            <TextBodyLarge className={titleClasses}>
+              {listPointName}
+              {memberCountItemTaken > 0 && <TagMe />}
+            </TextBodyLarge>
           </div>
 
-          <div className="flex gap-x-1">
-            <BindingProgressTags
-              className="grow"
-              progressCount={countItemTaken}
-              totalCount={count}
-              unit={unit}
-            />
+          <BtnIcon
+            icon={<KebabIcon size={16} />}
+            className="btn-xs"
+            onClick={() => {}}
+          />
+        </div>
 
-            <div className="flex grow-0 shrink">
-              <Counter
-                value={countItemTaken}
-                size="sm"
-                color={isItemTaken ? "gray" : "green"}
-                className="w-[180px]"
-                onChange={onBindListPoint}
-              />
-            </div>
+        <div className="flex gap-x-1">
+          <BindingProgressTags
+            className="grow"
+            progressCount={countItemTaken}
+            totalCount={count}
+            unit={unit}
+          />
+
+          <div className="flex grow-0 shrink">
+            <Counter
+              value={memberCountItemTaken}
+              size="sm"
+              color={isItemTaken ? "gray" : "green"}
+              className="w-[180px]"
+              onChange={onBindListPoint}
+            />
           </div>
         </div>
-      </div>
 
-      {additionalContent}
+        {additionalContent}
+      </div>
     </div>
   );
 };

@@ -121,6 +121,15 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
     });
   };
 
+  const updateListPoint = (index: number, point: ICommonListPoint) => {
+    const clonedListPoints = JSON.parse(
+      JSON.stringify(listPoints)
+    ) as ICommonListPoint[];
+
+    clonedListPoints.splice(index, 1, point);
+    setListPoints(clonedListPoints);
+  };
+
   const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
 
@@ -133,6 +142,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
           listPoint={listPoint}
           accessIds={accessIds}
           key={listPoint.pointUid}
+          updateListPoint={(point) => updateListPoint(index, point)}
         />
       );
     } else {

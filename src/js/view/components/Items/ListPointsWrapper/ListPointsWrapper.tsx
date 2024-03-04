@@ -138,9 +138,13 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
                 )}
               </div>
 
-              <div>
+              <div className="-mr-4 -ml-4">
                 {groupedListPointsAfterFilter[groupName]?.map(
-                  ({ itemTemplate }) => itemTemplate
+                  ({ itemTemplate }) => (
+                    <div className="flex flex-col w-full zebra-list-item px-4">
+                      {itemTemplate}
+                    </div>
+                  )
                 )}
               </div>
             </div>
