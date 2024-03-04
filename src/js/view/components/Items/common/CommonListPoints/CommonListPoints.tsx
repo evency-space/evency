@@ -142,6 +142,9 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
           listPoint={listPoint}
           accessIds={accessIds}
           key={listPoint.pointUid}
+          onShowListPointSettings={() => {
+            void showActionListPointModal(listPoint);
+          }}
           updateListPoint={(point) => updateListPoint(index, point)}
         />
       );

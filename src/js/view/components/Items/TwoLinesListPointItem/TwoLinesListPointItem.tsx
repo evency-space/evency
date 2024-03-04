@@ -23,6 +23,7 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
     className,
     onClickTitle,
     onBindListPoint,
+    onShowListPointSettings,
   } = props;
 
   const isItemTaken = countItemTaken >= count;
@@ -58,7 +59,7 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
           <BtnIcon
             icon={<KebabIcon size={16} />}
             className="btn-xs"
-            onClick={() => {}}
+            onClick={onShowListPointSettings}
           />
         </div>
 

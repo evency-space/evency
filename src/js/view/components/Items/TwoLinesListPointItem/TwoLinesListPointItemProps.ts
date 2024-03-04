@@ -12,4 +12,5 @@ export interface IListPointItemProps {
   className?: string;
   onClickTitle?: () => void;
   onBindListPoint: (value: number) => void;
+  onShowListPointSettings: () => void;
 }

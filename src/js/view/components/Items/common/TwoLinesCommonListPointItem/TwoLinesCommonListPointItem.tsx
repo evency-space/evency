@@ -15,7 +15,8 @@ import { CommonItemBindingsDetails } from "../CommonItemBindingsDetails/CommonIt
 export const TwoLinesCommonListPointItem = (
   props: ITwoLinesCommonListPointItem
 ) => {
-  const { listPoint, accessIds, updateListPoint } = props;
+  const { listPoint, accessIds, updateListPoint, onShowListPointSettings } =
+    props;
 
   const [itemLoading, setItemLoading] = useState<boolean>(false);
 
@@ -145,6 +146,7 @@ export const TwoLinesCommonListPointItem = (
           void toggleAdditionalContent();
         }}
         onBindListPoint={checkListPointAvailability}
+        onShowListPointSettings={onShowListPointSettings}
       />
       {itemLoading && (
         <LoaderIcon
