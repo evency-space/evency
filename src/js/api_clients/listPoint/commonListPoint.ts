@@ -71,7 +71,7 @@ export const editCommonListPoint = ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        point: { ...listPoint, isPrivate: true },
+        point: listPoint,
         memberUid,
       }),
     },

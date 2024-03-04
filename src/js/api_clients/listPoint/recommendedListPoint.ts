@@ -10,5 +10,5 @@ export const createRecommendedPrivateList = async (
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(body.map(point => ({ ...point, isPrivate: true }))),
+    body: JSON.stringify(body),
   });
