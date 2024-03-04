@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { cloneDeep } from "lodash";
 import { CommonListPointItem } from "../CommonListPointItem/CommonListPointItem";
 import { ListPointsWrapper } from "../../ListPointsWrapper/ListPointsWrapper";
 import { convertListPointToIEditListPoint } from "../../../../../utils";
@@ -122,9 +123,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
   };
 
   const updateListPoint = (index: number, point: ICommonListPoint) => {
-    const clonedListPoints = JSON.parse(
-      JSON.stringify(listPoints)
-    ) as ICommonListPoint[];
+    const clonedListPoints = cloneDeep(listPoints);
 
     clonedListPoints.splice(index, 1, point);
     setListPoints(clonedListPoints);

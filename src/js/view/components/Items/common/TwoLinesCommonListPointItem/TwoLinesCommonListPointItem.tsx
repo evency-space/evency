@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { debounce } from "underscore";
+import { debounce } from "lodash";
 import { ITwoLinesCommonListPointItem } from "./TwoLinesCommonListPointItemProps";
 import { ArrowIcon, LoaderIcon } from "../../../../icons";
 import { classesOf } from "../../../../../utils";
