@@ -16,6 +16,7 @@ import {
 import { TProvidedEvent } from "../../../../router/types";
 import { DuplicateListPointModal, Loader } from "../../elements";
 import {
+  eventEditListPointPageUrl,
   eventPageUrl,
   favoritesListPointsPageUrl,
 } from "../../../../router/constants";
@@ -83,9 +84,23 @@ export const ListPointEditPage = () => {
           <DuplicateListPointModal
             accessIds={accessIds}
             listPoint={duplicateListPoint}
-            onPrimaryButtonClick={goBackToListPointsPage}
+            onPrimaryButtonClick={() => goBackToListPointsPage()}
             onSecondaryButtonClick={() => {
               void addDuplicateCommonListPoint(baseListPoint);
+            }}
+            setListPointForEdit={(point) => {
+              navigate(
+                eventEditListPointPageUrl({
+                  eventUid: accessIds.eventUid,
+                  listPointUid: point.pointUid || "",
+                }),
+                {
+                  state: {
+                    listPointType: "common",
+                    listPointUid: point.pointUid,
+                  },
+                }
+              );
             }}
           />
         ),
