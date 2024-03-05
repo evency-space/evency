@@ -89,6 +89,7 @@ export const convertListPointToIEditListPoint = ({
       item: { name, tags },
       unit,
       count,
+      pointUid,
     } = point as IListPoint;
 
     convertedPoint = {
@@ -97,6 +98,7 @@ export const convertListPointToIEditListPoint = ({
       tag: tags[0],
       unit,
       count,
+      pointUid,
     };
   }
 

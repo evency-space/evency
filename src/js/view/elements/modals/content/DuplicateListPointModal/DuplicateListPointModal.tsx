@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { IDuplicateListPointModalProps } from "./DuplicateListPointModalProps";
 import { ActionPanel } from "../../../ActionPanel/ActionPanel";
 import { ModalTitle } from "../../Modal/ModalTitle/ModalTitle";
@@ -9,7 +8,6 @@ import { ButtonTransparent } from "../../../buttons";
 import { ModalDescription } from "../../Modal/ModalDescription/ModalDescription";
 import { TextBodyStandard } from "../../../typography";
 import { saveCurrentListPointInLocalStorage } from "../../../../../utils/localStorage";
-import { eventEditListPointPageUrl } from "../../../../../../router/constants";
 import { lockCommonListPoint } from "../../../../../api_clients";
 import { useLoading, useModal } from "../../../../../hooks";
 import { BlockedListPointModal } from "../BlockedListPointModal/BlockedListPointModal";
@@ -18,12 +16,15 @@ import { convertListPointToIEditListPoint } from "../../../../../utils";
 export const DuplicateListPointModal = (
   props: IDuplicateListPointModalProps
 ) => {
-  const { accessIds, listPoint, onPrimaryButtonClick, onSecondaryButtonClick } =
-    props;
+  const {
+    accessIds,
+    listPoint,
+    onPrimaryButtonClick,
+    onSecondaryButtonClick,
+    setListPointForEdit,
+  } = props;
 
   const { setLoading } = useLoading();
-
-  const navigate = useNavigate();
 
   const modalContext = useModal();
 
@@ -36,13 +37,7 @@ export const DuplicateListPointModal = (
     });
 
     saveCurrentListPointInLocalStorage(currentListPoint);
-    navigate(
-      eventEditListPointPageUrl({
-        eventUid: accessIds.eventUid,
-        listPointUid: listPoint.pointUid || "",
-      }),
-      { state: { listPointType: "common", listPointUid: listPoint.pointUid } }
-    );
+    setListPointForEdit(currentListPoint);
   };
 
   const closeModal = () => {
