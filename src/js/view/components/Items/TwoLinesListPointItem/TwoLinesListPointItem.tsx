@@ -9,6 +9,7 @@ import {
 } from "../../../elements";
 import { classesOf } from "../../../../utils";
 import { KebabIcon } from "../../../icons";
+import { LIST_POINT_UNITS_STEP } from "../../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
 
 export const TwoLinesListPointItem = (props: IListPointItemProps) => {
   const {
@@ -76,6 +77,7 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
               value={memberCountItemTaken}
               size="sm"
               color={isItemTaken ? "gray" : "green"}
+              step={LIST_POINT_UNITS_STEP[unit]}
               className="w-[180px]"
               onChange={onBindListPoint}
             />
