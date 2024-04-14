@@ -22,6 +22,7 @@ import {
   ShareIcon,
   StarIcon,
   ZoomIcon,
+  CheckMarkIcon,
 } from "./index";
 
 export default {
@@ -61,3 +62,4 @@ export const Chat = getComponent(ChatIcon).bind({});
 export const ChatQuestion = getComponent(ChatQuestionIcon).bind({});
 export const Star = getComponent(StarIcon).bind({});
 export const Language = getComponent(LanguageIcon).bind({});
+export const CheckMark = getComponent(CheckMarkIcon).bind({});
