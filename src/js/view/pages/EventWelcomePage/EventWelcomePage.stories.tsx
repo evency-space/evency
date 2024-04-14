@@ -1,36 +1,18 @@
 import React from "react";
 import { ComponentStory } from "@storybook/react";
+import { withRouter } from "storybook-addon-react-router-v6";
 import {
   members,
   fullEvent,
-  accessIds as accessIdsJson,
   convertIEventFromBEToIEvent,
 } from "../../../utils";
 import { EventWelcomePage } from "./EventWelcomePage";
 import { IEventFromBE } from "../../../interfaces";
-import {
-  pushAccessIdsInLocalStorage,
-  saveCurrentEventInLocalStorage,
-  deleteEventMemberUidFromLocalStorage,
-} from "../../../utils/localStorage";
 import { SERVER_URL } from "../../../common/constants";
 
 const event = convertIEventFromBEToIEvent(fullEvent as IEventFromBE);
 
 const { eventUid } = event;
-
-const accessIds = { ...accessIdsJson, eventUid };
-
-const initialLocalStorageState = () => {
-  saveCurrentEventInLocalStorage(event);
-  pushAccessIdsInLocalStorage({ ...accessIds });
-  return Promise.resolve({});
-};
-
-const initialLocalStorageStateForMemberSelection = () => {
-  deleteEventMemberUidFromLocalStorage(eventUid);
-  return Promise.resolve({});
-};
 
 const mockedApi = {
   getItems: {
@@ -47,7 +29,16 @@ export default {
   component: EventWelcomePage,
   parameters: {
     mockData: Object.values(mockedApi),
+    reactRouter: {
+      loader: () => ({
+        data: Promise.resolve({
+          event,
+          members,
+        }),
+      }),
+    },
   },
+  decorators: [withRouter],
 };
 
 const Template: ComponentStory<typeof EventWelcomePage> = () => (
@@ -55,7 +46,16 @@ const Template: ComponentStory<typeof EventWelcomePage> = () => (
 );
 
 export const ChangeMember = Template.bind({});
-ChangeMember.loaders = [() => initialLocalStorageState()];
 
 export const ChooseMember = Template.bind({});
-ChooseMember.loaders = [() => initialLocalStorageStateForMemberSelection()];
+ChooseMember.parameters = {
+  reactRouter: {
+    loader: () => ({
+      data: Promise.resolve({
+        event,
+        members,
+        accessIds: { memberUid: members[0].memberUid },
+      }),
+    }),
+  },
+};

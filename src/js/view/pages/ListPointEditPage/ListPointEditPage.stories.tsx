@@ -52,8 +52,11 @@ export default {
   decorators: [withRouter],
   parameters: {
     reactRouter: {
-      routePath: "/event/:eventUid/item",
-      routeParams: { eventUid: accessIds.eventUid },
+      loader: () => ({
+        data: Promise.resolve({
+          accessIds,
+        }),
+      }),
     },
   },
 };
