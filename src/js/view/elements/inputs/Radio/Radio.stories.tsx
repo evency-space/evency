@@ -15,3 +15,9 @@ Checked.args = {
   name: "radio",
   value: true,
 };
+
+export const WithLabel = Template.bind({});
+WithLabel.args = {
+  label: <span>radio label</span>,
+  value: false,
+};
