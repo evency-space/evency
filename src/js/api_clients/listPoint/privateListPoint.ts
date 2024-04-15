@@ -17,6 +17,7 @@ export const privateListPointApi = ({
   editItem: `${endPoint(eventUid)}/EditItem/${pointUid || ""}`,
   getItems: `${endPoint(eventUid)}/GetItems/${memberUid || ""}`,
   removeItem: `${endPoint(eventUid)}/DeleteItem`,
+  addFromFavorites: `${endPoint(eventUid)}/AddFromFavorites`,
 });
 
 export const getPrivateListPoints = ({
@@ -79,5 +80,25 @@ export const removePrivateListPoint = ({
     body: JSON.stringify({
       memberUid,
       pointUid,
+    }),
+  });
+
+export const addPrivateItemsFromFavorites = ({
+  eventUid,
+  memberUid,
+  items,
+}: {
+  eventUid: string;
+  memberUid: string;
+  items: Array<{ itemUid: string; count: number }>;
+}) =>
+  fetch(privateListPointApi({ eventUid }).addFromFavorites, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      memberUid,
+      items,
     }),
   });
