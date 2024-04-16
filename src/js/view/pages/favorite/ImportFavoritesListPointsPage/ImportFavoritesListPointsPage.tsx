@@ -115,7 +115,7 @@ export const ImportFavoritesListPointsPage = () => {
   };
 
   const pageContent = (
-    <div className="flex flex-col gap-y-6 w-full">
+    <div className="flex flex-col gap-y-6 w-full h-full">
       <TitleH1>{t(`pages.import_favorites.step_${step}.title`)}</TitleH1>
       {isFirstStep() ? (
         <ImportedFavoritesList
