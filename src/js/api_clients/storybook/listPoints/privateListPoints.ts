@@ -38,4 +38,11 @@ export const mockedPrivateListPointsApi = {
     response: [],
     delay,
   },
+  addPrivateItemsFromFavorites: {
+    url: privateEndPoints.addFromFavorites,
+    method: "POST",
+    status,
+    response: [],
+    delay,
+  },
 };

@@ -1,0 +1,10 @@
+@import "react-toastify/dist/ReactToastify.css";
+
+.Toastify__toast-container {
+  --toastify-toast-width: 94%;
+}
+
+.Toastify__toast {
+  background-color: transparent;
+  box-shadow: none;
+}

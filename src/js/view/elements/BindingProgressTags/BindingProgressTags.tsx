@@ -17,13 +17,21 @@ export const BindingProgressTags = (props: BindingProgressTagsProps) => {
 
   return (
     <div className={classes}>
-      <TagSmall isButton={false} className="text-sw-max">{`${progressCount} ${t(
-        `list_point.short_units.${unit}`
-      )}`}</TagSmall>
+      {totalCount > 0 ? (
+        <>
+          <TagSmall isButton={false} className="text-sw-max">
+            {`${progressCount} ${t(`list_point.short_units.${unit}`)}`}
+          </TagSmall>
 
-      <TextBodySmall>
-        / {totalCount} {t(`list_point.short_units.${unit}`)}
-      </TextBodySmall>
+          <TextBodySmall>
+            / {totalCount} {t(`list_point.short_units.${unit}`)}
+          </TextBodySmall>
+        </>
+      ) : (
+        <TagSmall isButton={false} className="text-sw-max">
+          {t(`list_point.short_units.${unit}`)}
+        </TagSmall>
+      )}
     </div>
   );
 };

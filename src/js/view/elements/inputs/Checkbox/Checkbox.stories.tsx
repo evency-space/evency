@@ -1,23 +1,24 @@
 import React from "react";
 import { ComponentStory } from "@storybook/react";
 
-import { Radio } from "./Radio";
+import { Checkbox } from "./Checkbox";
 
 export default {
-  title: "elements/inputs/Radio",
-  component: Radio,
+  title: "elements/inputs/Checkbox",
+  component: Checkbox,
 };
 
-const Template: ComponentStory<typeof Radio> = (args) => <Radio {...args} />;
+const Template: ComponentStory<typeof Checkbox> = (args) => (
+  <Checkbox {...args} />
+);
 
 export const Checked = Template.bind({});
 Checked.args = {
-  name: "radio",
   value: true,
 };
 
 export const WithLabel = Template.bind({});
 WithLabel.args = {
-  label: <span>radio label</span>,
+  label: <span>checkbox label</span>,
   value: false,
 };

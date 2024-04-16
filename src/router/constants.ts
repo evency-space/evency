@@ -67,3 +67,15 @@ export const editFavoriteListPointPageUrl = ({
 export const faqPageUrl = () => "/help";
 
 export const settingsPageUrl = () => "/settings";
+
+export const eventImportFavoritesItemsPageUrlStepOne = ({
+  eventUid,
+}: {
+  eventUid: string;
+}) => `${eventPageUrl({ eventUid })}/favorites`;
+
+export const eventImportFavoritesItemsPageUrlStepTwo = ({
+  eventUid,
+}: {
+  eventUid: string;
+}) => `${eventImportFavoritesItemsPageUrlStepOne({ eventUid })}?step=list`;

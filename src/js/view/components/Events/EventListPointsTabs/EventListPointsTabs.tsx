@@ -60,7 +60,7 @@ export const EventListPointsTabs = (props: IEventListPointsTabsProps) => {
             onClick={() => setActiveTab(listPointType)}
           >
             <TextBodyStandard fontWeight="medium">
-              {t(`event_card.list_point_types.${listPointType}`)}
+              {t(`list_point_types.${listPointType}`)}
             </TextBodyStandard>
           </button>
         ))}

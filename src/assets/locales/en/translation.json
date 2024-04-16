@@ -9,6 +9,8 @@
   "search": "Search",
   "taken": "Taken",
   "whoTookIt": "Who took it",
+  "add_items": "Добавить вещи",
+  "select_all": "Select all",
   "headerRoutes": {
     "goBack": "Back",
     "eventEditListPointPage": {
@@ -117,6 +119,15 @@
     },
     "favorites": {
       "title": "Favorites items"
+    },
+    "import_favorites": {
+      "successfully_imported": "Вещи успешно добавлены в мероприятие!",
+      "step_1": {
+        "title": "Добавить из избранного"
+      },
+      "step_2": {
+        "title": "В какой список добавить?"
+      }
     }
   },
   "list_point": {
@@ -157,14 +168,6 @@
       "other": "Other"
     }
   },
-  "event_card": {
-    "list_point_types": {
-      "recommended": "Recommended items",
-      "private": "Private items",
-      "common": "Public items",
-      "taken": "I’m taking"
-    }
-  },
   "modals": {
     "warning": "Your action will influence other members",
     "blocked_list_point": {
@@ -179,7 +182,8 @@
       "leave": "Leave event",
       "edit_event": "Edit event",
       "members": "Event members",
-      "logout": "Choose another member"
+      "logout": "Choose another member",
+      "import_favorites": "Добавить из избранного"
     },
     "events_list_action": {
       "deleteEvent": "Delete event",
@@ -192,5 +196,11 @@
       "primary_button_text": "Back to public items",
       "secondary_button_text": "Add anyway"
     }
+  },
+  "list_point_types": {
+    "recommended": "Recommended items",
+    "private": "Private items",
+    "common": "Public items",
+    "taken": "I’m taking"
   }
 }
