@@ -1,10 +1,6 @@
 import { SERVER_URL } from "../../common/constants";
 
-import {
-  ICommonListPoint,
-  IListPoint,
-  IListPointBinding,
-} from "../../interfaces";
+import { ICommonListPoint, IListPoint } from "../../interfaces";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/CommonList/${eventUid}`;
 
@@ -173,7 +169,7 @@ export const getMemberBindings = ({
     headers: {
       "Content-Type": "application/json",
     },
-  }).then(response => response.json() as Promise<IListPointBinding[]>);
+  }).then(response => response.json() as Promise<ICommonListPoint>);
 
 export const getDuplicateListPoints = async ({
   eventUid,

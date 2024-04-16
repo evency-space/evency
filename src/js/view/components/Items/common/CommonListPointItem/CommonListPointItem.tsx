@@ -146,7 +146,7 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
         pointUid: listPoint.pointUid,
       });
 
-      setBindingsDetails(result);
+      setBindingsDetails(result.bindings);
     } finally {
       setItemLoading(false);
     }

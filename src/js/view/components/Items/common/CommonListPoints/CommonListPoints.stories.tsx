@@ -63,7 +63,7 @@ EmptyBindings.parameters = {
     ...mockedCommonListPointsApi,
     getMemberBindings: {
       ...mockedCommonListPointsApi.getMemberBindings,
-      response: [],
+      response: { bindings: [{}] },
     },
   }),
 };

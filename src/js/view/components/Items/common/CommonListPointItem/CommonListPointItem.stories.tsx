@@ -10,6 +10,7 @@ export default {
   component: CommonListPointItem,
   args: {
     listPoint: commonListPoint,
+    accessIds,
   },
 };
 
