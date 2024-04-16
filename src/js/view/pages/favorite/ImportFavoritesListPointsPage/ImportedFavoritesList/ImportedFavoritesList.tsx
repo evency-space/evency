@@ -13,6 +13,7 @@ import { Checkbox } from "../../../../elements/inputs/Checkbox/Checkbox";
 import { LIST_POINT_UNITS_STEP } from "../../../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
 
 import { ListPoints } from "../../../../components/Items/ListPoints/ListPoints";
+import { TextBodyStandard } from "../../../../elements";
 
 export const ImportedFavoritesList = (props: IImportedFavoritesListProps) => {
   const { selectedListPoints, onChangeSelectedListPoints } = props;
@@ -74,11 +75,32 @@ export const ImportedFavoritesList = (props: IImportedFavoritesListProps) => {
 
     return (
       <Checkbox
-        label={t("select_all")}
+        label={
+          <TextBodyStandard
+            className="flex items-center text-light-4"
+            fontWeight="medium"
+          >
+            {t("select_all")}
+          </TextBodyStandard>
+        }
         value={!unselectedPointExists}
         onChange={() => changeSelectedListPoints()}
       />
     );
+  };
+
+  const handleCheckboxItemClick = ({
+    listPoint: {
+      unit,
+      item: { itemUid },
+    },
+    count,
+  }: {
+    listPoint: IFavoriteListPoint;
+    count: number;
+  }) => {
+    const newCount = count === 0 ? getIncrementedCount({ count, unit }) : 0;
+    changeSelectedListPoints(itemUid, newCount);
   };
 
   const getListPointCheckbox = ({
@@ -87,20 +109,12 @@ export const ImportedFavoritesList = (props: IImportedFavoritesListProps) => {
   }: {
     listPoint: IFavoriteListPoint;
     count: number;
-  }) => {
-    const {
-      unit,
-      item: { itemUid },
-    } = listPoint;
-    const newCount = count === 0 ? getIncrementedCount({ count, unit }) : 0;
-
-    return (
-      <Checkbox
-        value={count > 0}
-        onChange={() => changeSelectedListPoints(itemUid, newCount)}
-      />
-    );
-  };
+  }) => (
+    <Checkbox
+      value={count > 0}
+      onChange={() => handleCheckboxItemClick({ listPoint, count })}
+    />
+  );
 
   const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
@@ -108,6 +122,7 @@ export const ImportedFavoritesList = (props: IImportedFavoritesListProps) => {
 
     const itemTemplate = (
       <TwoLinesListPointItem
+        isButton
         listPointName={listPoint.item.name}
         unit={listPoint.unit}
         count={0}
@@ -121,7 +136,9 @@ export const ImportedFavoritesList = (props: IImportedFavoritesListProps) => {
         onBindListPoint={(value) =>
           changeSelectedListPoints(listPoint.item.itemUid, value)
         }
-        onShowListPointSettings={() => {}}
+        onClickTitle={() =>
+          handleCheckboxItemClick({ listPoint, count: selectedCount })
+        }
       />
     );
 

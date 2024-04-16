@@ -43,9 +43,9 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
       {prependContent}
 
       <div className="flex flex-col gap-y-3 w-full">
-        <div className="flex items-start">
+        <div className="flex items-start justify-between">
           <div
-            className="flex gap-x-3 grow"
+            className="flex gap-x-3"
             role="button"
             tabIndex={0}
             onClick={onClickTitle}
@@ -61,7 +61,7 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
             <BtnIcon
               icon={<KebabIcon size={16} />}
               className="btn-xs"
-              onClick={onShowListPointSettings}
+              onClick={() => onShowListPointSettings?.()}
             />
           )}
         </div>

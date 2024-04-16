@@ -11,6 +11,6 @@ export interface IListPointItemProps {
   additionalContent?: JSX.Element;
   className?: string;
   onClickTitle?: () => void;
+  onShowListPointSettings?: () => void;
   onBindListPoint: (value: number) => void;
-  onShowListPointSettings: () => void;
 }
