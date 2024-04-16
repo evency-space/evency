@@ -182,7 +182,8 @@
       "leave": "Leave event",
       "edit_event": "Edit event",
       "members": "Event members",
-      "logout": "Choose another member"
+      "logout": "Choose another member",
+      "import_favorites": "Добавить из избранного"
     },
     "events_list_action": {
       "deleteEvent": "Delete event",

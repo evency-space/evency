@@ -8,6 +8,7 @@ import { TProvidedEvent } from "../../../../router/types";
 import {
   editEventPageUrl,
   eventMembersPageUrl,
+  eventImportFavoritesItemsPageUrlStepOne,
   shareEventPageUrl,
   eventWelcomePageUrl,
 } from "../../../../router/constants";
@@ -35,6 +36,9 @@ export const EventPage = () => {
             onShareEvent={() => navigate(shareEventPageUrl({ eventUid }))}
             onEditEvent={() => navigate(editEventPageUrl({ eventUid }))}
             onEditMembers={() => navigate(eventMembersPageUrl({ eventUid }))}
+            onImportFavorites={() =>
+              navigate(eventImportFavoritesItemsPageUrlStepOne({ eventUid }))
+            }
             onLeaveEvent={() => {}}
             onLogoutClick={() => navigate(eventWelcomePageUrl({ eventUid }))}
           />

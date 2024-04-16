@@ -64,7 +64,7 @@ export const Header = () => {
       isNewEvent: event?.isNewEvent || false,
       memberUid: accessIds?.memberUid,
       state: (location.state || {}) as IRouteState,
-      pathName: location.pathname,
+      pathName: `${location.pathname}${location.search}`,
     });
 
     setRouteData(parentData);
