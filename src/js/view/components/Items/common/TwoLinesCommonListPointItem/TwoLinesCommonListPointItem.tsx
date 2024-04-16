@@ -56,7 +56,7 @@ export const TwoLinesCommonListPointItem = (
         pointUid: listPoint.pointUid,
       });
 
-      setBindingsDetails(result);
+      setBindingsDetails(result.bindings);
     } finally {
       setItemLoading(false);
     }

@@ -1,9 +1,5 @@
-import {
-  commonListPointBindingsFromBE,
-  commonListPointsFromBE,
-  accessIds,
-} from "../../../utils";
-import { IListPointBinding } from "../../../interfaces";
+import { commonListPointsFromBE, accessIds } from "../../../utils";
+import { ICommonListPoint } from "../../../interfaces";
 import { commonListPointApi } from "../../listPoint";
 
 const status = 200;
@@ -75,7 +71,7 @@ export const mockedCommonListPointsApi = {
     url: commonEndPoints.getMemberBindings,
     method: "GET",
     status,
-    response: commonListPointBindingsFromBE as IListPointBinding[],
+    response: commonListPointsFromBE[0] as ICommonListPoint,
     delay,
   },
 };

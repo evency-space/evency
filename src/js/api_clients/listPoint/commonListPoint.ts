@@ -172,7 +172,7 @@ export const getMemberBindings = ({
     headers: {
       "Content-Type": "application/json",
     },
-  }).then(response => response.json() as Promise<IListPointBinding[]>);
+  }).then(response => response.json() as Promise<ICommonListPoint>);
 
 export const getDuplicateListPoints = async ({
   eventUid,
