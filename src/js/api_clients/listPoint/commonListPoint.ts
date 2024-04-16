@@ -1,10 +1,6 @@
 import { SERVER_URL } from "../../common/constants";
 
-import {
-  ICommonListPoint,
-  IListPoint,
-  IListPointBinding,
-} from "../../interfaces";
+import { ICommonListPoint, IListPoint } from "../../interfaces";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/CommonList/${eventUid}`;
 
