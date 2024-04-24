@@ -34,7 +34,7 @@ export const TakenListPoints = (props: ITakenListPointsProps) => {
 
   const onChangeIsTakenStatus = (listPoint: ITakenListPoint) => {
     const index = listPoints.findIndex(
-      (lp) => lp.pointUid === listPoint.pointUid
+      (lp) => lp.pointUid === listPoint.pointUid,
     );
 
     if (index !== -1) {

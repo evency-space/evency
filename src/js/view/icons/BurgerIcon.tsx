@@ -14,7 +14,7 @@ export const BurgerIcon = (props: SVGprops) => {
     "origin-center",
     direction === "down" && "rotate-180",
     direction === "right" && "rotate-90",
-    direction === "left" && "-rotate-90"
+    direction === "left" && "-rotate-90",
   );
 
   return (

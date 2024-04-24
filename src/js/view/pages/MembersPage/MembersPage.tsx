@@ -83,7 +83,7 @@ export const MembersPage = () => {
         list.find(
           (member) =>
             member.memberUid === editingMember.memberUid &&
-            member.name === editingMember.name
+            member.name === editingMember.name,
         )
       ) {
         return;
@@ -95,7 +95,7 @@ export const MembersPage = () => {
             const newList = list.map((m) =>
               m.memberUid === editingMember.memberUid
                 ? { ...m, name: editingMember.name }
-                : m
+                : m,
             );
             setList(newList);
           }

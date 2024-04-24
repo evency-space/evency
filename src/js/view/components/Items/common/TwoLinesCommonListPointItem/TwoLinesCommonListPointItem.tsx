@@ -13,7 +13,7 @@ import {
 import { CommonItemBindingsDetails } from "../CommonItemBindingsDetails/CommonItemBindingsDetails";
 
 export const TwoLinesCommonListPointItem = (
-  props: ITwoLinesCommonListPointItem
+  props: ITwoLinesCommonListPointItem,
 ) => {
   const { listPoint, accessIds, updateListPoint, onShowListPointSettings } =
     props;
@@ -21,7 +21,7 @@ export const TwoLinesCommonListPointItem = (
   const [itemLoading, setItemLoading] = useState<boolean>(false);
 
   const [bindingsDetails, setBindingsDetails] = useState<IListPointBinding[]>(
-    []
+    [],
   );
 
   const { memberUid, eventUid } = accessIds;
@@ -34,13 +34,13 @@ export const TwoLinesCommonListPointItem = (
         bindings: listPoint.bindings,
         memberUid,
       }),
-    [commonListPointsUtils, listPoint, memberUid]
+    [commonListPointsUtils, listPoint, memberUid],
   );
 
   const bindingsProgress = getBindingsProgress();
 
   const [memberCountItemTaken, setMemberCountItemTaken] = useState(
-    bindingsProgress.selectedMember
+    bindingsProgress.selectedMember,
   );
 
   const showBindingsDetails = bindingsDetails.length > 0;
@@ -64,7 +64,7 @@ export const TwoLinesCommonListPointItem = (
 
   const itemClasses = classesOf(
     "transition duration-150 ease-out",
-    itemLoading && "opacity-30 pointer-events-none"
+    itemLoading && "opacity-30 pointer-events-none",
   );
 
   const prependContent = (

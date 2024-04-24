@@ -11,7 +11,7 @@ export const CommonListPointViewOptions = () => {
   const { t } = useTranslation();
 
   const [viewMode, setViewMode] = useState<TCommonListPointViewMode>(
-    getCommonListPointViewMode() || "oneLine"
+    getCommonListPointViewMode() || "oneLine",
   );
 
   const changeCommonListPointViewMode = (mode: TCommonListPointViewMode) => {

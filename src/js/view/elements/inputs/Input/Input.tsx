@@ -33,7 +33,7 @@ export function Input(props: InputProps) {
     !isIconLeft && "right-4",
     isIconLeft && "left-4",
     disabled && "text-dark-4 dark:text-black-3",
-    !!value && "text-dark-3"
+    !!value && "text-dark-3",
   );
 
   const inputClasses = classesOf(
@@ -47,7 +47,7 @@ export function Input(props: InputProps) {
     isIconLeft && "pl-11 pr-3",
     !isIconLeft && type !== "date" && "pr-11 pl-3",
     !disabled &&
-      "hover:placeholder:text-dark-3 hover:dark:placeholder:text-dark-3 hover:text-dark-3"
+      "hover:placeholder:text-dark-3 hover:dark:placeholder:text-dark-3 hover:text-dark-3",
   );
 
   function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {

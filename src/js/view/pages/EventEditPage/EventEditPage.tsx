@@ -70,7 +70,7 @@ export const EventEditPage = () => {
     event.title === null || event.title.length === 0 || !isValidDates;
 
   const onEditEvent = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     try {
       e.preventDefault();
@@ -113,7 +113,7 @@ export const EventEditPage = () => {
             value={event.title}
             onChange={onNewTripNameChange}
             placeholder={`${t("pages.new_event.example")}, ${t(
-              "pages.new_event.event_name_example"
+              "pages.new_event.event_name_example",
             )}`}
           />
         </div>
@@ -128,7 +128,7 @@ export const EventEditPage = () => {
                 onChange={onStartDateChange}
                 type="date"
                 placeholder={`${t("pages.new_event.date_start")}: ${t(
-                  "pages.new_event.example"
+                  "pages.new_event.example",
                 )}, 12.06.2022`}
               />
             </div>
@@ -142,7 +142,7 @@ export const EventEditPage = () => {
                 onChange={onEndDateChange}
                 type="date"
                 placeholder={`${t("pages.new_event.date_end")}: ${t(
-                  "pages.new_event.example"
+                  "pages.new_event.example",
                 )}, 12.06.2022`}
               />
             </div>
@@ -153,7 +153,7 @@ export const EventEditPage = () => {
             label={t("pages.new_event.description")}
             rows={3}
             placeholder={`${t("pages.new_event.example")}, ${t(
-              "pages.new_event.description_example"
+              "pages.new_event.description_example",
             )}`}
             onChange={onNewTripDescriptionChange}
             value={event.description}

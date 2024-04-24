@@ -96,7 +96,7 @@ export const CommonListPointsUtils = ({
             all,
           };
         },
-        { selectedMember: 0, all: 0 }
+        { selectedMember: 0, all: 0 },
       ),
   };
 };

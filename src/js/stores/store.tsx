@@ -45,7 +45,7 @@ const listSlice = createSlice({
     removePerson: (list, action: PayloadAction<Person["id"]>) => {
       if (list && action.payload > 0) {
         list.people = list.people.filter(
-          (person) => person.id !== action.payload
+          (person) => person.id !== action.payload,
         );
       }
       return list;

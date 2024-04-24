@@ -27,7 +27,7 @@ export const InputDate = (props: InputProps) => {
     "focus:dark:placeholder:text-light-0 focus:placeholder:text-black-4",
     "invalid:border-red-1 invalid:dark:border-red-1",
     !disabled &&
-      "hover:placeholder:text-dark-3 hover:dark:placeholder:text-dark-3 hover:text-dark-3"
+      "hover:placeholder:text-dark-3 hover:dark:placeholder:text-dark-3 hover:text-dark-3",
   );
 
   return (

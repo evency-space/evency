@@ -57,7 +57,7 @@ export const ListPoints = (props: IListPointsProps) => {
         (
           filteredListPoints: TUnknownListPoint[],
           listPoint: TUnknownListPoint,
-          index: number
+          index: number,
         ) => {
           const listPointData = getListPointData(index);
           const itemName = listPointData.name.toLowerCase();
@@ -72,7 +72,7 @@ export const ListPoints = (props: IListPointsProps) => {
 
           return filteredListPoints;
         },
-        []
+        [],
       );
       setGroupedListPointsAfterFilter(grouped);
     } else {
@@ -93,7 +93,7 @@ export const ListPoints = (props: IListPointsProps) => {
       setGroupedListPoints(grouped);
       setGroupedListPointsAfterFilter(grouped);
     },
-    [getListPointData]
+    [getListPointData],
   );
 
   const noContent = (
@@ -142,7 +142,7 @@ export const ListPoints = (props: IListPointsProps) => {
                   >
                     {itemTemplate}
                   </div>
-                )
+                ),
               )}
             </div>
           </div>

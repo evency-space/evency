@@ -52,11 +52,11 @@ const SPAremoveit = () => {
       setUserUid(userUid);
       pushLocalStorage(
         localStorageUsernameKey,
-        JSON.stringify(localStorageUserNameObj)
+        JSON.stringify(localStorageUserNameObj),
       )
         .then(
           () => {},
-          () => {}
+          () => {},
         )
         .catch(() => {});
     }
@@ -88,13 +88,13 @@ const SPAremoveit = () => {
     useState<string>("");
   const [peopleFormOpen, setPeopleFormOpen] = useState<boolean>(false);
   const onNewTripFormNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => setNewTripFormName(event.target.value);
   const onNewTripFormDatesChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => setNewTripFormDates(event.target.value);
   const onNewTripFormDescriptionChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => setNewTripFormDescription(event.target.value);
   const onNewTripFormSubmit = async () => {
     const response = await fetch(
@@ -110,7 +110,7 @@ const SPAremoveit = () => {
           start: newTripFormDates,
           end: newTripFormDates,
         }),
-      }
+      },
     );
 
     interface INewTripResponse {
@@ -128,7 +128,7 @@ const SPAremoveit = () => {
       pushLocalStorage("localStorageTripIdKey", JSON.stringify(_tripUid))
         .then(
           () => {},
-          () => {}
+          () => {},
         )
         .catch(() => {});
     }
@@ -166,13 +166,13 @@ const SPAremoveit = () => {
   const [itemListItems, setItemListItems] = useState<string[]>([]);
 
   const handleItemListTitleChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setItemListTitle(event.target.value);
   };
 
   const handleItemListFormSubmit = (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
     setItemListItems([...itemListItems, itemListTitle]);

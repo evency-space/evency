@@ -12,7 +12,7 @@ export const Modal = (props: IModalProps) => {
   const closeModal = (
     e:
       | KeyboardEvent<HTMLDivElement>
-      | MouseEvent<HTMLButtonElement | HTMLDivElement>
+      | MouseEvent<HTMLButtonElement | HTMLDivElement>,
   ) => {
     onClose();
     e.stopPropagation();

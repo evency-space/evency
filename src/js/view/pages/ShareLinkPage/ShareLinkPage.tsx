@@ -62,7 +62,7 @@ export const ShareLinkPage = () => {
           }, 1000 * 2);
         });
     },
-    [link]
+    [link],
   );
 
   const addRecommendedListPoints = async () => {
@@ -72,7 +72,7 @@ export const ShareLinkPage = () => {
       if (isNewEvent && event) {
         await createRecommendedPrivateList(
           event.eventUid,
-          getRecommendedListPointsFromLocalStorage()
+          getRecommendedListPointsFromLocalStorage(),
         );
         saveRecommendedListPointsInLocalStorage([]);
 
@@ -121,7 +121,7 @@ export const ShareLinkPage = () => {
         <div
           className={classesOf(
             "alert shadow-lg my-2 absolute",
-            !successMessageShown && "hidden"
+            !successMessageShown && "hidden",
           )}
         >
           Link is copied
@@ -129,7 +129,7 @@ export const ShareLinkPage = () => {
         <div
           className={classesOf(
             "alert-warning shadow-lg my-2 absolute",
-            !failMessageShown && "hidden"
+            !failMessageShown && "hidden",
           )}
         >
           Sorry, could not copy link. Please copy it manually.

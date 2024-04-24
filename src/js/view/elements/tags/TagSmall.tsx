@@ -17,7 +17,7 @@ export const TagSmall = (props: TagProps) => {
     isActive && "bg-green-0 text-light-4",
     !isActive && "bg-black-3 text-dark-4",
     !isButton && "disabled cursor-text",
-    className
+    className,
   );
 
   return (

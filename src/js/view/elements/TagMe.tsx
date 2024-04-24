@@ -11,7 +11,7 @@ export const TagMe = () => {
     "rounded-full bg-green-1 dark:bg-green-0",
     "text-light-4 h-4",
     t("language") === "Русский" && "w-4",
-    t("language") !== "Русский" && "w-7"
+    t("language") !== "Русский" && "w-7",
   );
 
   return (

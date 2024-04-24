@@ -54,7 +54,7 @@ export const ImportFavoritesListPointsPage = () => {
     useState<TSelectedFavoritesItems>({});
 
   const [targetList, setTargetList] = useState<TSelectedList>(
-    LIST_POINT_TYPES.private
+    LIST_POINT_TYPES.private,
   );
 
   const isFirstStep = () => step === 1;
@@ -67,12 +67,12 @@ export const ImportFavoritesListPointsPage = () => {
 
   const getSelectedListPointsCount = useCallback(
     () => Object.values(selectedListPoints).filter((count) => count > 0).length,
-    [selectedListPoints]
+    [selectedListPoints],
   );
 
   const getStepQueryParam = useCallback(
     () => searchParams.get(STEP_QUERY_PARAM.key),
-    [searchParams]
+    [searchParams],
   );
 
   const changeStep = async () => {
@@ -101,7 +101,7 @@ export const ImportFavoritesListPointsPage = () => {
         deleteSelectedFavoritesItemsFromLocalStorage();
         goBackToEventPage();
         toast(
-          <Toast text={t("pages.import_favorites.successfully_imported")} />
+          <Toast text={t("pages.import_favorites.successfully_imported")} />,
         );
       } finally {
         setLoading(false);

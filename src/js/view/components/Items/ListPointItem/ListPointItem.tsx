@@ -17,7 +17,7 @@ export const ListPointItem = (props: IListPointItemProps) => {
     "font-semibold text-light-4",
     grayTitle && "text-dark-2",
     !grayTitle && "text-light-4",
-    !isButton && "cursor-text"
+    !isButton && "cursor-text",
   );
 
   return (

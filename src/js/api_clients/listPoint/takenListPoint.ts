@@ -43,6 +43,6 @@ export const changeIsTakenStatus = ({
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 };

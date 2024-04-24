@@ -10,7 +10,7 @@ export const TagMedium = (props: TagProps) => {
     "px-2 h-6 rounded flex align-items-center text-light-4",
     isActive && "bg-green-0",
     !isActive && "bg-black-3",
-    className
+    className,
   );
 
   return (

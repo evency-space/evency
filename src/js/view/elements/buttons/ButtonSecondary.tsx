@@ -17,7 +17,7 @@ export const ButtonSecondary = (props: BtnProps) => {
   const textClasses = classesOf(
     textClassName,
     !disabled && "text-light-4",
-    disabled && "text-dark-2"
+    disabled && "text-dark-2",
   );
 
   return (

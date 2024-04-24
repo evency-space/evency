@@ -35,14 +35,14 @@ export const RecommendedListPointsPage = () => {
   const { eventUid = "" } = useParams();
 
   const [listPoints, setListPoints] = useState<IListPoint[]>(
-    getRecommendedListPointsFromLocalStorage()
+    getRecommendedListPointsFromLocalStorage(),
   );
 
   const modalContext = useModal();
 
   const goToListPointEditPage = (listPoint: IListPoint) => {
     const index = listPoints.findIndex(
-      (lp) => lp.item.name === listPoint.item.name
+      (lp) => lp.item.name === listPoint.item.name,
     );
     const currentListPoint = convertListPointToIEditListPoint({
       point: listPoint,
@@ -53,7 +53,7 @@ export const RecommendedListPointsPage = () => {
       index !== -1
         ? eventEditRecommendedListPointPageUrl({ eventUid, index })
         : eventCreateRecommendedListPointPageUrl({ eventUid }),
-      { state: { listPointIndex: index } }
+      { state: { listPointIndex: index } },
     );
   };
 
@@ -73,7 +73,7 @@ export const RecommendedListPointsPage = () => {
 
   const addRemoveListPointModalContent = (
     listPointIndex: number,
-    listPointName: string
+    listPointName: string,
   ) =>
     modalContext.setContent({
       content: (
@@ -116,7 +116,7 @@ export const RecommendedListPointsPage = () => {
         onRemove={() =>
           addRemoveListPointModalContent(
             listPoints.findIndex((lp) => lp.item.name === listPoint.item.name),
-            listPoint.item.name
+            listPoint.item.name,
           )
         }
       />

@@ -14,7 +14,7 @@ import { BlockedListPointModal } from "../BlockedListPointModal/BlockedListPoint
 import { convertListPointToIEditListPoint } from "../../../../../utils";
 
 export const DuplicateListPointModal = (
-  props: IDuplicateListPointModalProps
+  props: IDuplicateListPointModalProps,
 ) => {
   const {
     accessIds,
@@ -103,7 +103,7 @@ export const DuplicateListPointModal = (
           </TextBodyStandard>
           <TagSmall isButton={false} className="shrink-0">
             {`${listPoint.count} ${t(
-              `list_point.short_units.${listPoint.unit}`
+              `list_point.short_units.${listPoint.unit}`,
             )}`}
           </TagSmall>
         </div>
@@ -111,10 +111,10 @@ export const DuplicateListPointModal = (
 
       <ActionPanel
         primaryButtonText={t(
-          "modals.duplicated_list_point.primary_button_text"
+          "modals.duplicated_list_point.primary_button_text",
         )}
         secondaryButtonText={t(
-          "modals.duplicated_list_point.secondary_button_text"
+          "modals.duplicated_list_point.secondary_button_text",
         )}
         onPrimaryButtonClick={onPrimaryButtonClick}
         onSecondaryButtonClick={onSecondaryButtonClick}

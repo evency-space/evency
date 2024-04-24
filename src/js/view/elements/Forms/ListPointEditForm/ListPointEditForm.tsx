@@ -24,7 +24,7 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
   const { name, unit, tag, count } = listPointData;
 
   const [countStep, setCountStep] = useState<number>(
-    LIST_POINT_UNITS_STEP[unit]
+    LIST_POINT_UNITS_STEP[unit],
   );
 
   const countIsNumber = typeof count === "number";
@@ -36,7 +36,7 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
   const listPointUnits = Object.values(LIST_POINT_UNITS);
 
   const activeTagIndex = listPointCategories.findIndex(
-    (category) => category === tag
+    (category) => category === tag,
   );
 
   const changeItem = (value: Partial<IEditListPoint>) => {

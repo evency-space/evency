@@ -27,7 +27,7 @@ export const SettingsPage = () => {
       document.documentElement.setAttribute("lang", locale);
       await i18n.changeLanguage(locale);
     },
-    [i18n]
+    [i18n],
   );
 
   return (

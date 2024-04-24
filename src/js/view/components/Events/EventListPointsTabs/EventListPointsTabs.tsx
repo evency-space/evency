@@ -37,7 +37,7 @@ export const EventListPointsTabs = (props: IEventListPointsTabsProps) => {
   };
 
   const possibleListPointTypes = Object.keys(
-    tabContents
+    tabContents,
   ) as TEventCardListPointTypes[];
 
   const getClassName = (listPointType: TEventCardListPointTypes) =>
@@ -45,7 +45,7 @@ export const EventListPointsTabs = (props: IEventListPointsTabsProps) => {
       "flex grow justify-center pt-2 pb-3 px-0 border-b",
       listPointType === activeTab
         ? "text-green-1 border-green-1"
-        : "border-dark-3 text-dark-3"
+        : "border-dark-3 text-dark-3",
     );
 
   useEffect(() => {

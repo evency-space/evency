@@ -65,7 +65,7 @@ export const EventsPage = () => {
         setLoading(false);
       }
     },
-    [setLoading]
+    [setLoading],
   );
 
   useEffect(() => {

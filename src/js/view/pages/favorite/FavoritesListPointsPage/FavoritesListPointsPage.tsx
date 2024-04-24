@@ -37,7 +37,7 @@ export const FavoritesListPointsPage = () => {
   const modalContext = useModal();
 
   const getEmptyFavoriteListPoint = (
-    category: LIST_POINT_CATEGORIES | undefined
+    category: LIST_POINT_CATEGORIES | undefined,
   ): IFavoriteListPoint => {
     const { item, unit } = getEmptyListPointWithCurrentCategory(category);
 
@@ -64,7 +64,7 @@ export const FavoritesListPointsPage = () => {
   }, [setLoading]);
 
   const goToListPointEditPage = (
-    listPoint: IListPoint | IFavoriteListPoint
+    listPoint: IListPoint | IFavoriteListPoint,
   ) => {
     const currentListPoint = convertListPointToIEditListPoint({
       point: listPoint,
@@ -83,7 +83,7 @@ export const FavoritesListPointsPage = () => {
           listPointType: "favorite",
           listPointUid: listPoint.item.itemUid,
         },
-      }
+      },
     );
   };
 
@@ -95,7 +95,7 @@ export const FavoritesListPointsPage = () => {
         await removeFavoriteListPoint({ listPoint });
         const localList = getFavoritesIdsFromLocalStorage();
         saveFavoritesListPointsUidsInLocalStorage(
-          localList.filter((uid) => uid !== listPoint.item.itemUid)
+          localList.filter((uid) => uid !== listPoint.item.itemUid),
         );
         await getListPoints();
       }
