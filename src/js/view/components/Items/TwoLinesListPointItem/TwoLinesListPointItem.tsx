@@ -57,7 +57,7 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
             </TextBodyLarge>
           </div>
 
-          {countItemTaken > 0 && (
+          {count > 0 && (
             <BtnIcon
               icon={<KebabIcon size={16} />}
               className="btn-xs"

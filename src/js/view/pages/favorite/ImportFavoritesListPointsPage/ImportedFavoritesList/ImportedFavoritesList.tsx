@@ -57,7 +57,8 @@ export const ImportedFavoritesList = (props: IImportedFavoritesListProps) => {
         points = {};
       } else {
         listPoints.forEach(({ item, unit }) => {
-          points[item.itemUid] = getIncrementedCount({ unit });
+          points[item.itemUid] =
+            selectedListPoints[item.itemUid] || getIncrementedCount({ unit });
         });
       }
     } else if (count === 0) {
