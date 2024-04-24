@@ -74,4 +74,11 @@ export const mockedCommonListPointsApi = {
     response: commonListPointsFromBE[0] as ICommonListPoint,
     delay,
   },
+  addCommonItemsFromFavorites: {
+    url: commonEndPoints.addFromFavorites,
+    method: "POST",
+    status,
+    response: [],
+    delay,
+  },
 };

@@ -9,6 +9,8 @@
   "search": "Поиск",
   "taken": "Разобрано",
   "whoTookIt": "Кто взял",
+  "add_items": "Добавить вещи",
+  "select_all": "Выбрать все",
   "headerRoutes": {
     "goBack": "Назад",
     "eventEditListPointPage": {
@@ -144,6 +146,15 @@
     },
     "favorites": {
       "title": "Избранные вещи"
+    },
+    "import_favorites": {
+      "successfully_imported": "Вещи успешно добавлены в мероприятие!",
+      "step_1": {
+        "title": "Добавить из избранного"
+      },
+      "step_2": {
+        "title": "В какой список добавить?"
+      }
     }
   },
   "list_point": {
@@ -184,14 +195,6 @@
       "other": "Другое"
     }
   },
-  "event_card": {
-    "list_point_types": {
-      "recommended": "Рекомендованный список",
-      "private": "Личные вещи",
-      "common": "Общие вещи",
-      "taken": "Взять с собой"
-    }
-  },
   "modals": {
     "warning": "Это может затронуть других участников мероприятия",
     "blocked_list_point": {
@@ -206,7 +209,8 @@
       "leave": "Покинуть мероприятие",
       "edit_event": "Редактировать мероприятие",
       "members": "Участники мероприятия",
-      "logout": "Сменить участника"
+      "logout": "Сменить участника",
+      "import_favorites": "Добавить из избранного"
     },
     "events_list_action": {
       "deleteEvent": "Удалить мероприятие",
@@ -219,5 +223,11 @@
       "primary_button_text": "Назад к списку вещей",
       "secondary_button_text": "Все равно добавить"
     }
+  },
+  "list_point_types": {
+    "recommended": "Рекомендованный список",
+    "private": "Личные вещи",
+    "common": "Общие вещи",
+    "taken": "Взять с собой"
   }
 }

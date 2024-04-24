@@ -27,6 +27,7 @@ export const commonListPointApi = ({
   getDuplicateListPoints: `${endPoint(eventUid)}/Duplicates?item_name=${
     pointName || ""
   }`,
+  addFromFavorites: `${endPoint(eventUid)}/AddFromFavorites`,
 });
 
 export const getCommonListPoints = ({
@@ -199,3 +200,23 @@ export const getDuplicateListPoints = async ({
 
   return data;
 };
+
+export const addCommonItemsFromFavorites = ({
+  eventUid,
+  memberUid,
+  items,
+}: {
+  eventUid: string;
+  memberUid: string;
+  items: Array<{ itemUid: string; count: number }>;
+}) =>
+  fetch(commonListPointApi({ eventUid }).addFromFavorites, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      memberUid,
+      items,
+    }),
+  });

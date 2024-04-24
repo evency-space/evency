@@ -26,6 +26,7 @@ import { ShareLinkPage } from "../js/view/pages/ShareLinkPage/ShareLinkPage";
 import { App } from "../js/view/components/App/App";
 import { deleteLocalEvent, provideEvent, provideMembers } from "./utils";
 import { eventWelcomePageUrl, homePageUrl, welcomePageUrl } from "./constants";
+import { ImportFavoritesListPointsPage } from "../js/view/pages/favorite/ImportFavoritesListPointsPage/ImportFavoritesListPointsPage";
 
 const deferEvent = ({ eventUid = "" }: { eventUid: string | undefined }) => {
   const accessIds = getEventAccessIds(eventUid);
@@ -153,6 +154,16 @@ export const router = createBrowserRouter([
               {
                 path: "item/:index",
                 element: <RecommendedListPointEditPage />,
+              },
+            ],
+          },
+          {
+            path: "favorites",
+            children: [
+              {
+                index: true,
+                element: <ImportFavoritesListPointsPage />,
+                loader: ({ params: { eventUid } }) => deferEvent({ eventUid }),
               },
             ],
           },

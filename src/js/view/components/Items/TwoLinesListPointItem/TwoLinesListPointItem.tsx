@@ -27,7 +27,7 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
     onShowListPointSettings,
   } = props;
 
-  const isItemTaken = countItemTaken >= count;
+  const isItemTaken = count > 0 && countItemTaken >= count;
 
   const titleClasses = classesOf(
     "flex items-center gap-x-2 font-semibold text-light-4 leading-snug",
@@ -43,9 +43,9 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
       {prependContent}
 
       <div className="flex flex-col gap-y-3 w-full">
-        <div className="flex items-start">
+        <div className="flex items-start justify-between">
           <div
-            className="flex gap-x-3 grow"
+            className="flex gap-x-3"
             role="button"
             tabIndex={0}
             onClick={onClickTitle}
@@ -53,15 +53,17 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
           >
             <TextBodyLarge className={titleClasses}>
               {listPointName}
-              {memberCountItemTaken > 0 && <TagMe />}
+              {count > 0 && memberCountItemTaken > 0 && <TagMe />}
             </TextBodyLarge>
           </div>
 
-          <BtnIcon
-            icon={<KebabIcon size={16} />}
-            className="btn-xs"
-            onClick={onShowListPointSettings}
-          />
+          {count > 0 && (
+            <BtnIcon
+              icon={<KebabIcon size={16} />}
+              className="btn-xs"
+              onClick={() => onShowListPointSettings?.()}
+            />
+          )}
         </div>
 
         <div className="flex gap-x-1">
@@ -76,7 +78,11 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
             <Counter
               value={memberCountItemTaken}
               size="sm"
-              color={isItemTaken ? "gray" : "green"}
+              color={
+                isItemTaken || (count === 0 && memberCountItemTaken === 0)
+                  ? "gray"
+                  : "green"
+              }
               step={LIST_POINT_UNITS_STEP[unit]}
               className="w-[180px]"
               onChange={onBindListPoint}
