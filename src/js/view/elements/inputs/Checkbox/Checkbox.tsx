@@ -1,10 +1,14 @@
 import React from "react";
 import { ICheckboxProps } from "./CheckboxProps";
+import { classesOf } from "../../../../utils";
 
 export const Checkbox = (props: ICheckboxProps) => {
-  const { label, value, onChange } = props;
+  const { label, value, className, onChange } = props;
+
+  const labelClasses = classesOf("flex gap-x-3 cursor-pointer", className);
+
   return (
-    <label className="flex gap-x-3 cursor-pointer">
+    <label className={labelClasses}>
       <input
         type="checkbox"
         className="checkbox checkbox-primary rounded"

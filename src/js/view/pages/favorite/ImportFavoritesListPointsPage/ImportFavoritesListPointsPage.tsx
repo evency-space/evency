@@ -15,7 +15,7 @@ import {
 import { STEP_QUERY_PARAM } from "./constants";
 import { ImportedFavoritesList } from "./ImportedFavoritesList/ImportedFavoritesList";
 import { PageWrapper } from "../../../components";
-import { ImportedFavoritesListButton } from "./ImportedFavoritesListButton/ImportedFavoritesListButton";
+import { SelectedFavoritesButton } from "../SelectedFavoritesButton/SelectedFavoritesButton";
 import { Loader, TitleH1 } from "../../../elements";
 import { TSelectedFavoritesItems, TSelectedList } from "../types";
 import {
@@ -132,7 +132,7 @@ export const ImportFavoritesListPointsPage = () => {
   );
 
   const pageFooter = (
-    <ImportedFavoritesListButton
+    <SelectedFavoritesButton
       count={getSelectedListPointsCount()}
       onClick={() => {
         void changeStep();
