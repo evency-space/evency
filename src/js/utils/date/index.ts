@@ -13,7 +13,7 @@ export const convertDateToYYYYMMDDWithDash = (date: Date | string) =>
 
 export const getDateIntervalWithDots = (
   start: Date | string = "",
-  end: Date | string = ""
+  end: Date | string = "",
 ) => {
   if (start && !end) {
     return `${convertDateToDDMMYYYYWithDots(start)}`;
@@ -23,7 +23,7 @@ export const getDateIntervalWithDots = (
   }
 
   return `${convertDateToDDMMYYYYWithDots(
-    start
+    start,
   )}-${convertDateToDDMMYYYYWithDots(end)}`;
 };
 

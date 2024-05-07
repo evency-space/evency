@@ -13,7 +13,7 @@ import { ArrowIcon } from "../../../../icons";
 import { IListPointBinding } from "../../../../../interfaces";
 
 export const CommonItemBindingsDetails = (
-  props: ICommonItemBindingsDetailsProps
+  props: ICommonItemBindingsDetailsProps,
 ) => {
   const {
     bindingsDetails,
@@ -46,7 +46,7 @@ export const CommonItemBindingsDetails = (
     bindingCount: IListPointBinding["count"];
   }) => (
     <TagSmall isButton={false} className="w-max">{`${bindingCount} ${t(
-      `list_point.short_units.${unit}`
+      `list_point.short_units.${unit}`,
     )}`}</TagSmall>
   );
 

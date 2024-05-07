@@ -33,7 +33,7 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
     "flex items-center gap-x-2 font-semibold text-light-4 leading-snug",
     isItemTaken && "text-dark-2",
     !isItemTaken && "text-light-4",
-    !isButton && "cursor-text"
+    !isButton && "cursor-text",
   );
 
   const mainClasses = classesOf("flex gap-x-3 py-3", className);

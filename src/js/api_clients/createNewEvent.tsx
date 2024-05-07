@@ -29,7 +29,7 @@ export const editEvent = async ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify(convertIEventToIEventFromBE(event)),
-      }
+      },
     );
 
     if (response.ok) {

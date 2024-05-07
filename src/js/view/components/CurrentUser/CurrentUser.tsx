@@ -21,7 +21,7 @@ function CurrentUser() {
 
   useEffect(() => {
     void pullLocalStorage(localStorageKey).then(
-      (id) => typeof id === "string" && id.length > 0 && setUserId(Number(id))
+      (id) => typeof id === "string" && id.length > 0 && setUserId(Number(id)),
     );
   }, []);
 

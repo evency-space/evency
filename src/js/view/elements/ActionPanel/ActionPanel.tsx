@@ -18,7 +18,7 @@ export const ActionPanel = (props: IContentWrapperProps) => {
 
   const classes = classesOf(
     "flex flex-col items-center py-base px-7 bg-light-4 dark:bg-black-0",
-    sticky && "sticky bottom-0"
+    sticky && "sticky bottom-0",
   );
 
   return (

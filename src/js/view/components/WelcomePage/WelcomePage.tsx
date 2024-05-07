@@ -15,7 +15,7 @@ export const WelcomePage = () => {
   const [username, setUsername] = useState<string>("");
 
   const onUsernameSubmit = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
 

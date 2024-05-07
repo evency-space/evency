@@ -1,7 +1,7 @@
 import { List } from "../interfaces";
 
 export const pullLocalStorage = async (
-  localStorageKey: string
+  localStorageKey: string,
 ): Promise<string | null> => {
   try {
     const item = window.localStorage.getItem(localStorageKey);
@@ -13,7 +13,7 @@ export const pullLocalStorage = async (
 
 export const pushLocalStorage = async (
   localStorageKey: string,
-  localStorageValue: string
+  localStorageValue: string,
 ): Promise<void> =>
   window.localStorage.setItem(localStorageKey, localStorageValue);
 

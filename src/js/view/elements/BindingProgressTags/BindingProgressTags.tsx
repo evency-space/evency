@@ -12,7 +12,7 @@ export const BindingProgressTags = (props: BindingProgressTagsProps) => {
 
   const classes = classesOf(
     "flex items-center gap-x-1 w-max whitespace-nowrap",
-    className
+    className,
   );
 
   return (

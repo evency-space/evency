@@ -10,7 +10,7 @@ export const TagLarge = (props: TagProps) => {
     "p-3 min-h-10 rounded-xl text-light-4 flex align-items-center",
     isActive && "bg-green-0",
     !isActive && "bg-black-3",
-    className
+    className,
   );
 
   return (

@@ -76,7 +76,7 @@ export const ListPointEditPage = () => {
 
   const showDuplicateListPointModal = (
     baseListPoint: IEditListPoint,
-    duplicateListPoint: IListPoint
+    duplicateListPoint: IListPoint,
   ) => {
     if (accessIds) {
       modalContext.setContent({
@@ -99,7 +99,7 @@ export const ListPointEditPage = () => {
                     listPointType: "common",
                     listPointUid: point.pointUid,
                   },
-                }
+                },
               );
             }}
           />
@@ -127,7 +127,7 @@ export const ListPointEditPage = () => {
           if (duplicateListPoints?.length > 0) {
             showDuplicateListPointModal(
               editedListPoint,
-              duplicateListPoints[0]
+              duplicateListPoints[0],
             );
             return;
           }
@@ -138,7 +138,7 @@ export const ListPointEditPage = () => {
         await editPrivateListPoint(listPointData);
       } else if (pointType === "favorite") {
         const points = (await editFavoriteListPoint(
-          listPointData
+          listPointData,
         )) as IFavoriteListPoint[];
 
         if (isCreationMode) {

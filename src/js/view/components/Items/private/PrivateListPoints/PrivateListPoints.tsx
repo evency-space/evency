@@ -48,7 +48,7 @@ export const PrivateListPoints = (props: IPrivateListPointsProps) => {
         : eventCreateListPointPageUrl({
             eventUid: accessIds.eventUid,
           }),
-      { state: { listPointType: "private", listPointUid: listPoint.pointUid } }
+      { state: { listPointType: "private", listPointUid: listPoint.pointUid } },
     );
   };
 

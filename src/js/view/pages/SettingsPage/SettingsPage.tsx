@@ -18,6 +18,7 @@ export const SettingsPage = () => {
   const localesText = {
     [LOCALES.en]: "English",
     [LOCALES.ru]: "Русский",
+    [LOCALES.cn]: "中文",
   };
 
   const locales = Object.keys(LOCALES) as LOCALES[];
@@ -27,7 +28,7 @@ export const SettingsPage = () => {
       document.documentElement.setAttribute("lang", locale);
       await i18n.changeLanguage(locale);
     },
-    [i18n]
+    [i18n],
   );
 
   return (

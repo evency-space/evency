@@ -22,7 +22,7 @@ export const BindListPointModal = (props: IBindListPointModal) => {
       <div className="flex justify-between gap-x-2">
         <TextBodyLarge className="text-left text-light-4">
           {`${listPoint.item.name} (${t(
-            `list_point.short_units.${listPoint.unit}`
+            `list_point.short_units.${listPoint.unit}`,
           )})`}
         </TextBodyLarge>
         <BindingProgressTags

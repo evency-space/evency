@@ -16,13 +16,13 @@ export const PageWrapper = (props: IPageWrapperProps) => {
 
   const pageWrapperClasses = classesOf(
     "h-full w-full flex flex-col grow items-stretch",
-    className
+    className,
   );
 
   const pageContentClasses = classesOf(
     "flex grow justify-center bg-light-4 dark:bg-black-0",
     verticalTopPageContent && "items-start",
-    !verticalTopPageContent && "items-center"
+    !verticalTopPageContent && "items-center",
   );
 
   return (

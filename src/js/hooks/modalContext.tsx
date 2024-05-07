@@ -25,7 +25,7 @@ export const ModalProvider = ({ children }: { children: JSX.Element }) => {
       ...data,
       setContent,
     }),
-    [data]
+    [data],
   );
 
   return (

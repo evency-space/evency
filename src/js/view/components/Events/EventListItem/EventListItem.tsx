@@ -45,7 +45,7 @@ export const EventListItem = (props: IEventListItemProps) => {
   };
 
   const onButtonClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.stopPropagation();
 

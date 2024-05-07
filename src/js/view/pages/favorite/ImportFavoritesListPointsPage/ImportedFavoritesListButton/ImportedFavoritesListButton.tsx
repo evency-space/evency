@@ -4,7 +4,7 @@ import { IImportedFavoritesListButtonProps } from "./ImportedFavoritesListButton
 import { ActionPanel } from "../../../../elements";
 
 export const ImportedFavoritesListButton = (
-  props: IImportedFavoritesListButtonProps
+  props: IImportedFavoritesListButtonProps,
 ) => {
   const { count = 0, onClick } = props;
 

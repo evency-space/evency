@@ -19,7 +19,7 @@ export const TagsGroup = (props: ITagsGroupProps) => {
 
   const tagComponentsClasses = classesOf(
     "text-small",
-    !readonly && "cursor-pointer"
+    !readonly && "cursor-pointer",
   );
 
   const TagComponents = {
@@ -34,7 +34,7 @@ export const TagsGroup = (props: ITagsGroupProps) => {
 
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement>,
-    index: number
+    index: number,
   ) => {
     event.preventDefault();
 

@@ -20,7 +20,7 @@ export const pushAccessIdsInLocalStorage = (accessIds: IAccessIds) => {
 
     setLocalStorage<TLocalStorageAccessIdsList>(
       localStorageAccessIdsList,
-      list
+      list,
     );
   }
 };

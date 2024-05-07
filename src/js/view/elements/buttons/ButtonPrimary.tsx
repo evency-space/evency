@@ -19,7 +19,7 @@ export const ButtonPrimary = (props: BtnProps) => {
     "text-black-0",
     textClassName,
     !disabled && "text-black-0",
-    disabled && "text-light-0 dark:text-dark-2"
+    disabled && "text-light-0 dark:text-dark-2",
   );
 
   return (

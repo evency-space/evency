@@ -35,8 +35,8 @@ export const getEvents = async ({ eventsUids }: { eventsUids: string[] }) => {
     });
 
     if (response.ok) {
-      data = ((await response.json()) as IEventFromBE[]).map((e) =>
-        convertIEventFromBEToIEvent(e)
+      data = ((await response.json()) as IEventFromBE[]).map(e =>
+        convertIEventFromBEToIEvent(e),
       );
     }
   } catch (e) {

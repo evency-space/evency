@@ -4,7 +4,7 @@ import { urlApiGet, urlApiSet } from "../common/constants";
 
 export const loadState = async (
   key: string,
-  initialValue: Store
+  initialValue: Store,
 ): Promise<Store> => {
   try {
     const response = (await (

@@ -1,4 +1,4 @@
 export interface IAccordionProps {
-  title: string,
-  children: JSX.Element
+  title: string;
+  children: JSX.Element;
 }

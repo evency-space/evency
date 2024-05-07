@@ -24,7 +24,7 @@ export const LoadingProvider = ({ children }: { children: JSX.Element }) => {
       loading,
       setLoading,
     }),
-    [loading, setLoading]
+    [loading, setLoading],
   );
 
   return (

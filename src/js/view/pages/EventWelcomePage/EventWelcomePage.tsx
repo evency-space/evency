@@ -112,7 +112,7 @@ export const EventWelcomePage = () => {
         setMembers(d.members);
 
         const member = d.members.find(
-          (m) => m.memberUid === d.accessIds?.memberUid
+          (m) => m.memberUid === d.accessIds?.memberUid,
         );
         setSelectedMember(member);
       });

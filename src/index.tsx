@@ -7,7 +7,7 @@ import { LoadingProvider, ModalProvider } from "./js/hooks";
 import { router } from "./router";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
@@ -16,5 +16,5 @@ root.render(
         <RouterProvider router={router} />
       </ModalProvider>
     </LoadingProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

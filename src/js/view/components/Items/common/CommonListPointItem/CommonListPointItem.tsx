@@ -32,7 +32,7 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
   const [itemLoading, setItemLoading] = useState<boolean>(false);
 
   const [bindingsDetails, setBindingsDetails] = useState<IListPointBinding[]>(
-    []
+    [],
   );
 
   const hideAdditionalContent = () => setBindingsDetails([]);
@@ -45,7 +45,7 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
         bindings: listPoint.bindings,
         memberUid,
       }),
-    [commonListPointsUtils, listPoint, memberUid]
+    [commonListPointsUtils, listPoint, memberUid],
   );
 
   const bindingsProgress = getBindingsProgress();
@@ -66,12 +66,12 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
     "btn btn-sm btn-square normal-case border-0",
     bindingsProgress.selectedMember === 0 &&
       "btn-primary focus:bg-green-2 focus-visible:bg-green-2",
-    bindingsProgress.selectedMember > 0 && "dark:bg-green-0 text-white"
+    bindingsProgress.selectedMember > 0 && "dark:bg-green-0 text-white",
   );
 
   const outerBlockClasses = classesOf(
     "flex items-center justify-between gap-x-4 w-full transition duration-150 ease-out",
-    itemLoading && "opacity-10"
+    itemLoading && "opacity-10",
   );
 
   const bindListPoint = async ({
@@ -104,7 +104,7 @@ export const CommonListPointItem = (props: ICommonListPointItemProps) => {
 
   const showBindModal = () => {
     const binding = listPoint.bindings.find(
-      (b) => b.member.memberUid === accessIds.memberUid
+      (b) => b.member.memberUid === accessIds.memberUid,
     );
     const countItemTaken = binding ? binding.count : 0;
 

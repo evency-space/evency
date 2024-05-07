@@ -33,7 +33,7 @@ export const RecommendedListPointEditPage = () => {
     } else if (!indexIsUndefined) {
       replaceListPointToLocalStorageRecommendedListPoints(
         Number(index),
-        convertedListPoint
+        convertedListPoint,
       );
     }
 
