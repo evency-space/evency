@@ -5,6 +5,7 @@ import { initReactI18next } from "react-i18next";
 
 import translationEN from "./assets/locales/en/translation.json";
 import translationRU from "./assets/locales/ru/translation.json";
+import translationCN from "./assets/locales/cn/translation.json";
 
 void i18n
   // Подключение бэкенда i18next
@@ -14,7 +15,7 @@ void i18n
   // модуль инициализации
   .use(initReactI18next)
   .init({
-    supportedLngs: ["en", "ru"],
+    supportedLngs: ["en", "ru", "cn"],
     fallbackLng: "en",
     react: {
       useSuspense: false,
@@ -27,6 +28,7 @@ void i18n
     resources: {
       en: { translation: translationEN },
       ru: { translation: translationRU },
+      cn: { translation: translationCN },
     },
   });
 

@@ -12,6 +12,7 @@ export const SERVER_URL = process.env.REACT_APP_IS_DEV_SERVER
 export enum LOCALES {
   "ru" = "ru",
   "en" = "en",
+  "cn" = "cn",
 }
 
 export enum LIST_POINT_TYPES {

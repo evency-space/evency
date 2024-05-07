@@ -18,6 +18,7 @@ export const SettingsPage = () => {
   const localesText = {
     [LOCALES.en]: "English",
     [LOCALES.ru]: "Русский",
+    [LOCALES.cn]: "中文",
   };
 
   const locales = Object.keys(LOCALES) as LOCALES[];

@@ -1,0 +1,221 @@
+{
+  "me": "我",
+  "hide": "隐藏",
+  "members": "参加者",
+  "error": "抱歉。出了点问题。请刷新页面并重试。",
+  "welcome": "欢迎",
+  "i_take": "我带",
+  "language": "语言",
+  "search": "搜索",
+  "headerRoutes": {
+    "goBack": "返回",
+    "eventEditListPointPage": {
+      "private": "个人物品",
+      "common": "一般的东西"
+    },
+    "eventsPage": "你的事件",
+    "recommendedListPointsPage": "推荐的东西",
+    "eventMembersPage": "添加参加者",
+    "editEventPage": "编辑事件",
+    "favoritesListPointsPage": "收藏夹"
+  },
+  "events": {
+    "list": {
+      "your_events": "你的事件",
+      "no_events": "你还没有事件"
+    },
+    "create_new_event": {
+      "create_btn": "+ 创建新事件",
+      "new_event": "新事件",
+      "enter_event_name": "输入活动名称",
+      "choose_dates": "选择日期",
+      "description": "描述"
+    },
+    "members": {
+      "add_members": "添加参加者",
+      "edit_members": "编辑参加者"
+    }
+  },
+  "categories": {
+    "choose_category": "选择分类",
+    "take": {
+      "what": "Что взять с собой",
+      "how_much": "Сколько взять с собой"
+    }
+  },
+  "buttons": {
+    "add": "添加",
+    "create": "创建",
+    "save": "保存",
+    "save_list": "保存",
+    "take": "带",
+    "delete": "删除",
+    "edit": "编辑",
+    "share": "分享",
+    "continue": "Продолжить",
+    "cancel": "取消",
+    "remember_me": "Запомнить меня",
+    "done": "完成",
+    "next": "下一个",
+    "settings": "设置",
+    "favorite_items": "收藏夹",
+    "feedback_form": "反馈表",
+    "faq": "常见问题",
+    "favorites_items": "收藏夹"
+  },
+  "tabs": {
+    "common_things": "一般的东西",
+    "private_things": "个人物品",
+    "bring_along": "Взять с собой"
+  },
+  "inputs": {
+    "whats_your_name": "你叫什么名字?"
+  },
+  "favoriteToggle": {
+    "description": "点击添加到收藏夹"
+  },
+  "pages": {
+    "welcome": {
+      "title_welcome": "欢迎!",
+      "description": "Evency 最好的活动策划应用程序",
+      "whats_your_name": "你叫什么名字?"
+    },
+    "new_event": {
+      "edit_title": "编辑事件",
+      "title": "新事件",
+      "event_name": "输入事件的名称*",
+      "event_name_example": "在山上徒步旅行",
+      "dates": "选择日期",
+      "date_start": "开始日期",
+      "date_end": "结束日期",
+      "description": "描述",
+      "description_example": "我们要穿过松树林去瀑布，在高山草甸上吃晚餐，欣赏山峰的景色",
+      "example": "例如",
+      "success": "加油！事件已成功创建!"
+    },
+    "share": {
+      "paragraph": "分享这个 链接给你的朋友",
+      "logo": "Логотип рюкзака",
+      "title": "复制网址"
+    },
+    "members": {
+      "who_are_you": "你是谁?",
+      "add_members": "添加参加者",
+      "edit_members": "编辑参加者",
+      "input_placeholder": "新参加者"
+    },
+    "recommended": {
+      "title": "推荐的东西",
+      "description": "创建一个建议事件参加者随身携带的列表。"
+    },
+    "faq": {
+      "title": "一般问题",
+      "content": {
+        "blockedItem": {
+          "title": "为什么东西«阻止»?",
+          "values": {
+            "text1": "Если при попытке редактирования появляется сообщение о том, что вещь заблокирована, то это означает, что другой пользователь редактирует ее в данный момент. Повторите попытку немного позднее."
+          }
+        },
+        "leaveEvent": {
+          "title": "«离开事件»是什么意思?",
+          "values": {
+            "text1": "При выборе действия «Покинуть мероприятие» вы удаляетесь из мероприятия как участник, а все ваши вещи освобождаются."
+          }
+        },
+        "deleteItem": {
+          "title": "如何删除东西?",
+          "values": {
+            "text1": "Для удаления вещи из общего списка нажми на кнопку опций рядом с названием вещи. Для удаления вещи из личного списка нажми на кнопку корзины рядом с названием вещи.",
+            "text2": "В открытом меню выбери действие «Удалить» и подтверди удаление.\n"
+          }
+        }
+      }
+    },
+    "settings": {
+      "title": "设置",
+      "commonListPointViewOptions": {
+        "title": "如何显示一般的东西",
+        "oneLine": "在一行",
+        "twoLines": "在两行"
+      }
+    },
+    "favorites": {
+      "title": "收藏夹"
+    }
+  },
+  "list_point": {
+    "add_item": "添加东西",
+    "edit_item": "编辑东西",
+    "empty_list": {
+      "title": "这里还没有什么东西",
+      "action": "添加第一个东西"
+    },
+    "edit_form": {
+      "category": "选择分类",
+      "item": "东西",
+      "unit": "单位",
+      "count": "数量"
+    },
+    "units": {
+      "gram": "克",
+      "kilogram": "公斤",
+      "piece": "块",
+      "package": "包",
+      "liter": "升",
+      "milliliter": "毫升"
+    },
+    "short_units": {
+      "gram": "克",
+      "kilogram": "公斤",
+      "piece": "块",
+      "package": "包",
+      "liter": "升",
+      "milliliter": "毫升"
+    },
+    "categories": {
+      "food": "食品",
+      "equipment": "设备",
+      "clothes": "衣服",
+      "medicines": "药",
+      "entertainment": "娱乐",
+      "other": "其他"
+    }
+  },
+  "event_card": {
+    "list_point_types": {
+      "recommended": "Рекомендованный список",
+      "private": "Личные вещи",
+      "common": "Общие вещи",
+      "taken": "Взять с собой"
+    }
+  },
+  "modals": {
+    "warning": "Это может затронуть других участников мероприятия",
+    "blocked_list_point": {
+      "title": "这个东西现已被封锁!",
+      "description": "Кто-то из участников мероприятия редактирует эту вещь",
+      "primary_button_text": "行"
+    },
+    "remove_list_point": {
+      "title": "确认删除  \"{{listPointName}}\"?"
+    },
+    "event_action": {
+      "leave": "离开事件",
+      "edit_event": "编辑事件",
+      "members": "事件参加者",
+      "logout": "选择另一个参加者"
+    },
+    "events_list_action": {
+      "deleteEvent": "删除事件",
+      "title": "Точно удалить мероприятие \"{{eventTitle}}\"?"
+    },
+    "duplicated_list_point": {
+      "title": "Такая вещь уже есть в списке!",
+      "description": "Если вы хотите изменить количество, перейдите в",
+      "description_button": "режим редактирования вещи",
+      "primary_button_text": "Назад к списку вещей",
+      "secondary_button_text": "添加"
+    }
+  }
+}
