@@ -1,8 +1,13 @@
 import { SERVER_URL } from "../../common/constants";
-import { IEvent, IEventFromBE } from "../../interfaces";
+import { IEvent, IEventFromBE, IFavoriteListPoint } from "../../interfaces";
 import { convertIEventFromBEToIEvent } from "../../utils";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/Trip/${eventUid}`;
+
+const eventsApi = ({ eventUid }: { eventUid: string }) => ({
+  delete: endPoint(eventUid),
+  getCombinedList: `${endPoint(eventUid)}/GetCombinedList`,
+});
 
 export const getEvent = async ({ eventUid }: { eventUid: string }) => {
   let data: null | IEvent = null;
@@ -55,3 +60,11 @@ export const deleteEvent = async ({ eventUid }: { eventUid: string }) => {
     console.error(e);
   }
 };
+
+export const getCombinedList = ({ eventUid }: { eventUid: string }) =>
+  fetch(eventsApi({ eventUid }).getCombinedList, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(response => response.json() as Promise<IFavoriteListPoint[]>);

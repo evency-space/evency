@@ -14,6 +14,7 @@ export const favoritesListPointApi = ({
   editItem: `${endPoint}/EditItem/${itemUid || ""}`,
   getItems: `${endPoint}/`,
   removeItem: `${endPoint}/${itemUid || ""}`,
+  insertItems: `${endPoint}/InsertItems`,
 });
 
 export const getFavoriteListPoints = ({ itemUids }: { itemUids: string[] }) =>
@@ -55,4 +56,17 @@ export const removeFavoriteListPoint = ({
     headers: {
       "Content-Type": "application/json",
     },
+  });
+
+export const insertFavoriteListPoints = ({
+  itemUids,
+}: {
+  itemUids: string[];
+}) =>
+  fetch(favoritesListPointApi().insertItems, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(itemUids),
   });

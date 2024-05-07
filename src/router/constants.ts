@@ -79,3 +79,9 @@ export const eventImportFavoritesItemsPageUrlStepTwo = ({
 }: {
   eventUid: string;
 }) => `${eventImportFavoritesItemsPageUrlStepOne({ eventUid })}?step=list`;
+
+export const eventExportFavoritesItemsPageUrl = ({
+  eventUid,
+}: {
+  eventUid: string;
+}) => `${eventImportFavoritesItemsPageUrlStepOne({ eventUid })}/export`;

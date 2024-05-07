@@ -157,7 +157,7 @@ export const ListPoints = (props: IListPointsProps) => {
   }, [initializeGroupedListPoints, listPoints]);
 
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col h-full w-full gap-6">
       {title}
       {listPoints.length > 0 ? listContent : noContent}
     </div>

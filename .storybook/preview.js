@@ -33,8 +33,8 @@ const i18nextStoryDecorator = (Story, context) => {
     <LoadingProvider>
       <ModalProvider>
         <I18nextProvider i18n={i18n}>
-          <div className="relative h-full bg-light-4 dark:bg-black-0 overflow-y-auto">
-            <div className="h-full max-w-[1024px] m-auto">
+          <div className="relative h-full bg-light-4 dark:bg-black-0">
+            <div className="h-full max-w-[1024px] m-auto overflow-y-auto">
               <Story />
             </div>
           </div>
