@@ -4,9 +4,15 @@ import { convertIEventFromBEToIEvent } from "../../utils";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/Trip/${eventUid}`;
 
-const eventsApi = ({ eventUid }: { eventUid: string }) => ({
+const eventsApi = ({
+  eventUid,
+  memberUid,
+}: {
+  eventUid: string;
+  memberUid?: string;
+}) => ({
   delete: endPoint(eventUid),
-  getCombinedList: `${endPoint(eventUid)}/GetCombinedList`,
+  getCombinedList: `${endPoint(eventUid)}/GetCombinedList?member_uid=${memberUid}`,
 });
 
 export const getEvent = async ({ eventUid }: { eventUid: string }) => {
@@ -61,8 +67,14 @@ export const deleteEvent = async ({ eventUid }: { eventUid: string }) => {
   }
 };
 
-export const getCombinedList = ({ eventUid }: { eventUid: string }) =>
-  fetch(eventsApi({ eventUid }).getCombinedList, {
+export const getCombinedList = ({
+  eventUid,
+  memberUid,
+}: {
+  eventUid: string;
+  memberUid: string;
+}) =>
+  fetch(eventsApi({ eventUid, memberUid }).getCombinedList, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

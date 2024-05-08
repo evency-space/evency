@@ -59,14 +59,14 @@ export const removeFavoriteListPoint = ({
   });
 
 export const insertFavoriteListPoints = ({
-  itemUids,
+  pointUids,
 }: {
-  itemUids: string[];
+  pointUids: string[];
 }) =>
   fetch(favoritesListPointApi().insertItems, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(itemUids),
+    body: JSON.stringify(pointUids),
   });

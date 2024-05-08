@@ -56,7 +56,9 @@ export const ExportFavoritesListPointsPage = () => {
       const itemUids = Object.keys(selectedListPoints);
 
       await insertFavoriteListPoints({
-        itemUids,
+        pointUids: listPoints
+          .filter((listPoint) => itemUids.includes(listPoint.item.itemUid))
+          .map((listPoint) => listPoint.pointUid),
       });
 
       pushFavoriteListPointUidInLocalStorage(itemUids);
@@ -88,12 +90,19 @@ export const ExportFavoritesListPointsPage = () => {
   };
 
   const getListPoints = useCallback(
-    async ({ eventUid }: { eventUid: string }) => {
+    async ({
+      eventUid,
+      memberUid,
+    }: {
+      eventUid: string;
+      memberUid: string;
+    }) => {
       try {
         setLoading(true);
 
         const list = await getCombinedList({
           eventUid,
+          memberUid,
         });
 
         setListPoints(list);
@@ -144,8 +153,11 @@ export const ExportFavoritesListPointsPage = () => {
   useEffect(() => {
     if (routeData) {
       void routeData.data.then((d) => {
-        if (d.event) {
-          void getListPoints({ eventUid: d.event.eventUid });
+        if (d.event && d.accessIds) {
+          void getListPoints({
+            eventUid: d.event.eventUid,
+            memberUid: d.accessIds.memberUid,
+          });
         }
       });
     }
