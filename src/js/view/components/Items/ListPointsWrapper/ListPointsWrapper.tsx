@@ -5,8 +5,11 @@ import { PageWrapper } from "../../PageWrapper/PageWrapper";
 import { ActionPanel } from "../../../elements";
 import { useLoading } from "../../../../hooks";
 import { ListPoints } from "../ListPoints/ListPoints";
+import { IListPointsProps } from "../ListPoints/ListPointsProps";
 
-export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
+export const ListPointsWrapper = (
+  props: IListPointsWrapperProps & IListPointsProps,
+) => {
   const {
     listPoints,
     getListPointData,
@@ -14,6 +17,7 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
     onCreateListPoint,
     title,
     disableCategoryAddButton = false,
+    contentBeforeList,
   } = props;
 
   const { t } = useTranslation();
@@ -27,6 +31,7 @@ export const ListPointsWrapper = (props: IListPointsWrapperProps) => {
       getListPointData={getListPointData}
       disableCategoryAddButton={disableCategoryAddButton}
       onCreateListPoint={onCreateListPoint}
+      contentBeforeList={contentBeforeList}
     />
   ) : (
     <div />
