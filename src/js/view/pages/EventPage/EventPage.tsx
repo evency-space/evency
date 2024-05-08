@@ -11,6 +11,7 @@ import {
   eventImportFavoritesItemsPageUrlStepOne,
   shareEventPageUrl,
   eventWelcomePageUrl,
+  eventExportFavoritesItemsPageUrl,
 } from "../../../../router/constants";
 import { saveCurrentEventInLocalStorage } from "../../../utils/localStorage";
 import { useModal } from "../../../hooks";
@@ -38,6 +39,9 @@ export const EventPage = () => {
             onEditMembers={() => navigate(eventMembersPageUrl({ eventUid }))}
             onImportFavorites={() =>
               navigate(eventImportFavoritesItemsPageUrlStepOne({ eventUid }))
+            }
+            onExportFavorites={() =>
+              navigate(eventExportFavoritesItemsPageUrl({ eventUid }))
             }
             onLeaveEvent={() => {}}
             onLogoutClick={() => navigate(eventWelcomePageUrl({ eventUid }))}

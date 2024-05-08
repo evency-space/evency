@@ -144,11 +144,7 @@ export const FavoritesListPointsPage = () => {
     };
   };
 
-  const title = (
-    <div className="flex flex-col mb-3">
-      <TitleH1>{t("pages.favorites.title")}</TitleH1>
-    </div>
-  );
+  const title = <TitleH1>{t("pages.favorites.title")}</TitleH1>;
 
   useEffect(() => {
     if (listPoints.length === 0) {
