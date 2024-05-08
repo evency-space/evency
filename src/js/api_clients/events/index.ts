@@ -12,7 +12,7 @@ const eventsApi = ({
   memberUid?: string;
 }) => ({
   delete: endPoint(eventUid),
-  getCombinedList: `${endPoint(eventUid)}/GetCombinedList?member_uid=${memberUid}`,
+  getCombinedList: `${endPoint(eventUid)}/GetCombinedList?member_uid=${memberUid || ""}`,
 });
 
 export const getEvent = async ({ eventUid }: { eventUid: string }) => {
