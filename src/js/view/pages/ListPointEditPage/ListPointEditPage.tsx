@@ -143,7 +143,7 @@ export const ListPointEditPage = () => {
 
         if (isCreationMode) {
           points.forEach((point) => {
-            pushFavoriteListPointUidInLocalStorage(point.item.itemUid);
+            pushFavoriteListPointUidInLocalStorage([point.item.itemUid]);
           });
         }
 

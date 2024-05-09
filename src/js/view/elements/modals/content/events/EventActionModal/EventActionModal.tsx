@@ -15,6 +15,7 @@ export const EventActionModal = (props: IEventActionModal) => {
     onEditMembers,
     onLogoutClick,
     onImportFavorites,
+    onExportFavorites,
   } = props;
 
   const { t } = useTranslation();
@@ -34,9 +35,12 @@ export const EventActionModal = (props: IEventActionModal) => {
     {
       title: t("modals.event_action.import_favorites"),
       icon: <StarIcon size={16} />,
-      onClick: () => {
-        onImportFavorites();
-      },
+      onClick: onImportFavorites,
+    },
+    {
+      title: t("modals.event_action.export_favorites"),
+      icon: <StarIcon size={16} />,
+      onClick: onExportFavorites,
     },
     eventActions.members,
     eventActions.logout,
