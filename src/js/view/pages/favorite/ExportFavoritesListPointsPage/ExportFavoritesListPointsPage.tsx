@@ -53,15 +53,13 @@ export const ExportFavoritesListPointsPage = () => {
     try {
       setLoading(true);
 
-      const itemUids = Object.keys(selectedListPoints);
-
-      await insertFavoriteListPoints({
-        pointUids: listPoints
-          .filter((listPoint) => itemUids.includes(listPoint.item.itemUid))
-          .map((listPoint) => listPoint.pointUid),
+      const insertedListPoints = await insertFavoriteListPoints({
+        pointUids: Object.keys(selectedListPoints),
       });
 
-      pushFavoriteListPointUidInLocalStorage(itemUids);
+      pushFavoriteListPointUidInLocalStorage(
+        insertedListPoints.map((listPoint) => listPoint.item.itemUid),
+      );
     } finally {
       setLoading(false);
     }
@@ -115,10 +113,11 @@ export const ExportFavoritesListPointsPage = () => {
 
   const getListPointData = (index: number) => {
     const {
-      item: { name, itemUid, tags },
+      item: { name, tags },
       unit,
+      pointUid,
     } = listPoints[index];
-    const selectedCount = selectedListPoints[itemUid] || 0;
+    const selectedCount = selectedListPoints[pointUid] || 0;
 
     const itemTemplate = (
       <ListPointItemSelector
@@ -127,7 +126,7 @@ export const ExportFavoritesListPointsPage = () => {
         key={index}
         onClick={() =>
           changeSelectedListPoints(
-            itemUid,
+            pointUid,
             getSelectedListPointCount({ count: selectedCount, unit }),
           )
         }
