@@ -62,11 +62,11 @@ export const insertFavoriteListPoints = ({
   pointUids,
 }: {
   pointUids: string[];
-}): Promise<IFavoriteListPoint[]> =>
+}) =>
   fetch(favoritesListPointApi().insertItems, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(pointUids),
-  }).then(response => response.json());
+  }).then(response => response.json() as Promise<IFavoriteListPoint[]>);
