@@ -1,41 +1,33 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { TakenListPointItemProps } from "./TakenListPointItemProps";
-import { ListPointItem } from "../../ListPointItem/ListPointItem";
 import { TagSmall } from "../../../../elements";
+import { ListPointItemSelector } from "../../ListPointItemSelector/ListPointItemSelector";
 
 export const TakenListPointItem = (props: TakenListPointItemProps) => {
   const { listPoint, onCheck } = props;
 
   const { t } = useTranslation();
 
-  const listPointCount = () => (
-    <TagSmall isButton={false} className="w-max cursor-default">{`${
+  const listPointCount = (
+    <TagSmall className="w-max" onClick={onCheck}>{`${
       listPoint.count
     } ${t(`list_point.short_units.${listPoint.point.unit}`)}`}</TagSmall>
   );
 
-  const actionButtons = () => (
-    <input
-      type="checkbox"
-      className="checkbox checkbox-primary rounded"
-      checked={listPoint.isTaken}
-      onChange={onCheck}
-    />
-  );
-
-  const content = () => (
+  const content = (
     <div className="flex grow items-center justify-between gap-x-4">
-      {listPointCount()}
-      {actionButtons()}
+      {listPointCount}
     </div>
   );
 
   return (
-    <ListPointItem
+    <ListPointItemSelector
       listPointName={listPoint.point.item.name}
       grayTitle={listPoint.isTaken}
-      content={content()}
+      content={content}
+      value={listPoint.isTaken}
+      onClick={onCheck}
     />
   );
 };

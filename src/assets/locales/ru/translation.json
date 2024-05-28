@@ -155,6 +155,10 @@
       "step_2": {
         "title": "В какой список добавить?"
       }
+    },
+    "export_favorites": {
+      "successfully_exported": "Вещи успешно добавлены в избранное!",
+      "title": "Добавить в избранное"
     }
   },
   "list_point": {
@@ -210,7 +214,8 @@
       "edit_event": "Редактировать мероприятие",
       "members": "Участники мероприятия",
       "logout": "Сменить участника",
-      "import_favorites": "Добавить из избранного"
+      "import_favorites": "Добавить из избранного",
+      "export_favorites": "Добавить в избранное"
     },
     "events_list_action": {
       "deleteEvent": "Удалить мероприятие",

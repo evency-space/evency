@@ -3,7 +3,7 @@ import { ComponentStory } from "@storybook/react";
 import { TargetListTypeSelector } from "./TargetListTypeSelector";
 
 export default {
-  title: "pages/ImportFavoritesListPointsPage/TargetListTypeSelector",
+  title: "pages/favorite/ImportFavoritesListPointsPage/TargetListTypeSelector",
   component: TargetListTypeSelector,
   args: {
     selectedList: "common",
