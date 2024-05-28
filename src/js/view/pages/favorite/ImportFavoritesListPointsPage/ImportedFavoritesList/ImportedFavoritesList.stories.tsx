@@ -5,7 +5,7 @@ import { mockedFavoritesListPointsApi } from "../../../../../api_clients";
 import { favoriteListPointsFromBE } from "../../../../../utils";
 
 export default {
-  title: "pages/ImportFavoritesListPointsPage/ImportedFavoritesList",
+  title: "pages/favorite/ImportFavoritesListPointsPage/ImportedFavoritesList",
   component: ImportedFavoritesList,
   parameters: {
     mockData: Object.values(mockedFavoritesListPointsApi),

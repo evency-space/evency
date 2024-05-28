@@ -43,8 +43,10 @@ export const saveFavoritesListPointsUidsInLocalStorage = (list: string[]) => {
   setLocalStorage<string[]>(localStorageFavoritesIds, list);
 };
 
-export const pushFavoriteListPointUidInLocalStorage = (favoriteId: string) => {
-  const list = new Set([...getFavoritesIdsFromLocalStorage(), favoriteId]);
+export const pushFavoriteListPointUidInLocalStorage = (
+  favoriteIds: string[],
+) => {
+  const list = new Set([...getFavoritesIdsFromLocalStorage(), ...favoriteIds]);
 
   setLocalStorage<string[]>(localStorageFavoritesIds, Array.from(list));
 };

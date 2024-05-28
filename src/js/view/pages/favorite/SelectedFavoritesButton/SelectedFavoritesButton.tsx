@@ -1,10 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IImportedFavoritesListButtonProps } from "./ImportedFavoritesListButtonProps";
-import { ActionPanel } from "../../../../elements";
+import { ISelectedFavoritesButtonProps } from "./SelectedFavoritesButtonProps";
+import { ActionPanel } from "../../../elements";
 
-export const ImportedFavoritesListButton = (
-  props: IImportedFavoritesListButtonProps,
+export const SelectedFavoritesButton = (
+  props: ISelectedFavoritesButtonProps,
 ) => {
   const { count = 0, onClick } = props;
 
