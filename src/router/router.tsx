@@ -27,6 +27,7 @@ import { App } from "../js/view/components/App/App";
 import { deleteLocalEvent, provideEvent, provideMembers } from "./utils";
 import { eventWelcomePageUrl, homePageUrl, welcomePageUrl } from "./constants";
 import { ImportFavoritesListPointsPage } from "../js/view/pages/favorite/ImportFavoritesListPointsPage/ImportFavoritesListPointsPage";
+import { ExportFavoritesListPointsPage } from "../js/view/pages/favorite/ExportFavoritesListPointsPage/ExportFavoritesListPointsPage";
 
 const deferEvent = ({ eventUid = "" }: { eventUid: string | undefined }) => {
   const accessIds = getEventAccessIds(eventUid);
@@ -163,6 +164,11 @@ export const router = createBrowserRouter([
               {
                 index: true,
                 element: <ImportFavoritesListPointsPage />,
+                loader: ({ params: { eventUid } }) => deferEvent({ eventUid }),
+              },
+              {
+                path: "export",
+                element: <ExportFavoritesListPointsPage />,
                 loader: ({ params: { eventUid } }) => deferEvent({ eventUid }),
               },
             ],

@@ -7,6 +7,7 @@ import {
   eventCreateRecommendedListPointPageUrl,
   eventEditListPointPageUrl,
   eventEditRecommendedListPointPageUrl,
+  eventExportFavoritesItemsPageUrl,
   eventImportFavoritesItemsPageUrlStepOne,
   eventImportFavoritesItemsPageUrlStepTwo,
   eventMembersPageUrl,
@@ -107,15 +108,20 @@ export const getRoutesParentData = ({
     parentPathName: favoritesListPointsPageUrl(),
     parentLocalePath: "favoritesListPointsPage",
   },
-  // Импорт избранный вещей в мероприятие (Шаг 1)
+  // Импорт избранных вещей в мероприятие (Шаг 1)
   [eventImportFavoritesItemsPageUrlStepOne({ eventUid })]: {
     parentPathName: eventPageUrl({ eventUid }),
     parentLocalePath: "goBack",
   },
-  // Импорт избранный вещей в мероприятие (Шаг 2)
+  // Импорт избранных вещей в мероприятие (Шаг 2)
   [eventImportFavoritesItemsPageUrlStepTwo({ eventUid })]: {
     parentPathName: eventImportFavoritesItemsPageUrlStepOne({ eventUid }),
     parentLocalePath: "favoritesListPointsPage",
+  },
+  // Экспорт вещей в избранное
+  [eventExportFavoritesItemsPageUrl({ eventUid })]: {
+    parentPathName: eventPageUrl({ eventUid }),
+    parentLocalePath: "goBack",
   },
 });
 

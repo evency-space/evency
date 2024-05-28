@@ -13,10 +13,5 @@ export interface IListPointData {
 export type TUnknownListPoint = unknown;
 
 export interface IListPointsWrapperProps {
-  listPoints: TUnknownListPoint[];
-  getListPointData: (index: number) => IListPointData;
-  onCreateListPoint?: (category?: LIST_POINT_CATEGORIES) => void;
   customActionPanel?: JSX.Element;
-  title?: JSX.Element;
-  disableCategoryAddButton?: boolean;
 }
