@@ -5,8 +5,7 @@ import { ExportFavoritesListPointsPage } from "./ExportFavoritesListPointsPage";
 import { IAccessIds, IEventFromBE } from "../../../../interfaces";
 import {
   mockedFavoritesListPointsApi,
-  mockedPrivateListPointsApi,
-  mockedCommonListPointsApi,
+  mockedEventsApi,
 } from "../../../../api_clients";
 import { accessIds } from "../../../../utils/json/accessIds/accessIds.json";
 import { convertIEventFromBEToIEvent, fullEvent } from "../../../../utils";
@@ -14,13 +13,12 @@ import { convertIEventFromBEToIEvent, fullEvent } from "../../../../utils";
 const event = convertIEventFromBEToIEvent(fullEvent as IEventFromBE);
 
 export default {
-  title: "pages/ExportFavoritesListPointsPage",
+  title: "pages/favorite/ExportFavoritesListPointsPage",
   component: ExportFavoritesListPointsPage,
   parameters: {
     mockData: [
+      ...Object.values(mockedEventsApi),
       ...Object.values(mockedFavoritesListPointsApi),
-      ...Object.values(mockedPrivateListPointsApi),
-      ...Object.values(mockedCommonListPointsApi),
     ],
     reactRouter: {
       loader: () => ({

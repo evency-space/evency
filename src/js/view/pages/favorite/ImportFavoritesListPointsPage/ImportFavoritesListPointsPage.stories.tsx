@@ -14,7 +14,7 @@ import { convertIEventFromBEToIEvent, fullEvent } from "../../../../utils";
 const event = convertIEventFromBEToIEvent(fullEvent as IEventFromBE);
 
 export default {
-  title: "pages/ImportFavoritesListPointsPage",
+  title: "pages/favorite/ImportFavoritesListPointsPage",
   component: ImportFavoritesListPointsPage,
   parameters: {
     mockData: [

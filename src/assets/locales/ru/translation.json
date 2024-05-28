@@ -157,6 +157,7 @@
       }
     },
     "export_favorites": {
+      "successfully_exported": "Вещи успешно добавлены в избранное!",
       "title": "Добавить в избранное"
     }
   },

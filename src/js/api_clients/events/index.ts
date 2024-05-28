@@ -4,7 +4,7 @@ import { convertIEventFromBEToIEvent } from "../../utils";
 
 const endPoint = (eventUid: string) => `${SERVER_URL}/Trip/${eventUid}`;
 
-const eventsApi = ({
+export const eventsApi = ({
   eventUid,
   memberUid,
 }: {

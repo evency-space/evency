@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, useLoaderData, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { ListPointsWrapper } from "../../../components";
 import { Loader, TextBodyStandard, TitleH1 } from "../../../elements";
 import { SelectedFavoritesButton } from "../SelectedFavoritesButton/SelectedFavoritesButton";
 
 import { TSelectedFavoritesItems } from "../types";
 import { TProvidedEvent } from "../../../../../router/types";
-import { IFavoriteListPoint } from "../../../../interfaces";
+import { IAccessIds, IFavoriteListPoint } from "../../../../interfaces";
 import { useLoading } from "../../../../hooks";
 import {
   getCombinedList,
@@ -20,6 +21,8 @@ import {
   getUpdatedSelectedListPoints,
 } from "../utils";
 import { pushFavoriteListPointUidInLocalStorage } from "../../../../utils/localStorage";
+import { Toast } from "../../../elements/Toasts/Toast";
+import { eventPageUrl } from "../../../../../router/constants";
 
 export const ExportFavoritesListPointsPage = () => {
   const routeData = useLoaderData() as TProvidedEvent;
@@ -27,6 +30,10 @@ export const ExportFavoritesListPointsPage = () => {
   const { setLoading } = useLoading();
 
   const { t } = useTranslation();
+
+  const navigate = useNavigate();
+
+  const [accessIds, setAccessIds] = useState<IAccessIds>();
 
   const [listPoints, setListPoints] = useState<IFavoriteListPoint[]>([]);
 
@@ -37,6 +44,12 @@ export const ExportFavoritesListPointsPage = () => {
     () => Object.values(selectedListPoints).filter((count) => count > 0).length,
     [selectedListPoints],
   );
+
+  const goBackToEventPage = () => {
+    navigate(eventPageUrl({ eventUid: accessIds?.eventUid || "" }), {
+      replace: true,
+    });
+  };
 
   const changeSelectedListPoints = (key?: string, count = 0) => {
     const points = getUpdatedSelectedListPoints({
@@ -53,13 +66,22 @@ export const ExportFavoritesListPointsPage = () => {
     try {
       setLoading(true);
 
+      const selectedItemUids = Object.keys(selectedListPoints);
+      const selectedPointUids = listPoints
+        .filter((listPoint) =>
+          selectedItemUids.includes(listPoint.item.itemUid),
+        )
+        .map((listPoint) => listPoint.pointUid);
+
       const insertedListPoints = await insertFavoriteListPoints({
-        pointUids: Object.keys(selectedListPoints),
+        pointUids: selectedPointUids,
       });
 
       pushFavoriteListPointUidInLocalStorage(
         insertedListPoints.map((listPoint) => listPoint.item.itemUid),
       );
+      goBackToEventPage();
+      toast(<Toast text={t("pages.export_favorites.successfully_exported")} />);
     } finally {
       setLoading(false);
     }
@@ -113,11 +135,10 @@ export const ExportFavoritesListPointsPage = () => {
 
   const getListPointData = (index: number) => {
     const {
-      item: { name, tags },
+      item: { name, tags, itemUid },
       unit,
-      pointUid,
     } = listPoints[index];
-    const selectedCount = selectedListPoints[pointUid] || 0;
+    const selectedCount = selectedListPoints[itemUid] || 0;
 
     const itemTemplate = (
       <ListPointItemSelector
@@ -126,7 +147,7 @@ export const ExportFavoritesListPointsPage = () => {
         key={index}
         onClick={() =>
           changeSelectedListPoints(
-            pointUid,
+            itemUid,
             getSelectedListPointCount({ count: selectedCount, unit }),
           )
         }
@@ -153,6 +174,7 @@ export const ExportFavoritesListPointsPage = () => {
     if (routeData) {
       void routeData.data.then((d) => {
         if (d.event && d.accessIds) {
+          setAccessIds(d.accessIds);
           void getListPoints({
             eventUid: d.event.eventUid,
             memberUid: d.accessIds.memberUid,
