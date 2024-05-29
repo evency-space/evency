@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { TakenListPointItemProps } from "./TakenListPointItemProps";
 import { TagSmall } from "../../../../elements";
-import { ListPointItemSelector } from "../../ListPointItemSelector/ListPointItemSelector";
+import { ListItemSelector } from "../../../ListItemSelector/ListItemSelector";
 
 export const TakenListPointItem = (props: TakenListPointItemProps) => {
   const { listPoint, onCheck } = props;
@@ -22,8 +22,8 @@ export const TakenListPointItem = (props: TakenListPointItemProps) => {
   );
 
   return (
-    <ListPointItemSelector
-      listPointName={listPoint.point.item.name}
+    <ListItemSelector
+      listItemName={listPoint.point.item.name}
       grayTitle={listPoint.isTaken}
       content={content}
       value={listPoint.isTaken}

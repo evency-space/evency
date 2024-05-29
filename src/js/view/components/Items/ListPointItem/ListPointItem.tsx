@@ -23,16 +23,18 @@ export const ListPointItem = (props: IListPointItemProps) => {
   return (
     <>
       <div className="flex items-center py-4 gap-x-4">
-        <div
-          role="button"
-          tabIndex={0}
-          onClick={onClickTitle}
-          onKeyDown={(e) => e}
-        >
-          <TextBodyLarge className={titleClasses}>
-            {listPointName}
-          </TextBodyLarge>
-        </div>
+        {listPointName && (
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={onClickTitle}
+            onKeyDown={(e) => e}
+          >
+            <TextBodyLarge className={titleClasses}>
+              {listPointName}
+            </TextBodyLarge>
+          </div>
+        )}
 
         {content}
       </div>

@@ -1,68 +1,38 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Radio,
-  TextBodyLarge,
-  TextBodyStandard,
-  TitleH1,
-} from "../../elements";
-import { LanguageIcon } from "../../icons";
-import { LOCALES } from "../../../common/constants";
+import { useNavigate } from "react-router-dom";
+import { ActionPanel, TitleH1 } from "../../elements";
 import { CommonListPointViewOptions } from "./CommonListPointViewOptions/CommonListPointViewOptions";
+import { LocaleOptions } from "./LocaleOptions/LocaleOptions";
+import { PageWrapper } from "../../components";
 
 export const SettingsPage = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  const { language } = i18n;
+  const navigate = useNavigate();
 
-  const localesText = {
-    [LOCALES.en]: "English",
-    [LOCALES.ru]: "Русский",
-    [LOCALES.cn]: "中文",
-  };
+  const pageMainContent = (
+    <div className="flex flex-col w-full gap-y-8">
+      <TitleH1>{t("pages.settings.title")}</TitleH1>
+      <LocaleOptions />
+      <CommonListPointViewOptions />
+    </div>
+  );
 
-  const locales = Object.keys(LOCALES) as LOCALES[];
-
-  const changeLocale = useCallback(
-    async (locale: keyof typeof LOCALES) => {
-      document.documentElement.setAttribute("lang", locale);
-      await i18n.changeLanguage(locale);
-    },
-    [i18n],
+  const pageFooter = (
+    <ActionPanel
+      primaryButtonText={t("pages.settings.button")}
+      primaryButtonType="submit"
+      onPrimaryButtonClick={() => navigate(-1)}
+    />
   );
 
   return (
-    <div className="flex flex-col w-full gap-y-8">
-      <TitleH1>{t("pages.settings.title")}</TitleH1>
-
-      <div className="flex flex-col gap-y-6">
-        <TextBodyLarge fontWeight="semibold">{t("language")}</TextBodyLarge>
-
-        <ul className="flex flex-col gap-y-2">
-          {locales.map((locale) => (
-            <li
-              key={locale}
-              className="flex justify-between p-3 bg-black-2 rounded-lg"
-            >
-              <span className="inline-flex items-center gap-x-3">
-                <LanguageIcon language={locale} />
-                <TextBodyStandard className="text-dark-4">
-                  {localesText[locale]}
-                </TextBodyStandard>
-              </span>
-              <Radio
-                name={locale}
-                value={locale === language}
-                onChange={() => {
-                  void changeLocale(locale);
-                }}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <CommonListPointViewOptions />
-    </div>
+    <PageWrapper
+      pageContent={pageMainContent}
+      pageFooter={pageFooter}
+      className="h-full"
+      verticalTopPageContent
+    />
   );
 };
