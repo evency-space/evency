@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ListPointsWrapper } from "../../../components";
+import { ListPointsWrapper, ListItemSelector } from "../../../components";
 import { Loader, TextBodyStandard, TitleH1 } from "../../../elements";
 import { SelectedFavoritesButton } from "../SelectedFavoritesButton/SelectedFavoritesButton";
 
@@ -14,7 +14,6 @@ import {
   getCombinedList,
   insertFavoriteListPoints,
 } from "../../../../api_clients";
-import { ListPointItemSelector } from "../../../components/Items/ListPointItemSelector/ListPointItemSelector";
 import { Checkbox } from "../../../elements/inputs/Checkbox/Checkbox";
 import {
   getSelectedListPointCount,
@@ -141,8 +140,8 @@ export const ExportFavoritesListPointsPage = () => {
     const selectedCount = selectedListPoints[itemUid] || 0;
 
     const itemTemplate = (
-      <ListPointItemSelector
-        listPointName={name}
+      <ListItemSelector
+        listItemName={name}
         value={selectedCount > 0}
         key={index}
         onClick={() =>

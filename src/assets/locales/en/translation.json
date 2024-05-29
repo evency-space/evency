@@ -115,7 +115,8 @@
         "title": "Отображение общих вещей",
         "oneLine": "В одну строку",
         "twoLines": "В две строки"
-      }
+      },
+      "button": "Сохранить настройки"
     },
     "favorites": {
       "title": "Favorites items"

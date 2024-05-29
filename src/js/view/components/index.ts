@@ -11,3 +11,4 @@ export * from "./PageWrapper/PageWrapper";
 export * from "./Events";
 export * from "./Items/ListPointsWrapper/ListPointsWrapper";
 export * from "./Items/BaseListPointItem/BaseListPointItem";
+export * from "./ListItemSelector/ListItemSelector";

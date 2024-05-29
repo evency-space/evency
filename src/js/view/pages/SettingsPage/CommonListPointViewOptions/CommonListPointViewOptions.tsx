@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Radio, TextBodyLarge, TextBodyStandard } from "../../../elements";
+import { TextBodyLarge, TextBodyStandard } from "../../../elements";
 import {
   TCommonListPointViewMode,
   getCommonListPointViewMode,
   switchCommonListPointViewMode,
 } from "../../../../utils/localStorage";
+import { ListItemSelector } from "../../../components/ListItemSelector/ListItemSelector";
 
 export const CommonListPointViewOptions = () => {
   const { t } = useTranslation();
@@ -21,6 +22,12 @@ export const CommonListPointViewOptions = () => {
 
   const viewModes: TCommonListPointViewMode[] = ["oneLine", "twoLines"];
 
+  const content = (mode: TCommonListPointViewMode) => (
+    <TextBodyStandard className="text-dark-4">
+      {t(`pages.settings.commonListPointViewOptions.${mode}`)}
+    </TextBodyStandard>
+  );
+
   return (
     <div className="flex flex-col gap-y-6">
       <TextBodyLarge fontWeight="semibold">
@@ -29,19 +36,12 @@ export const CommonListPointViewOptions = () => {
 
       <ul className="flex flex-col gap-y-2">
         {viewModes.map((mode) => (
-          <li
-            key={mode}
-            className="flex justify-between p-3 bg-black-2 rounded-lg"
-          >
-            <span className="inline-flex items-center gap-x-3">
-              <TextBodyStandard className="text-dark-4">
-                {t(`pages.settings.commonListPointViewOptions.${mode}`)}
-              </TextBodyStandard>
-            </span>
-            <Radio
-              name={mode}
+          <li key={mode} className="px-3 bg-black-2 rounded-lg">
+            <ListItemSelector
+              content={content(mode)}
+              variant="radio"
               value={mode === viewMode}
-              onChange={() => changeCommonListPointViewMode(mode)}
+              onClick={() => changeCommonListPointViewMode(mode)}
             />
           </li>
         ))}
