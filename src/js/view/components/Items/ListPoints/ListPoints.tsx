@@ -27,11 +27,17 @@ export const ListPoints = (props: IListPointsProps) => {
 
   const { t } = useTranslation();
 
+  const [filter, setFilter] = useState<string>("");
+
   const [groupedListPoints, setGroupedListPoints] =
     useState<TGroupedListPoints>({});
 
   const [groupedListPointsAfterFilter, setGroupedListPointsAfterFilter] =
     useState<TGroupedListPoints>();
+
+  const updateFilter = (value?: string) => {
+    setFilter(value || "");
+  };
 
   const updateGroupedListPoints = ({
     grouped,
@@ -49,8 +55,8 @@ export const ListPoints = (props: IListPointsProps) => {
     return { ...grouped, [tag]: [listPointData] };
   };
 
-  const applyFilter = (value?: string) => {
-    if (value) {
+  const applyFilter = useCallback(() => {
+    if (filter) {
       let grouped = {};
 
       listPoints.reduce(
@@ -62,7 +68,7 @@ export const ListPoints = (props: IListPointsProps) => {
           const listPointData = getListPointData(index);
           const itemName = listPointData.name.toLowerCase();
 
-          if (itemName.indexOf(value.toLowerCase()) !== -1) {
+          if (itemName.indexOf(filter.toLowerCase()) !== -1) {
             filteredListPoints.push(listPoint);
             grouped = updateGroupedListPoints({
               grouped,
@@ -78,7 +84,7 @@ export const ListPoints = (props: IListPointsProps) => {
     } else {
       setGroupedListPointsAfterFilter(groupedListPoints);
     }
-  };
+  }, [filter, getListPointData, groupedListPoints, listPoints]);
 
   const initializeGroupedListPoints = useCallback(
     (list: TUnknownListPoint[]) => {
@@ -111,7 +117,7 @@ export const ListPoints = (props: IListPointsProps) => {
 
   const listContent = (
     <div className="flex flex-col gap-y-6">
-      <SearchBar onChange={applyFilter} placeholder={t("search")} />
+      <SearchBar onChange={updateFilter} placeholder={t("search")} />
       {contentBeforeList}
       {groupedListPointsAfterFilter &&
         (
@@ -155,6 +161,10 @@ export const ListPoints = (props: IListPointsProps) => {
       initializeGroupedListPoints(listPoints);
     }
   }, [initializeGroupedListPoints, listPoints]);
+
+  useEffect(() => {
+    applyFilter();
+  }, [filter, applyFilter]);
 
   return (
     <div className="flex flex-col h-full w-full gap-6">
