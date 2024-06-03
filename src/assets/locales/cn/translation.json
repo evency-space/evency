@@ -138,7 +138,8 @@
         "title": "如何显示一般的东西",
         "oneLine": "在一行",
         "twoLines": "在两行"
-      }
+      },
+      "button": "Сохранить настройки"
     },
     "favorites": {
       "title": "收藏夹"
