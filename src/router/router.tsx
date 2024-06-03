@@ -3,6 +3,7 @@ import React from "react";
 import { EventsPage } from "../js/view/components/Events/EventsPage";
 import {
   deleteCurrentEventFromLocalStorage,
+  deleteEventMemberUidFromLocalStorage,
   getEventAccessIds,
   getUserNameFromLocalStorage,
   saveListPointTypeInLocalStorage,
@@ -25,12 +26,17 @@ import {
 import { ShareLinkPage } from "../js/view/pages/ShareLinkPage/ShareLinkPage";
 import { App } from "../js/view/components/App/App";
 import { deleteLocalEvent, provideEvent, provideMembers } from "./utils";
-import { eventWelcomePageUrl, homePageUrl, welcomePageUrl } from "./constants";
+import { eventWelcomePageUrl, homePageUrl } from "./constants";
 import { ImportFavoritesListPointsPage } from "../js/view/pages/favorite/ImportFavoritesListPointsPage/ImportFavoritesListPointsPage";
 import { ExportFavoritesListPointsPage } from "../js/view/pages/favorite/ExportFavoritesListPointsPage/ExportFavoritesListPointsPage";
 
 const deferEvent = ({ eventUid = "" }: { eventUid: string | undefined }) => {
   const accessIds = getEventAccessIds(eventUid);
+
+  if (accessIds?.memberUid && !accessIds?.memberName) {
+    deleteEventMemberUidFromLocalStorage(eventUid);
+    return redirect(eventWelcomePageUrl({ eventUid }));
+  }
 
   if (!accessIds?.memberUid) {
     return redirect(eventWelcomePageUrl({ eventUid }));
@@ -68,9 +74,7 @@ export const router = createBrowserRouter([
         index: true,
         element: <EventsPage />,
         loader: () => {
-          if (!getUserNameFromLocalStorage()) {
-            return redirect(welcomePageUrl());
-          }
+          // Удалять из хранилища accessIds
           saveListPointTypeInLocalStorage("common");
           deleteCurrentEventFromLocalStorage();
           return null;

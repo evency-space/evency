@@ -12,10 +12,7 @@ import {
   TextBodyLarge,
   TitleH1,
 } from "../../elements";
-import {
-  pushAccessIdsInLocalStorage,
-  saveUserNameInLocalStorage,
-} from "../../../utils/localStorage";
+import { pushAccessIdsInLocalStorage } from "../../../utils/localStorage";
 import { useLoading } from "../../../hooks";
 import { TEventWelcomePage } from "../../../../router/types";
 import { eventPageUrl } from "../../../../router/constants";
@@ -43,9 +40,8 @@ export const EventWelcomePage = () => {
     pushAccessIdsInLocalStorage({
       eventUid,
       memberUid: member.memberUid,
+      memberName: member.name,
     });
-
-    saveUserNameInLocalStorage(member.name);
   };
 
   const radioButton = (member: IMember) => (
@@ -112,7 +108,7 @@ export const EventWelcomePage = () => {
         setMembers(d.members);
 
         const member = d.members.find(
-          (m) => m.memberUid === d.accessIds?.memberUid,
+          (m) => m.memberUid === d.accessIds?.memberUid
         );
         setSelectedMember(member);
       });

@@ -11,6 +11,8 @@
   "whoTookIt": "Who took it",
   "add_items": "Добавить вещи",
   "select_all": "Select all",
+  "member_name": "Ваше имя",
+  "member_name_example": "Например, Иван",
   "headerRoutes": {
     "goBack": "Back",
     "eventEditListPointPage": {
@@ -78,9 +80,34 @@
   },
   "pages": {
     "welcome": {
-      "title": "Welcome to Evency!",
-      "description": "The best app to organize your event.",
-      "whats_your_name": "What’s your name?"
+      "buttons": {
+        "first_primary": "Давайте познакомимся!",
+        "primary": "Далее",
+        "last_primary": "Начинаем",
+        "secondary": "Пропустить"
+      },
+      "steps": {
+        "welcome": {
+          "title": "Встречайте Evency!",
+          "description": "Начните планировать походы, путешествия и другие мероприятия с друзьями легко и увлекательно!"
+        },
+        "planning": {
+          "title": "Легкость планирования",
+          "description": "Создавайте списки необходимых вещей. Все участники будут в курсе, что им взять с собой."
+        },
+        "synchronization": {
+          "title": "Синхронизация выбора",
+          "description": "Выбирайте предметы для события, чтобы все знали, кто и что взял на себя."
+        },
+        "check_list": {
+          "title": "Чек-лист готовности",
+          "description": "В разделе “Взять с собой” отмечайте упакованные вещи. Будьте уверены, что ничего не забыто!"
+        },
+        "favorites": {
+          "title": "Избранное для быстроты",
+          "description": "Используйте избранное для ускорения создания списков. Добавляйте любимые вещи в мероприятия одним касанием"
+        }
+      }
     },
     "new_event": {
       "title": "New event",

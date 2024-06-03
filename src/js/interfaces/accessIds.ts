@@ -5,4 +5,5 @@ export interface IAccessIdsFromBE {
 
 export interface IAccessIds extends Omit<IAccessIdsFromBE, "tripUid"> {
   eventUid: string;
+  memberName?: string;
 }

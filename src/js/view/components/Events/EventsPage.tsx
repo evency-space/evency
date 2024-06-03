@@ -3,8 +3,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { IEvent } from "../../../interfaces";
 import {
+  TLocalStorageAccessIdsList,
   getAccessEventsUidsFromLocalStorage,
+  getAccessIdsListFromLocalStorage,
   saveCurrentEventInLocalStorage,
+  setAccessIdsListInLocalStorage,
 } from "../../../utils/localStorage";
 import { ButtonCircle, Loader, TitleH1 } from "../../elements";
 import { AllEvents } from "./AllEvents";
@@ -44,10 +47,18 @@ export const EventsPage = () => {
 
       if (eventsUids.length > 0) {
         const list = await getEvents({ eventsUids });
+        const actualAccessIds: TLocalStorageAccessIdsList = {};
 
         if (list) {
           setEvents(list);
+
+          const accessIds = getAccessIdsListFromLocalStorage();
+          list.forEach(({ eventUid }) => {
+            actualAccessIds[eventUid] = accessIds[eventUid];
+          });
         }
+
+        setAccessIdsListInLocalStorage(actualAccessIds);
       }
     } finally {
       setLoading(false);
@@ -65,7 +76,7 @@ export const EventsPage = () => {
         setLoading(false);
       }
     },
-    [setLoading],
+    [setLoading]
   );
 
   useEffect(() => {

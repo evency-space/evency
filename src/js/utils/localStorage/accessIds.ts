@@ -8,6 +8,11 @@ export const getAccessIdsListFromLocalStorage =
     getLocalStorage<TLocalStorageAccessIdsList>(localStorageAccessIdsList) ||
     {};
 
+export const setAccessIdsListInLocalStorage = (
+  list: TLocalStorageAccessIdsList,
+) =>
+  setLocalStorage<TLocalStorageAccessIdsList>(localStorageAccessIdsList, list);
+
 export const getAccessEventsUidsFromLocalStorage = (): string[] =>
   Object.keys(getAccessIdsListFromLocalStorage());
 
@@ -18,10 +23,7 @@ export const pushAccessIdsInLocalStorage = (accessIds: IAccessIds) => {
   if (eventUid) {
     list[eventUid] = accessIds;
 
-    setLocalStorage<TLocalStorageAccessIdsList>(
-      localStorageAccessIdsList,
-      list,
-    );
+    setAccessIdsListInLocalStorage(list);
   }
 };
 

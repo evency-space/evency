@@ -29,7 +29,7 @@ export const EventEditPage = () => {
 
   const navigate = useNavigate();
 
-  const username = getUserNameFromLocalStorage() || "Default user";
+  const [username, setUsername] = useState(getUserNameFromLocalStorage() || "");
 
   const today = getToday();
 
@@ -67,10 +67,13 @@ export const EventEditPage = () => {
   };
 
   const isBtnDisabled =
-    event.title === null || event.title.length === 0 || !isValidDates;
+    event.title === null ||
+    event.title.length === 0 ||
+    !isValidDates ||
+    !username;
 
   const onEditEvent = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     try {
       e.preventDefault();
@@ -107,13 +110,24 @@ export const EventEditPage = () => {
             {t(`pages.new_event.${event.eventUid ? "edit_title" : "title"}`)}
           </TitleH1>
         </div>
+        {!event.eventUid && (
+          <div className="mb-4">
+            <Input
+              label={t("member_name")}
+              value={username}
+              onChange={setUsername}
+              placeholder={t("member_name_example")}
+            />
+            <div className="h-[1px] mt-4 bg-dark-2" />
+          </div>
+        )}
         <div className="mb-4">
           <Input
             label={t("pages.new_event.event_name")}
             value={event.title}
             onChange={onNewTripNameChange}
             placeholder={`${t("pages.new_event.example")}, ${t(
-              "pages.new_event.event_name_example",
+              "pages.new_event.event_name_example"
             )}`}
           />
         </div>
@@ -128,7 +142,7 @@ export const EventEditPage = () => {
                 onChange={onStartDateChange}
                 type="date"
                 placeholder={`${t("pages.new_event.date_start")}: ${t(
-                  "pages.new_event.example",
+                  "pages.new_event.example"
                 )}, 12.06.2022`}
               />
             </div>
@@ -142,7 +156,7 @@ export const EventEditPage = () => {
                 onChange={onEndDateChange}
                 type="date"
                 placeholder={`${t("pages.new_event.date_end")}: ${t(
-                  "pages.new_event.example",
+                  "pages.new_event.example"
                 )}, 12.06.2022`}
               />
             </div>
@@ -153,7 +167,7 @@ export const EventEditPage = () => {
             label={t("pages.new_event.description")}
             rows={3}
             placeholder={`${t("pages.new_event.example")}, ${t(
-              "pages.new_event.description_example",
+              "pages.new_event.description_example"
             )}`}
             onChange={onNewTripDescriptionChange}
             value={event.description}

@@ -18,6 +18,7 @@ import {
   favoritesListPointsPageUrl,
   settingsPageUrl,
 } from "../../../../router/constants";
+import { IAccessIds } from "../../../interfaces";
 
 export const Header = () => {
   const location = useLocation();
@@ -32,12 +33,17 @@ export const Header = () => {
 
   const modalContext = useModal();
 
-  const initName = () => {
-    const name = getUserNameFromLocalStorage();
+  const initName = (accessIds?: IAccessIds) => {
+    let name;
 
-    if (name) {
-      setUserName(name);
+    if (getCurrentEventFromLocalStorage() && accessIds?.memberName) {
+      const { memberName } = accessIds;
+      name = memberName;
+    } else {
+      name = getUserNameFromLocalStorage();
     }
+
+    setUserName(name || "");
   };
 
   const showMenuModal = () => {
@@ -58,7 +64,7 @@ export const Header = () => {
     const event = getCurrentEventFromLocalStorage();
     const accessIds = getEventAccessIds(event?.eventUid || "");
 
-    initName();
+    initName(accessIds);
     const parentData = getRouteParentData({
       eventUid: event?.eventUid || "",
       isNewEvent: event?.isNewEvent || false,
