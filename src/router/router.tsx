@@ -25,7 +25,7 @@ import {
 import { ShareLinkPage } from "../js/view/pages/ShareLinkPage/ShareLinkPage";
 import { App } from "../js/view/components/App/App";
 import { deleteLocalEvent, provideEvent, provideMembers } from "./utils";
-import { eventWelcomePageUrl, homePageUrl, welcomePageUrl } from "./constants";
+import { eventWelcomePageUrl, homePageUrl } from "./constants";
 import { ImportFavoritesListPointsPage } from "../js/view/pages/favorite/ImportFavoritesListPointsPage/ImportFavoritesListPointsPage";
 import { ExportFavoritesListPointsPage } from "../js/view/pages/favorite/ExportFavoritesListPointsPage/ExportFavoritesListPointsPage";
 
@@ -68,9 +68,6 @@ export const router = createBrowserRouter([
         index: true,
         element: <EventsPage />,
         loader: () => {
-          if (!getUserNameFromLocalStorage()) {
-            return redirect(welcomePageUrl());
-          }
           saveListPointTypeInLocalStorage("common");
           deleteCurrentEventFromLocalStorage();
           return null;

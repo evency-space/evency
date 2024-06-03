@@ -1,63 +1,94 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ActionPanel, Input, TextBodyLarge, TitleH1 } from "../../elements";
-import tentImg from "../../../../assets/images/tent.png";
-import { saveUserNameInLocalStorage } from "../../../utils/localStorage";
+import { GliderMethods } from "react-glider/dist/types";
+import Glider from "react-glider";
+import { ActionPanel, TextBodyLarge, TitleH1 } from "../../elements";
 import { PageWrapper } from "..";
 import { homePageUrl } from "../../../../router/constants";
+import "glider-js/glider.min.css";
+import { STEPS } from "./constants";
 
 export const WelcomePage = () => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState<string>("");
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  const onUsernameSubmit = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    event.preventDefault();
+  const getStepPath = (key: string) => `pages.welcome.steps.${key}`;
 
-    saveUserNameInLocalStorage(username);
-    navigate(homePageUrl());
+  const goToHomePage = () => navigate(homePageUrl());
+
+  const gliderRef = useRef<GliderMethods>(null);
+
+  const primaryButtonTitle = () => {
+    const path = "pages.welcome.buttons";
+
+    if (activeIndex === 0) {
+      return t(`${path}.first_primary`);
+    }
+
+    if (activeIndex === STEPS.length - 1) {
+      return t(`${path}.last_primary`);
+    }
+
+    return t(`${path}.primary`);
   };
 
   const pageMainContent = (
-    <form className="text-center w-full">
-      <div className="flex flex-col grow justify-center">
-        <div className="mb-8 xs:mb-14 mx-auto">
-          <img src={tentImg} alt="Tent" className="max-h-[230px]" />
-        </div>
-
-        <div className="mb-6">
-          <TitleH1>{t("pages.welcome.title")}</TitleH1>
-        </div>
-
-        <div className="mb-6">
-          <TextBodyLarge>{t("pages.welcome.description")}</TextBodyLarge>
-        </div>
-
-        <div className="mb-8 xs:mb-10">
-          <TextBodyLarge>{t("pages.welcome.whats_your_name")}</TextBodyLarge>
-        </div>
-
-        <div className="mb-10 xs:mb-14">
-          <Input
-            placeholder={t("pages.welcome.whats_your_name")}
-            onChange={setUsername}
-            value={username}
+    <div className="flex flex-col h-full overflow-hidden">
+      <Glider
+        ref={gliderRef}
+        draggable
+        slidesToShow={1}
+        slidesToScroll={1}
+        onSlideVisible={({ detail }: { detail: { slide: number } }) =>
+          setActiveIndex(detail.slide)
+        }
+        scrollLock
+      >
+        {STEPS.map(({ key, image }) => (
+          <div key={key} className="flex flex-col items-center">
+            <img
+              src={image}
+              srcSet={`${image} 1x, ${image} 2x`}
+              alt={t(`${key} image`)}
+              className="h-[228px] w-auto"
+            />
+            <div className="flex flex-col gap-y-6 text-center">
+              <TitleH1>{t(`${getStepPath(key)}.title`)}</TitleH1>
+              <TextBodyLarge className="text-dark-3">
+                {t(`${getStepPath(key)}.description`)}
+              </TextBodyLarge>
+            </div>
+          </div>
+        ))}
+      </Glider>
+      <ul className="flex gap-x-1">
+        {STEPS.map(({ key }) => (
+          <li
+            key={key}
+            className="w-1 h-1 bg-dark-2 rounded-full cursor-pointer"
           />
-        </div>
-      </div>
-    </form>
+        ))}
+      </ul>
+    </div>
   );
 
   const pageFooter = (
     <ActionPanel
-      primaryButtonText={t("buttons.remember_me")}
+      primaryButtonText={primaryButtonTitle()}
       primaryButtonType="submit"
-      onPrimaryButtonClick={(event) => onUsernameSubmit(event)}
+      secondaryButtonText={t("pages.welcome.buttons.secondary")}
+      onPrimaryButtonClick={() => {
+        if (activeIndex <= STEPS.length) {
+          gliderRef.current?.scrollItem(activeIndex + 1);
+        } else {
+          goToHomePage();
+        }
+      }}
+      onSecondaryButtonClick={goToHomePage}
     />
   );
 
