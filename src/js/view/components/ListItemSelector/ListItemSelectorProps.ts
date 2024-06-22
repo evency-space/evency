@@ -9,5 +9,6 @@ export interface IListItemSelectorProps {
   content?: JSX.Element;
   grayTitle?: boolean;
   variant?: keyof typeof TListItemSelectorVariants;
+  className?: string;
   onClick: () => void;
 }
