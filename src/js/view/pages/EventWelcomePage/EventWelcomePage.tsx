@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import { IAccessIds, IEvent, IMember } from "../../../interfaces";
-import { PageWrapper } from "../../components";
+import { ListItemSelector, PageWrapper } from "../../components";
 import {
   ActionPanel,
   EventTitle,
   Loader,
-  MembersListItem,
-  Radio,
   TextBodyLarge,
   TitleH1,
 } from "../../elements";
@@ -48,18 +46,6 @@ export const EventWelcomePage = () => {
     saveUserNameInLocalStorage(member.name);
   };
 
-  const radioButton = (member: IMember) => (
-    <Radio
-      name={member.name}
-      value={selectedMember?.memberUid === member.memberUid}
-      onChange={() => setSelectedMember(member)}
-    />
-  );
-
-  const membersListItemContent = (member: IMember) => (
-    <div className="flex grow justify-end ml-2">{radioButton(member)}</div>
-  );
-
   const pageMainContent = (
     <div className="w-full">
       <div className="flex flex-col gap-y-6">
@@ -75,9 +61,13 @@ export const EventWelcomePage = () => {
       <div>
         {members.length > 0
           ? members.map((member) => (
-              <MembersListItem key={member.memberUid} name={member.name}>
-                {membersListItemContent(member)}
-              </MembersListItem>
+              <ListItemSelector
+                className="px-4 zebra-list-item"
+                listItemName={member.name}
+                value={selectedMember?.memberUid === member.memberUid}
+                variant="radio"
+                onClick={() => setSelectedMember(member)}
+              />
             ))
           : !loading && <div>{t("error")}</div>}
       </div>
@@ -112,7 +102,7 @@ export const EventWelcomePage = () => {
         setMembers(d.members);
 
         const member = d.members.find(
-          (m) => m.memberUid === d.accessIds?.memberUid,
+          (m) => m.memberUid === d.accessIds?.memberUid
         );
         setSelectedMember(member);
       });
