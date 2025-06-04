@@ -43,7 +43,7 @@ export const editFavoriteListPoint = ({
       },
       body: JSON.stringify(mode === "add" ? [listPoint] : listPoint),
     },
-  ).then(response => response.json());
+  ).then(response => response.json() as Promise<IFavoriteListPoint[]>);
 };
 
 export const removeFavoriteListPoint = ({

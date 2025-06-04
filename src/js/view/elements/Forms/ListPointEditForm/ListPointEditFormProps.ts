@@ -18,10 +18,12 @@ export interface IEditListPoint {
   count?: IListPoint["count"];
   itemUid?: IListPoint["item"]["itemUid"];
   pointUid?: IListPoint["pointUid"];
+  takeIt?: boolean;
 }
 
 export interface IListPointEditFormProps {
   listPointData: IEditListPoint;
+  isCreationMode: boolean;
   onChange: (listPointInModel: IEditListPoint) => void;
   onFullFill: (filled: boolean) => void;
 }

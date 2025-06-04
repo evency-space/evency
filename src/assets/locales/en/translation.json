@@ -146,7 +146,8 @@
       "category": "Category",
       "item": "Item name",
       "unit": "Unit",
-      "count": "Quantity"
+      "count": "Quantity",
+      "take_it": "I'll take this item"
     },
     "units": {
       "gram": "Gram",
