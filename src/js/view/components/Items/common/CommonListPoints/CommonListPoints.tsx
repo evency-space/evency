@@ -49,7 +49,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
             listPointUid: listPoint.pointUid,
           })
         : eventCreateListPointPageUrl({ eventUid: accessIds.eventUid }),
-      { state: { listPointType: "common", listPointUid: listPoint.pointUid } },
+      { state: { listPointType: "common", listPointUid: listPoint.pointUid } }
     );
   };
 
@@ -114,7 +114,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
           }}
           onRemoveClick={() => {
             void checkListPointAvailability({ listPoint }).then(
-              removeListPoint,
+              removeListPoint
             );
           }}
         />
@@ -132,7 +132,7 @@ export const CommonListPoints = (props: ICommonListPointsProps) => {
   const getListPointData = (index: number) => {
     const listPoint = listPoints[index];
 
-    const viewMode = getCommonListPointViewMode() || "oneLine";
+    const viewMode = getCommonListPointViewMode() || "twoLines";
     let itemTemplate;
 
     if (viewMode === "twoLines") {
