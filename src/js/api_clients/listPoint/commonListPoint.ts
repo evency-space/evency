@@ -72,7 +72,7 @@ export const editCommonListPoint = ({
         memberUid,
       }),
     },
-  );
+  ).then(response => response.json() as Promise<IListPoint>);
 
 export const deleteCommonListPoint = ({
   eventUid,

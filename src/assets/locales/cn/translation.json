@@ -156,7 +156,8 @@
       "category": "选择分类",
       "item": "东西",
       "unit": "单位",
-      "count": "数量"
+      "count": "数量",
+      "take_it": "我会带着的"
     },
     "units": {
       "gram": "克",
