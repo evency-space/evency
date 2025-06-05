@@ -25,25 +25,26 @@ export const Counter = (props: ICounterProps) => {
   const inputClasses = classesOf(
     "w-full text-center rounded-lg text-light-4 focus:outline-none",
     color === "gray" && "bg-dark-2",
-    color === "green" && "bg-green-0",
+    color === "green" && "bg-green-0"
   );
+
+  const rootClasses = classesOf("flex flex-col gap-y-2", className);
 
   const counterClasses = classesOf(
     "flex w-full",
-    className,
     size === "sm" && "gap-x-2 h-[40px]",
-    size === "md" && "gap-x-3 h-[55px]",
+    size === "md" && "gap-x-3 h-[55px]"
   );
 
   const counterButtonClasses = classesOf(
     "h-auto min-h-[24px]",
     size === "sm" && "px-3",
-    size === "md" && "px-4",
+    size === "md" && "px-4"
   );
 
   const minusCounterButtonClasses = classesOf(
     counterButtonClasses,
-    stepMoreValue && "bg-black-2",
+    stepMoreValue && "bg-black-2"
   );
 
   const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +67,7 @@ export const Counter = (props: ICounterProps) => {
 
     if (!stepMoreValue) {
       setLocalValue(
-        String(Math.trunc(Number(localValue) * 10 - step * 10) / 10),
+        String(Math.trunc(Number(localValue) * 10 - step * 10) / 10)
       );
     }
   };
@@ -82,7 +83,7 @@ export const Counter = (props: ICounterProps) => {
   }, [value]);
 
   return (
-    <>
+    <div className={rootClasses}>
       {label && (
         <label htmlFor={id}>
           <TextBodyStandard className="dark:text-dark-3">
@@ -112,6 +113,6 @@ export const Counter = (props: ICounterProps) => {
           onClick={incrementInputValue}
         />
       </div>
-    </>
+    </div>
   );
 };

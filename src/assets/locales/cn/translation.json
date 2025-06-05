@@ -138,7 +138,8 @@
         "title": "如何显示一般的东西",
         "oneLine": "在一行",
         "twoLines": "在两行"
-      }
+      },
+      "button": "Сохранить настройки"
     },
     "favorites": {
       "title": "收藏夹"
@@ -155,7 +156,8 @@
       "category": "选择分类",
       "item": "东西",
       "unit": "单位",
-      "count": "数量"
+      "count": "数量",
+      "take_it": "我会带着的"
     },
     "units": {
       "gram": "克",

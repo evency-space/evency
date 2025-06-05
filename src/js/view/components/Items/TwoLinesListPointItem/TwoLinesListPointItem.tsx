@@ -33,7 +33,7 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
     "flex items-center gap-x-2 font-semibold text-light-4 leading-snug",
     isItemTaken && "text-dark-2",
     !isItemTaken && "text-light-4",
-    !isButton && "cursor-text",
+    !isButton && "cursor-text"
   );
 
   const mainClasses = classesOf("flex gap-x-3 py-3", className);
@@ -74,20 +74,18 @@ export const TwoLinesListPointItem = (props: IListPointItemProps) => {
             unit={unit}
           />
 
-          <div className="flex grow-0 shrink">
-            <Counter
-              value={memberCountItemTaken}
-              size="sm"
-              color={
-                isItemTaken || (count === 0 && memberCountItemTaken === 0)
-                  ? "gray"
-                  : "green"
-              }
-              step={LIST_POINT_UNITS_STEP[unit]}
-              className="w-[180px]"
-              onChange={onBindListPoint}
-            />
-          </div>
+          <Counter
+            value={memberCountItemTaken}
+            size="sm"
+            color={
+              isItemTaken || (count === 0 && memberCountItemTaken === 0)
+                ? "gray"
+                : "green"
+            }
+            step={LIST_POINT_UNITS_STEP[unit]}
+            className="w-[180px] flex grow-0 shrink"
+            onChange={onBindListPoint}
+          />
         </div>
 
         {additionalContent}

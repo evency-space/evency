@@ -10,21 +10,21 @@ import {
   LIST_POINT_UNITS,
 } from "../../../../interfaces";
 
-import { Input } from "../../inputs";
+import { Input, Checkbox } from "../../inputs";
 import { Select } from "../../Select/Select";
 import { TagsGroup } from "../../TagsGroup/TagsGroup";
-import { TextBodyStandard } from "../../typography";
+import { TextBodyLarge, TextBodyStandard } from "../../typography";
 import { Counter } from "../../Counter/Counter";
 
 export const ListPointEditForm = (props: IListPointEditFormProps) => {
-  const { listPointData, onChange, onFullFill } = props;
+  const { listPointData, isCreationMode, onChange, onFullFill } = props;
 
   const { t } = useTranslation();
 
   const { name, unit, tag, count } = listPointData;
 
   const [countStep, setCountStep] = useState<number>(
-    LIST_POINT_UNITS_STEP[unit],
+    LIST_POINT_UNITS_STEP[unit]
   );
 
   const countIsNumber = typeof count === "number";
@@ -36,7 +36,7 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
   const listPointUnits = Object.values(LIST_POINT_UNITS);
 
   const activeTagIndex = listPointCategories.findIndex(
-    (category) => category === tag,
+    (category) => category === tag
   );
 
   const changeItem = (value: Partial<IEditListPoint>) => {
@@ -58,7 +58,7 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
   });
 
   return (
-    <form className="flex flex-col gap-y-3">
+    <form className="flex flex-col gap-y-6">
       <div>
         <TextBodyStandard className="block dark:text-dark-3 mb-2">
           {t("list_point.edit_form.category")}
@@ -90,6 +90,18 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
           value={count}
           step={countStep}
           onChange={(value) => changeItem({ count: value })}
+        />
+      )}
+      {isCreationMode && listPointData.pointType === "common" && (
+        <Checkbox
+          className="flex-row-reverse justify-between items-center"
+          label={
+            <TextBodyLarge className="text-light-4">
+              {t("list_point.edit_form.take_it")}
+            </TextBodyLarge>
+          }
+          value={listPointData.takeIt || false}
+          onChange={() => changeItem({ takeIt: !listPointData.takeIt })}
         />
       )}
     </form>

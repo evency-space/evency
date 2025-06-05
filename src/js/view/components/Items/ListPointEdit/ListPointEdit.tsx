@@ -21,12 +21,13 @@ export const ListPointEdit = (props: IListPointEditProps) => {
   };
 
   const pageMainContent = (
-    <div className="flex flex-col gap-y-3">
+    <div className="flex flex-col gap-y-6 pb-6">
       <TitleH1>
         {isCreationMode ? t("list_point.add_item") : t("list_point.edit_item")}
       </TitleH1>
       <ListPointEditForm
         listPointData={localListPoint}
+        isCreationMode={isCreationMode}
         onChange={changeLocalListPoint}
         onFullFill={(filled) => setDisabledPrimaryButton(!filled)}
       />
