@@ -9,7 +9,7 @@
   "search": "Search",
   "taken": "Taken",
   "whoTookIt": "Who took it",
-  "add_items": "Добавить вещи",
+  "add_items": "Add items",
   "select_all": "Select all",
   "headerRoutes": {
     "goBack": "Back",
@@ -74,7 +74,7 @@
     "whats_your_name": "What’s your name?"
   },
   "favoriteToggle": {
-    "description": "Нажмите чтобы добавить в список избранных вещей"
+    "description": "Click to add to favorites list"
   },
   "pages": {
     "welcome": {
@@ -112,27 +112,27 @@
     "settings": {
       "title": "Settings",
       "commonListPointViewOptions": {
-        "title": "Отображение общих вещей",
-        "oneLine": "В одну строку",
-        "twoLines": "В две строки"
+        "title": "Common items view",
+        "oneLine": "Default view",
+        "twoLines": "Detailed view"
       },
-      "button": "Сохранить настройки"
+      "button": "Apply settings"
     },
     "favorites": {
       "title": "Favorites items"
     },
     "import_favorites": {
-      "successfully_imported": "Вещи успешно добавлены в мероприятие!",
+      "successfully_imported": "Items have been successfully added!",
       "step_1": {
-        "title": "Добавить из избранного"
+        "title": "Add from favorites list"
       },
       "step_2": {
-        "title": "В какой список добавить?"
+        "title": "Choose favorites list"
       }
     },
     "export_favorites": {
-      "successfully_exported": "Вещи успешно добавлены в избранное!",
-      "title": "Добавить в избранное"
+      "successfully_exported": "Items have been successfully added!",
+      "title": "Add to favorites"
     }
   },
   "list_point": {
@@ -189,8 +189,8 @@
       "edit_event": "Edit event",
       "members": "Event members",
       "logout": "Choose another member",
-      "import_favorites": "Добавить из избранного",
-      "export_favorites": "Добавить в избранное"
+      "import_favorites": "Add from favorites",
+      "export_favorites": "Add to favorites"
     },
     "events_list_action": {
       "deleteEvent": "Delete event",
