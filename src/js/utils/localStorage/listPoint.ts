@@ -8,6 +8,7 @@ import {
   localStorageCommonListPointViewMode,
   localStorageCurrentListPointObject,
   localStorageFavoritesIds,
+  localStorageFavoritesListUid,
   localStorageListPointType,
 } from "./constants";
 import { IEditListPoint } from "../../view/elements/Forms/ListPointEditForm/ListPointEditFormProps";
@@ -36,20 +37,21 @@ export const saveListPointTypeInLocalStorage = (
 export const getListPointTypeFromLocalStorage = () =>
   getLocalStorage<TLocalStorageListPointTypes>(localStorageListPointType);
 
+/**
+ * @deprecated
+ */
 export const getFavoritesIdsFromLocalStorage = () =>
   getLocalStorage<string[]>(localStorageFavoritesIds) || [];
 
-export const saveFavoritesListPointsUidsInLocalStorage = (list: string[]) => {
-  setLocalStorage<string[]>(localStorageFavoritesIds, list);
+export const getFavoritesListUidFromLocalStorage = () =>
+  getLocalStorage<string>(localStorageFavoritesListUid);
+
+export const saveFavoritesListUidInLocalStorage = (listUid: string) => {
+  setLocalStorage<string>(localStorageFavoritesListUid, listUid);
 };
 
-export const pushFavoriteListPointUidInLocalStorage = (
-  favoriteIds: string[],
-) => {
-  const list = new Set([...getFavoritesIdsFromLocalStorage(), ...favoriteIds]);
-
-  setLocalStorage<string[]>(localStorageFavoritesIds, Array.from(list));
-};
+export const deleteFavoritesIdsFromLocalStorage = () =>
+  deleteLocalStorage(localStorageFavoritesIds);
 
 export const switchCommonListPointViewMode = (
   mode: TCommonListPointViewMode,

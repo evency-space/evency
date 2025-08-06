@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IImportedFavoritesListProps } from "./ImportedFavoritesListProps";
 import { useLoading } from "../../../../../hooks";
-import { getFavoritesIdsFromLocalStorage } from "../../../../../utils/localStorage";
-import { getFavoriteListPoints } from "../../../../../api_clients";
 import { IFavoriteListPoint } from "../../../../../interfaces";
 import { TwoLinesListPointItem } from "../../../../components/Items/TwoLinesListPointItem/TwoLinesListPointItem";
 import { Checkbox } from "../../../../elements/inputs/Checkbox/Checkbox";
@@ -14,6 +12,7 @@ import {
   getSelectedListPointCount,
   getUpdatedSelectedListPoints,
 } from "../../utils";
+import { getFavoritesListPointsWithBridge } from "../../../../../api_clients/listPoint/favoriteListPoint/utils";
 
 export const ImportedFavoritesList = (props: IImportedFavoritesListProps) => {
   const { selectedListPoints, onChangeSelectedListPoints } = props;
@@ -28,12 +27,11 @@ export const ImportedFavoritesList = (props: IImportedFavoritesListProps) => {
     try {
       setLoading(true);
 
-      const itemUids = getFavoritesIdsFromLocalStorage();
-      const list = (await getFavoriteListPoints({
-        itemUids,
-      })) as IFavoriteListPoint[];
+      const list = await getFavoritesListPointsWithBridge();
 
-      setListPoints(list);
+      if (list) {
+        setListPoints(list);
+      }
     } finally {
       setLoading(false);
     }
