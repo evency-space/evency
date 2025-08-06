@@ -4,5 +4,9 @@ export const localStorageCurrentEventObject = "currentEvent";
 export const localStorageCurrentListPointObject = "currentListPoint";
 export const localStorageListPointType = "listPointType";
 export const localStorageLoadingState = "loading";
+/**
+ * @deprecated
+ */
 export const localStorageFavoritesIds = "favoritesIds";
+export const localStorageFavoritesListUid = "favoritesListUid";
 export const localStorageCommonListPointViewMode = "clvm";

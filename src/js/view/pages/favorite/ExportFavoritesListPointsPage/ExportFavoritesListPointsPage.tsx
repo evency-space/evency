@@ -19,9 +19,10 @@ import {
   getSelectedListPointCount,
   getUpdatedSelectedListPoints,
 } from "../utils";
-import { pushFavoriteListPointUidInLocalStorage } from "../../../../utils/localStorage";
+import { getFavoritesListUidFromLocalStorage } from "../../../../utils/localStorage";
 import { Toast } from "../../../elements/Toasts/Toast";
 import { eventPageUrl } from "../../../../../router/constants";
+import { createFavoriteListFromOldList } from "../../../../api_clients/listPoint/favoriteListPoint/utils";
 
 export const ExportFavoritesListPointsPage = () => {
   const routeData = useLoaderData() as TProvidedEvent;
@@ -41,7 +42,7 @@ export const ExportFavoritesListPointsPage = () => {
 
   const getSelectedListPointsCount = useCallback(
     () => Object.values(selectedListPoints).filter((count) => count > 0).length,
-    [selectedListPoints],
+    [selectedListPoints]
   );
 
   const goBackToEventPage = () => {
@@ -68,17 +69,19 @@ export const ExportFavoritesListPointsPage = () => {
       const selectedItemUids = Object.keys(selectedListPoints);
       const selectedPointUids = listPoints
         .filter((listPoint) =>
-          selectedItemUids.includes(listPoint.item.itemUid),
+          selectedItemUids.includes(listPoint.item.itemUid)
         )
         .map((listPoint) => listPoint.pointUid);
 
-      const insertedListPoints = await insertFavoriteListPoints({
-        pointUids: selectedPointUids,
+      if (!getFavoritesListUidFromLocalStorage()) {
+        await createFavoriteListFromOldList();
+      }
+
+      await insertFavoriteListPoints({
+        listUid: getFavoritesListUidFromLocalStorage() || "",
+        listPointsUids: selectedPointUids,
       });
 
-      pushFavoriteListPointUidInLocalStorage(
-        insertedListPoints.map((listPoint) => listPoint.item.itemUid),
-      );
       goBackToEventPage();
       toast(<Toast text={t("pages.export_favorites.successfully_exported")} />);
     } finally {
@@ -129,7 +132,7 @@ export const ExportFavoritesListPointsPage = () => {
         setLoading(false);
       }
     },
-    [setListPoints, setLoading],
+    [setListPoints, setLoading]
   );
 
   const getListPointData = (index: number) => {
@@ -147,7 +150,7 @@ export const ExportFavoritesListPointsPage = () => {
         onClick={() =>
           changeSelectedListPoints(
             itemUid,
-            getSelectedListPointCount({ count: selectedCount, unit }),
+            getSelectedListPointCount({ count: selectedCount, unit })
           )
         }
       />

@@ -3,7 +3,7 @@ import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import {
   deleteCurrentListPointFromLocalStorage,
   getCurrentListPointFromLocalStorage,
-  pushFavoriteListPointUidInLocalStorage,
+  getFavoritesListUidFromLocalStorage,
 } from "../../../utils/localStorage";
 import { ListPointEdit } from "../../components/Items/ListPointEdit/ListPointEdit";
 import { useLoading, useModal } from "../../../hooks";
@@ -17,6 +17,7 @@ import {
   favoritesListPointsPageUrl,
 } from "../../../../router/constants";
 import {
+  addFavoritesListPoints,
   changeCommonListPointBindStatus,
   editCommonListPoint,
   editFavoriteListPoint,
@@ -75,14 +76,16 @@ export const ListPointEditPage = () => {
   const changeFavoriteListPoint = async (
     changeableListPoint: IEditListPoint
   ) => {
-    const points = await editFavoriteListPoint(
-      getListPointData(changeableListPoint)
-    );
+    const convertedListPoint =
+      convertIEditListPointToIListPoint(changeableListPoint);
 
     if (isCreationMode) {
-      points.forEach((point) => {
-        pushFavoriteListPointUidInLocalStorage([point.item.itemUid]);
+      await addFavoritesListPoints({
+        listUid: getFavoritesListUidFromLocalStorage() || "",
+        listPoints: [convertedListPoint],
       });
+    } else {
+      await editFavoriteListPoint({ listPoint: convertedListPoint });
     }
 
     goBackToListPointsPage(favoritesListPointsPageUrl());
