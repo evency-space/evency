@@ -19,6 +19,7 @@ export interface IEditListPoint {
   itemUid?: IListPoint["item"]["itemUid"];
   pointUid?: IListPoint["pointUid"];
   takeIt?: boolean;
+  userTags?: string[];
 }
 
 export interface IListPointEditFormProps {

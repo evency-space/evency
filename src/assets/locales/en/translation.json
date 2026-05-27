@@ -209,5 +209,10 @@
     "private": "Private items",
     "common": "Public items",
     "taken": "I’m taking"
+  },
+  "tags": {
+    "create_tag": "Create tag",
+    "add_tag": "Add tag",
+    "select_tags": "Select tags"
   }
 }

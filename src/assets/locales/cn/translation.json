@@ -219,5 +219,10 @@
       "primary_button_text": "Назад к списку вещей",
       "secondary_button_text": "添加"
     }
+  },
+  "tags": {
+    "create_tag": "Create tag",
+    "add_tag": "Add tag",
+    "select_tags": "Select tags"
   }
 }

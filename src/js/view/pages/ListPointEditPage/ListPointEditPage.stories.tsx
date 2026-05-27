@@ -4,6 +4,7 @@ import { withRouter } from "storybook-addon-react-router-v6";
 import { ListPointEditPage } from "./ListPointEditPage";
 import {
   ICommonListPoint,
+  IFavoriteListPoint,
   IListPoint,
   IPrivateListPoint,
 } from "../../../interfaces";
@@ -17,6 +18,7 @@ import {
   getEmptyListPoint,
   commonListPointsFromBE,
   convertListPointToIEditListPoint,
+  favoriteListPointsFromBE,
 } from "../../../utils";
 import {
   pushAccessIdsInLocalStorage,
@@ -28,6 +30,7 @@ const commonListPoint = (commonListPointsFromBE as ICommonListPoint[])[0];
 const privateListPoint = (
   privateListPointsFromBE as unknown as IPrivateListPoint[]
 )[0];
+const favoriteListPoint = (favoriteListPointsFromBE as IFavoriteListPoint[])[0];
 const emptyListPoint = getEmptyListPoint();
 
 const initialLocalStorageState = ({
@@ -35,7 +38,11 @@ const initialLocalStorageState = ({
   listPoint,
 }: {
   type: TLocalStorageListPointTypes;
-  listPoint: IListPoint | ICommonListPoint | IPrivateListPoint;
+  listPoint:
+    | IListPoint
+    | ICommonListPoint
+    | IPrivateListPoint
+    | IFavoriteListPoint;
 }) => {
   const currentListPoint = convertListPointToIEditListPoint({
     point: listPoint,
@@ -82,6 +89,15 @@ CreateCommonListPoint.parameters = {
   mockData: Object.values(mockedCommonListPointsApi),
 };
 
+export const CreateFavoriteListPoint = Template.bind({});
+CreateFavoriteListPoint.loaders = [
+  () =>
+    initialLocalStorageState({ type: "favorite", listPoint: emptyListPoint }),
+];
+CreateFavoriteListPoint.parameters = {
+  mockData: Object.values(mockedCommonListPointsApi),
+};
+
 export const EditPrivateListPoint = Template.bind({});
 EditPrivateListPoint.loaders = [
   () =>
@@ -97,5 +113,17 @@ EditCommonListPoint.loaders = [
     initialLocalStorageState({ type: "common", listPoint: commonListPoint }),
 ];
 EditCommonListPoint.parameters = {
+  mockData: Object.values(mockedCommonListPointsApi),
+};
+
+export const EditFavoriteListPoint = Template.bind({});
+EditFavoriteListPoint.loaders = [
+  () =>
+    initialLocalStorageState({
+      type: "favorite",
+      listPoint: favoriteListPoint,
+    }),
+];
+EditFavoriteListPoint.parameters = {
   mockData: Object.values(mockedCommonListPointsApi),
 };

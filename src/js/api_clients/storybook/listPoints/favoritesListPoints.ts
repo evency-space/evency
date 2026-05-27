@@ -1,12 +1,12 @@
-import { accessIds, favoriteListPointsFromBE } from "../../../utils";
+import { favoriteListPointsFromBE } from "../../../utils";
 import { favoritesListPointApi } from "../../listPoint";
 
 const status = 200;
 const delay = 700;
 
 const favoritesEndPoints = favoritesListPointApi({
-  ...accessIds,
   itemUid: ":pointUid",
+  listUid: ":listUid",
 });
 
 export const mockedFavoritesListPointsApi = {
@@ -22,6 +22,13 @@ export const mockedFavoritesListPointsApi = {
     method: "POST",
     status,
     response: favoriteListPointsFromBE,
+    delay,
+  },
+  getTags: {
+    url: favoritesEndPoints.getTags,
+    method: "GET",
+    status,
+    response: ["1", "2", "3"],
     delay,
   },
 };
