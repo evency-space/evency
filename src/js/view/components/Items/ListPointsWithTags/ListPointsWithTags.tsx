@@ -2,35 +2,43 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   IListPointData,
-  IListPointsProps,
+  IListPointsWithTagsProps,
   TGroupedListPoints,
   TUnknownListPoint,
-} from "./ListPointsProps";
-import { TextBodyStandard, TitleH1 } from "../../../elements";
+} from "./ListPointsWithTagsProps";
+import { TagsGroup, TextBodyStandard, TitleH1 } from "../../../elements";
 import ShutterStock from "../../../../../assets/images/shutterstock.png";
 import SearchBar from "../../SearchBar/SearchBar";
 import { LIST_POINT_CATEGORIES } from "../../../../interfaces";
 import { ListPointsCategoryTitle } from "../ListPointsCategoryTitle/ListPointsCategoryTitle";
 
-export const ListPoints = (props: IListPointsProps) => {
+export const ListPointsWithTags = (props: IListPointsWithTagsProps) => {
   const {
+    tags = [],
     listPoints,
     getListPointData,
     onCreateListPoint,
     title,
-    disableCategoryAddButton = false,
-    contentBeforeList,
   } = props;
 
   const { t } = useTranslation();
 
   const [filter, setFilter] = useState<string>("");
 
+  const [tagsFilter, setTagsFilter] = useState<string[]>([]);
+
+  const tagsFilterSortedString = tagsFilter
+    .sort((a, b) => (a.toLowerCase() > b.toLowerCase() ? 1 : -1))
+    .join();
+
   const [groupedListPoints, setGroupedListPoints] =
     useState<TGroupedListPoints>({});
 
   const [groupedListPointsAfterFilter, setGroupedListPointsAfterFilter] =
     useState<TGroupedListPoints>();
+
+  const [filteredListPointsQuantity, setFilteredListPointsQuantity] =
+    useState<number>(listPoints.length);
 
   const updateGroupedListPoints = ({
     grouped,
@@ -48,20 +56,37 @@ export const ListPoints = (props: IListPointsProps) => {
     return { ...grouped, [tag]: [listPointData] };
   };
 
+  const searchBarFilterFn = useCallback(
+    (listPointData: IListPointData) =>
+      listPointData.name?.toLowerCase().indexOf(filter.toLowerCase()) !== -1,
+    [filter]
+  );
+
+  const tagsFilterFn = useCallback(
+    (listPointData: IListPointData) => {
+      const tagsSortedString = listPointData.tags
+        .sort((a, b) => (a.toLowerCase() > b.toLowerCase() ? 1 : -1))
+        .join();
+      return tagsSortedString.indexOf(tagsFilterSortedString) !== -1;
+    },
+    [tagsFilterSortedString]
+  );
+
   const applyFilter = useCallback(() => {
-    if (filter) {
+    let filteredQuantity = listPoints.length;
+
+    if (filter || tagsFilter.length > 0) {
       let grouped = {};
 
-      listPoints.reduce(
+      const filteredList = listPoints.reduce(
         (
           filteredListPoints: TUnknownListPoint[],
           listPoint: TUnknownListPoint,
           index: number
         ) => {
           const listPointData = getListPointData(index);
-          const itemName = listPointData.name.toLowerCase();
 
-          if (itemName.indexOf(filter.toLowerCase()) !== -1) {
+          if (searchBarFilterFn(listPointData) && tagsFilterFn(listPointData)) {
             filteredListPoints.push(listPoint);
             grouped = updateGroupedListPoints({
               grouped,
@@ -73,11 +98,22 @@ export const ListPoints = (props: IListPointsProps) => {
         },
         []
       );
+      filteredQuantity = filteredList.length;
       setGroupedListPointsAfterFilter(grouped);
     } else {
       setGroupedListPointsAfterFilter(groupedListPoints);
     }
-  }, [filter, getListPointData, groupedListPoints, listPoints]);
+
+    setFilteredListPointsQuantity(filteredQuantity);
+  }, [
+    filter,
+    getListPointData,
+    groupedListPoints,
+    listPoints,
+    searchBarFilterFn,
+    tagsFilter.length,
+    tagsFilterFn,
+  ]);
 
   const initializeGroupedListPoints = useCallback(
     (list: TUnknownListPoint[]) => {
@@ -108,25 +144,48 @@ export const ListPoints = (props: IListPointsProps) => {
     </div>
   );
 
+  const searchBarContent = (
+    <SearchBar
+      onChange={(value) => setFilter(value ?? "")}
+      placeholder={t("search")}
+    />
+  );
+
+  const titleContent = (
+    <TitleH1>
+      {title +
+        (filteredListPointsQuantity > 0
+          ? ` (${filteredListPointsQuantity})`
+          : "")}
+    </TitleH1>
+  );
+
+  const tagsFilterContent = (
+    <TagsGroup
+      tags={tags}
+      activeTags={tagsFilter}
+      size="s"
+      onClick={(tagName) => {
+        if (tagsFilter.findIndex((tag) => tag === tagName) !== -1) {
+          setTagsFilter(tagsFilter.filter((tag) => tag !== tagName));
+        } else {
+          setTagsFilter([...tagsFilter, tagName]);
+        }
+      }}
+    />
+  );
+
   const listContent = (
     <div className="flex flex-col gap-y-6">
-      <SearchBar
-        onChange={(value) => setFilter(value ?? "")}
-        placeholder={t("search")}
-      />
-      {contentBeforeList}
       {groupedListPointsAfterFilter &&
         (
           Object.keys(groupedListPointsAfterFilter) as LIST_POINT_CATEGORIES[]
         ).map((groupName) => (
           <div key={groupName}>
-            {groupName && (
-              <ListPointsCategoryTitle
-                categoryTitle={groupName}
-                disableCategoryAddButton={disableCategoryAddButton}
-                onCreateListPoint={onCreateListPoint}
-              />
-            )}
+            <ListPointsCategoryTitle
+              categoryTitle={groupName}
+              onCreateListPoint={onCreateListPoint}
+            />
             <div className="-mr-4 -ml-4">
               {groupedListPointsAfterFilter[groupName]?.map(
                 ({ itemTemplate }) => (
@@ -152,11 +211,13 @@ export const ListPoints = (props: IListPointsProps) => {
 
   useEffect(() => {
     applyFilter();
-  }, [filter, applyFilter]);
+  }, [filter, tagsFilter, applyFilter, tags]);
 
   return (
-    <div className="flex flex-col h-full w-full gap-6">
-      {title}
+    <div className="flex flex-col h-full w-full gap-4">
+      {titleContent}
+      {searchBarContent}
+      {tagsFilterContent}
       {listPoints.length > 0 ? listContent : noContent}
     </div>
   );

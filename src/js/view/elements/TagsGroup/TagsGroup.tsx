@@ -8,7 +8,7 @@ import { TagSmall, TagMedium, TagLarge } from "../tags";
 export const TagsGroup = (props: ITagsGroupProps) => {
   const {
     tags = [],
-    activeTagIndex,
+    activeTags = [],
     size,
     readonly,
     localizationPath,
@@ -19,7 +19,7 @@ export const TagsGroup = (props: ITagsGroupProps) => {
 
   const tagComponentsClasses = classesOf(
     "text-small",
-    !readonly && "cursor-pointer",
+    !readonly && "cursor-pointer"
   );
 
   const TagComponents = {
@@ -30,29 +30,28 @@ export const TagsGroup = (props: ITagsGroupProps) => {
 
   const TagComponent = size ? TagComponents[size] : TagComponents.l;
 
-  const checkActiveTag = (index: number) => index === activeTagIndex;
+  const checkActiveTag = (tag: string) =>
+    activeTags.findIndex((activeTag) => activeTag === tag) !== -1;
 
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement>,
-    index: number,
+    tagName: string
   ) => {
     event.preventDefault();
 
-    const isActiveTag = checkActiveTag(index);
-
-    if (!readonly && !isActiveTag) {
-      onClick(index);
+    if (!readonly) {
+      onClick(tagName);
     }
   };
 
   return (
     <ul className="flex flex-wrap gap-2">
-      {tags.map((tagName, index) => (
+      {tags.map((tagName) => (
         <TagComponent
           key={tagName}
-          isActive={!readonly && checkActiveTag(index)}
+          isActive={!readonly && checkActiveTag(tagName)}
           className={tagComponentsClasses}
-          onClick={(event) => handleClick(event, index)}
+          onClick={(e) => handleClick(e, tagName)}
         >
           {localizationPath ? t(`${localizationPath}.${tagName}`) : tagName}
         </TagComponent>

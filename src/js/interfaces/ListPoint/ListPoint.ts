@@ -2,7 +2,7 @@ import { LIST_POINT_CATEGORIES, LIST_POINT_UNITS } from "./contants";
 
 export interface IItem {
   name: string;
-  tags: [keyof typeof LIST_POINT_CATEGORIES];
+  tags: [keyof typeof LIST_POINT_CATEGORIES] | string[];
   itemUid: string;
 }
 

@@ -5,18 +5,24 @@ import { BtnIcon } from "../../buttons";
 import { CloseIcon } from "../../../icons";
 import { ModalTitle } from "./ModalTitle/ModalTitle";
 import { ModalDescription } from "./ModalDescription/ModalDescription";
+import { classesOf } from "../../../../utils";
 
 export const Modal = (props: IModalProps) => {
-  const { title, description, content, onClose } = props;
+  const { title, description, content, className, onClose } = props;
 
   const closeModal = (
     e:
       | KeyboardEvent<HTMLDivElement>
-      | MouseEvent<HTMLButtonElement | HTMLDivElement>,
+      | MouseEvent<HTMLButtonElement | HTMLDivElement>
   ) => {
     onClose();
     e.stopPropagation();
   };
+
+  const modalClasses = classesOf(
+    className,
+    "flex flex-col w-full fixed bottom-0 bg-black-0 p-6 gap-y-6 text-center border-none rounded-t-3xl"
+  );
 
   return (
     <div
@@ -29,7 +35,7 @@ export const Modal = (props: IModalProps) => {
       <div
         role="button"
         tabIndex={0}
-        className="flex flex-col w-full fixed bottom-0 bg-black-0 p-6 gap-y-6 text-center border-none rounded-t-3xl"
+        className={modalClasses}
         onClick={(e) => e.stopPropagation()}
         onKeyDown={() => {}}
       >

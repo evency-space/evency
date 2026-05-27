@@ -34,12 +34,12 @@ export const MultipleLines = Template.bind({});
 
 export const WithActiveTag = Template.bind({});
 WithActiveTag.args = {
-  activeTagIndex: 1,
+  activeTags: [LIST_POINT_CATEGORIES.food],
 };
 
 export const Readonly = Template.bind({});
 Readonly.args = {
-  activeTagIndex: 1,
+  activeTags: [LIST_POINT_CATEGORIES.food],
   readonly: true,
 };
 

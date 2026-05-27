@@ -15,9 +15,9 @@ export const favoritesListPointApi = ({
   addItem: `${endPoint}/AddItems/${listUid}`,
   editItem: `${endPoint}/EditItem/${itemUid}`,
   getItems: `${endPoint}/${listUid}`,
-  removeItem: `${endPoint}/${itemUid}`,
+  removeItem: `${endPoint}/DeleteItem/${itemUid}`,
   insertItems: `${endPoint}/InsertItems/${listUid}`,
-  getTags: `${endPoint}/${itemUid}/Tags`,
+  getTags: `${endPoint}/${listUid}/Tags`,
   createList: `${endPoint}/CreateList`,
   moveItems: `${endPoint}/MoveItems/${listUid}`,
 });
@@ -108,3 +108,11 @@ export const moveFavoritesListPoints = ({
     },
     body: JSON.stringify(listPointsUids),
   }).then(response => response.json() as Promise<IFavoriteListPoint[]>);
+
+export const getTags = ({ listUid }: { listUid: string }) =>
+  fetch(favoritesListPointApi({ listUid }).getTags, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(response => response.json()) as Promise<string[]>;

@@ -25,7 +25,7 @@ export const ModalProvider = ({ children }: { children: JSX.Element }) => {
       ...data,
       setContent,
     }),
-    [data],
+    [data]
   );
 
   return (
@@ -33,7 +33,12 @@ export const ModalProvider = ({ children }: { children: JSX.Element }) => {
       {children}
 
       {value.content && (
-        <Modal onClose={() => value.onClose?.()} content={value.content} />
+        <Modal
+          onClose={() => value.onClose?.()}
+          content={value.content}
+          className={value.className}
+          title={value.title}
+        />
       )}
     </ModalContext.Provider>
   );
