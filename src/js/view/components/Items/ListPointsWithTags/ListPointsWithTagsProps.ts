@@ -8,15 +8,15 @@ export interface IListPointData {
   itemTemplate: JSX.Element;
   tag: keyof typeof LIST_POINT_CATEGORIES | string;
   name: string;
+  tags: string[];
 }
 
 export type TUnknownListPoint = unknown;
 
-export interface IListPointsProps {
+export interface IListPointsWithTagsProps {
+  title: string;
+  tags: string[];
   listPoints: TUnknownListPoint[];
   getListPointData: (index: number) => IListPointData;
   onCreateListPoint?: (category?: LIST_POINT_CATEGORIES) => void;
-  contentBeforeList?: JSX.Element;
-  title?: JSX.Element;
-  disableCategoryAddButton?: boolean;
 }

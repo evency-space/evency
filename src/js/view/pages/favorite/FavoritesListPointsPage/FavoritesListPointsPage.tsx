@@ -1,16 +1,20 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ListPointsWrapperWithTags } from "../../../components/Items/ListPointsWrapperWithTags/ListPointsWrapperWithTags";
 import { useLoading, useModal } from "../../../../hooks";
 import {
   IFavoriteListPoint,
   IListPoint,
   LIST_POINT_CATEGORIES,
 } from "../../../../interfaces";
-import { RemoveListItemModal, TitleH1 } from "../../../elements";
-import { removeFavoriteListPoint } from "../../../../api_clients";
-import { saveCurrentListPointInLocalStorage } from "../../../../utils/localStorage";
-import { ListPointsWrapper, BaseListPointItem } from "../../../components";
+import { RemoveListItemModal } from "../../../elements";
+import { getTags, removeFavoriteListPoint } from "../../../../api_clients";
+import {
+  getFavoritesListUidFromLocalStorage,
+  saveCurrentListPointInLocalStorage,
+} from "../../../../utils/localStorage";
+import { BaseListPointItem } from "../../../components";
 import { getEmptyListPointWithCurrentCategory } from "../../../components/Items/utils";
 import {
   createFavoriteListPointPageUrl,
@@ -25,6 +29,7 @@ export const FavoritesListPointsPage = () => {
   const navigate = useNavigate();
 
   const [listPoints, setListPoints] = useState<IFavoriteListPoint[]>([]);
+  const [allTags, setAllTags] = useState<string[]>([]);
 
   const { setLoading } = useLoading();
 
@@ -42,19 +47,44 @@ export const FavoritesListPointsPage = () => {
     };
   };
 
+  const getAllTags = useCallback(async () => {
+    try {
+      const list = await getTags({
+        listUid: getFavoritesListUidFromLocalStorage() || "",
+      });
+
+      if (list) {
+        setAllTags(list);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    return Promise.resolve();
+  }, []);
+
   const getListPoints = useCallback(async () => {
     try {
-      setLoading(true);
-
       const list = await getFavoritesListPointsWithBridge();
 
       if (list) {
         setListPoints(list);
       }
+    } catch (e) {
+      console.error(e);
+    }
+
+    return Promise.resolve();
+  }, []);
+
+  const initilalizeListPoints = useCallback(async () => {
+    try {
+      setLoading(true);
+      await Promise.allSettled([getAllTags(), getListPoints()]);
     } finally {
       setLoading(false);
     }
-  }, [setLoading]);
+  }, [setLoading, getListPoints, getAllTags]);
 
   const goToListPointEditPage = (
     listPoint: IListPoint | IFavoriteListPoint
@@ -86,7 +116,7 @@ export const FavoritesListPointsPage = () => {
 
       if (listPoint.item.itemUid) {
         await removeFavoriteListPoint({ listPoint });
-        await getListPoints();
+        await initilalizeListPoints();
       }
     } finally {
       setLoading(false);
@@ -126,26 +156,28 @@ export const FavoritesListPointsPage = () => {
       />
     );
 
+    const [tag, ...tags] = listPoint.item.tags;
+
     return {
       itemTemplate,
-      tag: listPoint.item.tags[0],
+      tag,
       name: listPoint.item.name,
+      tags,
     };
   };
 
-  const title = <TitleH1>{t("pages.favorites.title")}</TitleH1>;
-
   useEffect(() => {
     if (listPoints.length === 0) {
-      void getListPoints();
+      void initilalizeListPoints();
     }
-  }, [getListPoints, listPoints.length]);
+  }, [listPoints.length, initilalizeListPoints]);
 
   return (
-    <ListPointsWrapper
-      title={title}
+    <ListPointsWrapperWithTags
+      title={t("pages.favorites.title")}
       listPoints={listPoints}
       getListPointData={getListPointData}
+      tags={allTags}
       onCreateListPoint={(category) =>
         goToListPointEditPage(getEmptyFavoriteListPoint(category))
       }

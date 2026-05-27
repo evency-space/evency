@@ -14,7 +14,7 @@
         "isPrivate": true,
         "item": {
           "name": "Шоколадки/батончики",
-          "tags": ["food"],
+          "tags": ["food", "Трейл"],
           "itemUid": "e788948e-e883-424e-a919-a8b26f7b11e0"
         }
       }

@@ -27,6 +27,7 @@ import {
 import { convertIEditListPointToIListPoint } from "../../../utils";
 import { IEditListPoint } from "../../elements/Forms/ListPointEditForm/ListPointEditFormProps";
 import { CommonListPointsUtils } from "../../components/Items/common/utils";
+import { FavoriteListPointEdit } from "../favorite/components/FavoriteListPointEdit/FavoriteListPointEdit";
 
 export const ListPointEditPage = () => {
   const routeData = useLoaderData() as TProvidedEvent;
@@ -214,15 +215,24 @@ export const ListPointEditPage = () => {
         resolve={routeData?.data}
         errorElement={<p>Error list point edit page loading</p>}
       >
-        {listPoint && (
-          <ListPointEdit
-            listPoint={listPoint}
-            isCreationMode={isCreationMode}
-            onClick={(editedListPoint) => {
-              void changeListPoint(editedListPoint);
-            }}
-          />
-        )}
+        {listPoint &&
+          (listPoint.pointType === "favorite" ? (
+            <FavoriteListPointEdit
+              listPoint={listPoint}
+              isCreationMode={isCreationMode}
+              onClick={(editedListPoint) => {
+                void changeListPoint(editedListPoint);
+              }}
+            />
+          ) : (
+            <ListPointEdit
+              listPoint={listPoint}
+              isCreationMode={isCreationMode}
+              onClick={(editedListPoint) => {
+                void changeListPoint(editedListPoint);
+              }}
+            />
+          ))}
       </Await>
     </React.Suspense>
   );

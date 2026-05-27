@@ -16,6 +16,10 @@ const Template: ComponentStory<typeof ListPointEdit> = (args) => (
 
 export const CreateMode = Template.bind({});
 CreateMode.args = {
+  listPoint: {
+    ...editListPoint,
+    name: "",
+  },
   isCreationMode: true,
 };
 
