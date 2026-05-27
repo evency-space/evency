@@ -22,12 +22,20 @@ export const getEmptyListPoint = (): IListPoint => ({
 export const convertIEditListPointToIListPoint = (
   listPoint: IEditListPoint,
 ): IListPoint => {
-  const { itemUid, name, unit, tag, count, pointUid } = listPoint;
+  const {
+    itemUid,
+    name,
+    unit,
+    tag,
+    count,
+    pointUid,
+    userTags = [],
+  } = listPoint;
   return {
     item: {
       itemUid: itemUid || "",
       name,
-      tags: [tag],
+      tags: [tag, ...userTags],
     },
     unit,
     count: count || 0,
@@ -76,13 +84,15 @@ export const convertListPointToIEditListPoint = ({
       item: { itemUid, name, tags },
       unit,
     } = point;
+    const [tag, ...userTags] = tags;
 
     convertedPoint = {
       pointType,
       name,
-      tag: tags[0],
+      tag,
       unit,
       itemUid,
+      userTags,
     };
   } else {
     const {

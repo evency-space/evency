@@ -17,7 +17,8 @@ export const ListItemSelector = (props: IListItemSelectorProps) => {
   } = props;
 
   const rootClasses = classesOf(
-    "flex-row-reverse justify-between items-center",
+    "items-center",
+    className?.indexOf("flex-row") === -1 && "justify-between flex-row-reverse",
     className
   );
 

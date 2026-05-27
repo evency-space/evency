@@ -35,10 +35,6 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
 
   const listPointUnits = Object.values(LIST_POINT_UNITS);
 
-  const activeTagIndex = listPointCategories.findIndex(
-    (category) => category === tag
-  );
-
   const changeItem = (value: Partial<IEditListPoint>) => {
     onChange({
       ...listPointData,
@@ -65,9 +61,9 @@ export const ListPointEditForm = (props: IListPointEditFormProps) => {
         </TextBodyStandard>
         <TagsGroup
           tags={listPointCategories}
-          activeTagIndex={activeTagIndex}
+          activeTags={[tag]}
           localizationPath="list_point.categories"
-          onClick={(value) => changeItem({ tag: listPointCategories[value] })}
+          onClick={(tagName) => changeItem({ tag: tagName })}
         />
       </div>
       <div>
