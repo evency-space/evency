@@ -8,13 +8,16 @@ import {
   Input,
   TextBodyStandard,
 } from "../../../../../elements";
-import { ListItemSelector, ListPointsWrapper } from "../../../../../components";
+import { ListItemSelector, PageWrapper } from "../../../../../components";
 import { DoneIcon } from "../../../../../icons";
+import { useLoading } from "../../../../../../hooks";
+import { ListPoints } from "../../../../../components/Items/ListPoints/ListPoints";
 
 export const TagsEditForm = (props: ITagsEditFormProps) => {
   const { tags, selectedTags, selectTags, updateTagsList } = props;
 
   const { t } = useTranslation();
+  const { loading } = useLoading();
 
   const [localSelectedTags, setLocalSelectedTags] = useState(selectedTags);
   const [newTag, setNewTag] = useState("");
@@ -77,15 +80,16 @@ export const TagsEditForm = (props: ITagsEditFormProps) => {
     />
   );
 
-  const contentBeforeList = (
+  const filterContent = (
     <>
-      <div className="flex items-end justify-between gap-x-6">
+      <div className="flex w-full items-end justify-between gap-x-6">
         <div className="w-full text-left">
           <Input
             value={newTag}
             label={t("tags.create_tag")}
             placeholder={t("tags.add_tag")}
             onChange={(tag) => setNewTag(tag)}
+            isFocused={tags.length === 0}
           />
         </div>
         {newTag.length > 0 && (
@@ -99,6 +103,16 @@ export const TagsEditForm = (props: ITagsEditFormProps) => {
     </>
   );
 
+  const listContent = !loading ? (
+    <ListPoints
+      listPoints={tags}
+      getListPointData={getListPointData}
+      contentBeforeList={filterContent}
+    />
+  ) : (
+    <div />
+  );
+
   const footer = (
     <ActionPanel
       primaryButtonText={t("buttons.done")}
@@ -109,14 +123,11 @@ export const TagsEditForm = (props: ITagsEditFormProps) => {
   );
 
   return (
-    <div className="px-4 overflow-y-auto h-full">
-      <ListPointsWrapper
-        listPoints={tags}
-        contentBeforeList={contentBeforeList}
-        getListPointData={getListPointData}
-        customActionPanel={footer}
-        disableCategoryAddButton
-      />
-    </div>
+    <PageWrapper
+      className="px-4 overflow-y-auto h-full"
+      pageContent={tags.length > 0 ? listContent : filterContent}
+      pageFooter={footer}
+      verticalTopPageContent
+    />
   );
 };
